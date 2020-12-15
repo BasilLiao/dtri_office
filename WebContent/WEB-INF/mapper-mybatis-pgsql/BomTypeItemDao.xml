@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dtri.com.db.pgsql.dao.BomTypeItemDao">
+	<!-- 查詢 資料 -->
+	<select id="queryAll" resultType="BomTypeItemEntity">
+		SELECT *
+		FROM bom_tpye_item
+		WHERE group_name ${group_name} order by type_order DESC,group_id ASC,id ASC
+	</select>
+	<!-- 查詢 資料 -->
+	<select id="queryAllOrderi0102" resultType="BomTypeItemEntity">
+		SELECT *
+		FROM bom_tpye_item
+		WHERE group_name ${group_name} order by group_id,i01,i02
+	</select>
+	<!-- 取得群組ID -->
+	<select id="queryAllByGroup_id" resultType="BomTypeItemEntity">
+		SELECT group_id from bom_tpye_item group by group_id
+	</select>
+	<!-- 取得下個物件 -->
+	<select id="nextvalItemGroup" resultType="Integer">
+		select nextval('bom_tpye_item_group_id_seq');
+	</select>
+	<insert id="addedOneGroup" parameterType="BomTypeItemEntity">
+		INSERT INTO
+		bom_tpye_item(
+		sys_create_date,sys_create_user,sys_modify_date,sys_modify_user,
+		id,group_name,group_id,
+		i01 , i02 , i03 , i04 , i05 ,
+		i06 , i07 , i08 , i09 , i10 ,
+		i11 , i12 , i13 , i14 , i15 ,
+		i16 , i17 , i18 , i19 , i20 ,
+		i21 , i22 , i23 , i24 , i25 ,
+		type_item,checkdef,type_order,note)
+		VALUES
+		(#{sys_create_date},#{sys_create_user},#{sys_modify_date},#{sys_modify_user},
+		#{id},#{group_name},#{group_id},
+		#{i01} , #{i02} , #{i03} , #{i04} ,
+		#{i05} ,
+		#{i06} , #{i07} , #{i08} , #{i09} , #{i10} ,
+		#{i11} , #{i12} , #{i13} , #{i14} , #{i15} ,
+		#{i16} , #{i17} , #{i18} , #{i19} , #{i20} ,
+		#{i21} , #{i22} , #{i23} , #{i24} , #{i25} ,
+		#{type_item},#{checkdef},#{type_order},#{note});
+	</insert>
+	<update id="updateOne" parameterType="BomTypeItemEntity">
+		UPDATE
+		bom_tpye_item
+		SET
+		sys_modify_date = #{sys_modify_date},
+		sys_modify_user =
+		#{sys_modify_user},
+
+		i01 = #{i01} , i02 = #{i02} , i03 = #{i03} , i04 = #{i04} , i05 = #{i05}
+		,
+		i06 = #{i06} , i07 = #{i07} , i08 = #{i08} , i09 = #{i09} , i10 = #{i10}
+		,
+		i11 = #{i11} , i12 = #{i12} , i13 = #{i13} , i14 = #{i14} , i15 = #{i15}
+		,
+		i16 = #{i16} , i17 = #{i17} , i18 = #{i18} , i19 = #{i19} , i20 = #{i20}
+		,
+		i21 = #{i21} , i22 = #{i22} , i23 = #{i23} , i24 = #{i24} , i25 = #{i25}
+		,
+		group_name = #{group_name},
+		checkdef = #{checkdef},
+		type_order =
+		#{type_order},
+		note = #{note}
+		WHERE id = #{id} AND group_id = #{group_id};
+	</update>
+	<!-- 移除 一個群組 -->
+	<delete id="deleteOne" parameterType="BomTypeItemEntity">
+		DELETE FROM bom_tpye_item
+		WHERE group_id = #{group_id};
+	</delete>
+	<!-- 移除 一個群組 內的非指定ID -->
+	<delete id="deleteOther" parameterType="BomTypeItemEntity">
+		DELETE FROM bom_tpye_item
+		WHERE group_id = #{group_id} AND id not in(${others});
+	</delete>
+</mapper>

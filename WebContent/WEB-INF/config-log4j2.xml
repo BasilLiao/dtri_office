@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<!-- 實時寫到mylog.log，每隔兩分鐘進行一次rollover， rollover策略為按照時間作為增量命名日誌檔案並壓縮歸檔。 -->
+<Configuration status="WARN">
+	<!--日誌級別以及優先順序排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+	<!-- 配置日誌檔案輸出目錄，此配置將日誌輸出到tomcat根目錄下的指定資料夾 -->
+	<!-- ACCEPT（放行）、DENY（拒絕）、NEUTRAL（不做任何操作) -->
+	<!-- onMatch >= level onMatch指的是日誌級別大於等於level時的操作 -->
+	<!-- onMismatch < levle onMismatch表示日誌級別小於level時的操作, -->
+	<Properties>
+		<Property name="LOG_HOME">${sys:catalina.home}/WebAppLogs/</Property>
+	</Properties>
+
+	<Appenders>
+		<!-- 便於在控制檯觀察實際輸出情況 -->
+		<!--<Console name="console_out_appender" target="SYSTEM_OUT"> <PatternLayout 
+			pattern="%5p [%t] %d{yyyy-MM-dd HH:mm:ss} (%F:%L) %m%n" /> </Console> -->
+		<!--<Console name="console_err_appender" target="SYSTEM_ERR"> <PatternLayout 
+			pattern="%5p [%t] %d{yyyy-MM-dd HH:mm:ss} (%F:%L) %m%n" /> </Console> -->
+		<!-- 配置日誌的根節點-項目 -->
+		<!--控制檯輸出-->
+		<Console name="console_appender" target="SYSTEM_OUT" >
+			<PatternLayout>
+				<pattern>%5p [%t] %d{yyyy-MM-dd HH:mm:ss} (%F:%L) %m%n</pattern>
+			</PatternLayout>
+		</Console>
+		
+		<RollingFile name="trace_appender" immediateFlush="true"
+			fileName="${LOG_HOME}/dtr_erp_trace.log"
+			filePattern="${LOG_HOME}/dtr_erp_trace - %d{yyyy-MM-dd HH_mm_ss}.log.gz">
+			<PatternLayout charset="UTF-8">
+				<pattern>%5p [%t] %d{yyyy-MM-dd HH:mm:ss} (%F:%L) %m%n</pattern>
+			</PatternLayout>
+			<Policies><!-- 兩個配置任選其一 -->
+				<!-- 每個日誌檔案最大10MB -->
+				<SizeBasedTriggeringPolicy size="10MB" />
+			</Policies>
+			<Filters>
+				<!-- 此Filter意思是，只輸出TRACE級別的資料 -->
+				<!-- DENY，日誌將立即被拋棄不再經過其他過濾器； NEUTRAL，有序列表裡的下個過濾器過接著處理日誌； -->
+				<!-- ACCEPT，日誌會被立即處理，不再經過剩餘過濾器。 -->
+				<!-- <ThresholdFilter level="debug" onMatch="DENY" onMismatch="NEUTRAL" 
+					/> -->
+				<ThresholdFilter level="TRACE" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+		</RollingFile>
+
+		<RollingFile name="error_appender" immediateFlush="true"
+			fileName="${LOG_HOME}/dtr_erp_error.log"
+			filePattern="${LOG_HOME}/dtr_erp_error - %d{yyyy-MM-dd HH_mm_ss}.log.gz">
+			<PatternLayout charset="UTF-8">
+				<pattern>%5p [%t] %d{yyyy-MM-dd HH:mm:ss} (%F:%L) %m%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10MB" />
+			</Policies>
+			<Filters>
+				<ThresholdFilter level="ERROR" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+		</RollingFile>
+
+		<RollingFile name="info_appender" immediateFlush="true"
+			fileName="${LOG_HOME}/dtr_erp_info.log"
+			filePattern="${LOG_HOME}/dtr_erp_info - %d{yyyy-MM-dd HH_mm_ss}.log.gz">
+			<PatternLayout charset="UTF-8">
+				<pattern>%5p [%t] %d{yyyy-MM-dd HH:mm:ss} (%F:%L) %m%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10MB" />
+			</Policies>
+			<Filters>
+				<ThresholdFilter level="INFO" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+		</RollingFile>
+
+
+	</Appenders>
+
+	<Loggers>
+		<!-- 配置日誌的根節點 -->
+		<root level="TRACE">
+			<!-- 
+			<appender-ref ref="console_out_appender" /> 
+			<appender-ref ref="debug_appender" 	/> 
+			<appender-ref ref="warn_appender" />
+			<appender-ref ref="console_appender" />
+			 -->
+			<appender-ref ref="info_appender" />
+			<appender-ref ref="trace_appender" />
+			<appender-ref ref="error_appender" />
+			
+		</root>
+		<!-- 第三方日誌系統 -->
+		<logger name="org.springframework.core" level="info" />
+		<logger name="org.springframework.beans" level="info" />
+		<logger name="org.springframework.context" level="info" />
+		<logger name="org.springframework.web" level="info" />
+		<logger name="org.apache.http" level="info" />
+	</Loggers>
+
+</Configuration>

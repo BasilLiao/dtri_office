@@ -1,0 +1,7 @@
+請依照下列命名
+
+1.如果是 網站:請用網頁能名稱 => 
+index.jsp => IndexFromBean.java
+
+2.如果是 內部使用:請用功能名稱 =>
+User => UserJavaBean.java

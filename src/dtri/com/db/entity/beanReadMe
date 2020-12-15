@@ -1,0 +1,4 @@
+請依照下列命名(因使用Mybatis 的Map案區)
+
+1.如果是 DB使用:請用功能名稱 =>
+User => UserEntity.java

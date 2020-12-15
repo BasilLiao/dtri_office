@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dtri.com.db.pgsql.dao.PermissionDao">
+	<!-- CRUD 權限設定 -->
+	<select id="queryAll" resultType="PermissionEntity">
+		SELECT * FROM system_permission
+		<where>
+			<if test="name !=''">
+				name  like '%' || #{name} || '%' 
+			</if>
+			<if test="group_name !=''">
+				AND group_name like '%' || #{group_name} || '%' 
+			</if>
+			<if test="control !=''">
+				AND control like '%' || #{control} || '%' 
+			</if>
+			<if test="useful == 3">
+				AND useful != #{useful}
+			</if>
+		</where>
+		ORDER by group_id,nbdesc,id;
+	</select>
+	<!-- 如果 沒 重複 -->
+	<insert id="addedOne" parameterType="PermissionEntity">
+		INSERT INTO
+		system_permission(
+		sys_create_date,sys_create_user,sys_modify_date,sys_modify_user,
+		name,group_name,control,permission,note,useful,nbdesc)
+		VALUES
+		(#{sys_create_date},#{sys_create_user},#{sys_modify_date},#{sys_modify_user},
+		#{name},#{group_name},#{control},#{permission},#{note},#{useful},#{nbdesc});
+	</insert>
+	<!-- 如果 有 重複(同個群組) -->
+	<insert id="addedRepeatGroupOne"
+		parameterType="PermissionEntity">
+		INSERT INTO
+		system_permission(
+		sys_create_date,sys_create_user,sys_modify_date,sys_modify_user,
+		name,group_id,group_name,control,permission,note,useful,nbdesc)
+		VALUES
+		(#{sys_create_date},#{sys_create_user},#{sys_modify_date},#{sys_modify_user},
+		#{name},#{group_id},#{group_name},#{control},#{permission},#{note},#{useful},#{nbdesc});
+	</insert>
+	<!-- 群組 則序列數 -1 -->
+	<select id="break_system_permission_group_id_seq">
+		select
+		setval('system_permission_group_id_seq',(SELECT
+		currval('system_permission_group_id_seq')-1),true );
+	</select>
+	<update id="updateOne" parameterType="PermissionEntity">
+		UPDATE
+		system_permission
+		SET
+		sys_modify_date = #{sys_modify_date},
+		sys_modify_user =
+		#{sys_modify_user},
+		name = #{name},
+		group_id = #{group_id},
+		group_name =
+		#{group_name},
+		control = #{control},
+		permission = #{permission},
+		note =
+		#{note},
+		useful = #{useful},
+		nbdesc = #{nbdesc}
+		WHERE id = #{id};
+	</update>
+	<delete id="deleteOne" parameterType="PermissionEntity">
+		DELETE FROM
+		system_permission WHERE id = #{id};
+	</delete>
+</mapper>

@@ -1,0 +1,494 @@
+<div class="row border" id="purchasing_link_body">
+    <div class="col-md-12 border">
+        <!-- 功能: 查詢 /新增 /修改 -->
+        <div class="mt-3 mb-3 border">
+            <div class="mb-3">
+                <h3>
+                    <b>物料關連與人員分配</b>
+                </h3>
+            </div>
+            <!-- 查詢功能 -->
+            <div class="mb-3 border border-primary shadow">
+                <div class="row mb-2">
+                    <div class="col-md-5">
+                        <a class="btn btn-success" data-toggle="collapse" href="#collapseSearch" role="button" aria-expanded="true" aria-controls="collapseSearch"> 查詢功能 : </a>
+                    </div>
+                </div>
+                <div class="mb-3 collapse show" id="collapseSearch">
+                    <div class="row mb-5">
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-12 text-left">關鍵字(料號) : <input class="col-md-7" type="text" id="s_kew_word" placeholder="Ex:0800092000" required autofocus /></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-12 text-left">關鍵字(品號) : <input class="col-md-7" type="text" id="s_kew_item_word" placeholder="Ex:螺絲釘" required /></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-12 text-left">使用者(人名) : <input class="col-md-7" type="text" id="s_user_name" placeholder="Ex:無名氏" required /></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-2">
+                            <button id="s_submit" class="col-md-12 btn btn-primary btn-block" type="submit">查詢</button>
+                        </div>
+                        <div class="col-md-5"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- 功能:查詢結果  /修改 -->
+            <div class="mb-3 border border-primary shadow">
+                <div class="border">
+                    <div class="row mb-2">
+                        <div class="col-md-5">
+                            <a class="btn btn-success" data-toggle="collapse" href="#collapseFinish" role="button" aria-expanded="true" aria-controls="collapseFinish"> 查詢結果 : </a>
+                        </div>
+                    </div>
+                    <div class="collapse show" id="collapseFinish">
+                        <div class="col-md-12">
+                            <div id="search_choose" class="row mb-2">
+                                <div class="text-left">
+                                    <b>顯示名稱-></b>
+                                </div>
+                            </div>
+                            <!-- 顯示內容 -->
+                            <div class="row">
+                                <table  style="min-height: 480px;" class="table table-sm table-hover table-striped table-bordered table-responsive">
+                                    <thead>
+                                        <tr id="search_thead" class="bg-primary">
+                                            <th scope="col" style="min-width: 80px;">功能</th>
+                                            <th scope="col" style="min-width: 30px;">筆</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="search_tbody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 新增/修改功能 -->
+            <div class="border border-primary shadow">
+                <div class="row mb-2">
+                    <div class="col-md-5">
+                        <a class="btn btn-success" data-toggle="collapse" href="#collapseAdded" role="button" aria-expanded="true" aria-controls="collapseAdded"> 新增/修改/刪除 功能 : </a>
+                    </div>
+                </div>
+                <form onsubmit="return templateBody.send_added_or_update_save();">
+                    <div class="collapse show" id="collapseAdded">
+                        <!-- 新增 或 修改(分辨) -->
+                        <div class="row mb-2">
+                            <div class="col-md-2 pr-0">
+                                <div class="row">
+                                    <div class="col-md-12 text-left">
+                                        <div class="col-md-12">狀態 :</div>
+                                        <div class="col-md-12" id="a_u_type" style="font-size: 25px; color: red;">新增資料</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="col-md-12 pr-0">
+                                    <div class="row">
+                                        <div class="col-md-4 pr-0">ID :</div>
+                                        <div class="col-md-8 pr-0" id="a_p_id">0</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="col-md-12 pr-0">
+                                    <div class="row">
+                                        <div class="col-md-4 pr-0">選擇使用者 :</div>
+                                        <div class="col-md-8 pr-0" >
+                                        	<select id="c_u_id">
+                                        		<option>請選擇使用者</option>
+                                        	</select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-2">
+                            <div class="col-md-2">
+                                <div class="col-md-12 pr-0">
+                                    <div class="row">
+                                        <div class="col-md-7 pr-0">使用者ID :</div>
+                                        <div class="col-md-5 pr-0" id="a_u_id">0</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                               	<div class="col-md-12 pr-0">
+                                    <div class="row">
+                                        <div class="col-md-5 pr-0">Name :</div>
+                                        <div class="col-md-7 pr-0" id="a_u_name">伍華</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="col-md-12 pr-0">
+                             		<div class="row">
+                                        <div class="col-md-4 pr-0">E_Name :</div>
+                                        <div class="col-md-8 pr-0" id="a_e_u_name">Whoami</div>
+	                            	</div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                               	<div class="col-md-12 pr-0">
+	                                <div class="row">
+                                        <div class="col-md-2 pr-0">Email :</div>
+                                        <div class="col-md-10 pr-0" id="a_u_email">examp@dtri.com.tw</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider" style="border-top: 1px solid green;"></div>
+                        <!-- 新增 或 修改 或 刪除(內容) -->
+                        <div class="row mb-3 mt-3">
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-md-12 text-left">料號關鍵 : <input class="col-md-7" type="text" id="a_key_word" placeholder="Ex:01" required /></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-md-12 text-left">品號關鍵 : <input class="col-md-7" type="text" id="a_key_item_word" placeholder="Ex:電桿"  /></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12 text-left">說明備註 : <input class="col-md-10" type="text" id="a_note" placeholder="Ex:可不寫"  /></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 設定 內容 -->
+                       
+                        <div class="row mb-3">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-2">
+                                <div class="">
+                                    <button id="a_u_submit" class="btn btn-primary btn-block" type="submit">存入資料</button>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="">
+                                    <button id="a_c_submit" class="btn btn-warning btn-block" type="button">清除內容</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    console.log("purchasing_link_body");
+    templateBody = new Vue({
+        el: "#purchasing_link_body",
+        data: {
+            link_item: "",
+            link_list: "",
+            user_list: "",
+            t_p_row_number: 2,
+        },
+        created: function () {
+            //初始化
+            templateBody = this;
+            console.log(main.contentData.templateInfo.body);
+            this.link_item = main.contentData.templateInfo.body["link_item"];
+            this.link_list = main.contentData.templateInfo.body["link_list"];
+            this.user_list = main.contentData.templateInfo.body["user_list"];
+            //t_choose
+            var t_choose = "";
+            for (var i = 0; i < this.link_item[0].length; i++) {
+                t_choose += '[<div class="text-left form-check">';
+                t_choose += '<input class="form-check-input" type="checkbox" value="" id="s_' + i + '" checked>';
+                t_choose += '<label class="form-check-label" for="s_' + i + '">';
+                t_choose += this.link_item[0][i];
+                t_choose += "</label></div>]";
+            }
+            $("#search_choose").append(t_choose);
+            //t_header_group
+            var t_header_group = "";
+            var min_width = "85px";
+            for (var i = 0; i < this.link_item[0].length; i++) {
+                min_width = "85px";
+                if (i == 4 || i == 5 || i == 6 || i == 7) {
+                    min_width = "175px";
+                } else if (i == 8 || i == 10) {
+                    min_width = "250px";
+                }
+                t_header_group += '<th style="min-width: ' + min_width + ';" class="s_' + i + '" scope="col">' + this.link_item[0][i] + "</th>";
+            }
+            $("#search_thead").append(t_header_group);
+
+            //t_body_purchasing
+            this.search_update();
+            this.user_choose();
+
+            //動態監聽顯示Table 物件 查看開關
+            $(document).on("click", "#search_choose input", function (event) {
+                templateBody.search_choose(event);
+            });
+            //查詢監聽
+            $(document).on("click", "#s_submit", function (event) {
+                templateBody.send_search();
+            });
+            //清除修改
+            $(document).on("click", "#a_c_submit", function (event) {
+                templateBody.rm_added();
+            });
+        },
+        methods: {
+            //動態切換 動態更改單元組
+            change_purchasing: function (event) {
+                $.each(templateBody.link_list, function (key, value) {
+                    if (value[0] == event.target.value) {
+                        $("#a_0").text(value[0]);
+                        $("#a_2").text(value[2]);
+                        $("#a_3").text(value[3]);
+                    }
+                });
+            },
+
+            //查詢更新
+            search_update: function () {
+                $("#search_tbody").empty();
+                //t_body
+                var t_body = "";
+                var list_id = "";
+                var a_submit = "";
+                var d_submit = "";
+                for (var i = 0; i < this.link_list.length; i++) {
+                    //功能
+                    list_id = this.link_list[i][0];
+
+                    a_submit = "";
+                    a_submit += '<div class="md-6">';
+                    a_submit += '<button purchasing_id="' + list_id + '" class="btn btn-warning btn-sm btn-block a_submit">';
+                    a_submit += "改</button></div>";
+
+                    d_submit = "";
+                    d_submit += '<div class="md-6 ml-1">';
+                    d_submit += '<button purchasing_id="' + list_id + '" class="btn btn-danger btn-sm btn-block d_submit">';
+                    d_submit += "刪</button></div>";
+
+                    t_body += '<tr class="t_row' + list_id + '" style="white-space: nowrap;" ><th class="ml-0 col-md-12 row">' + a_submit + d_submit + "</th>";
+                    //計數量
+                    t_body += "<td>" + (i + 1) + "</td>";
+                    //關聯內容
+                    for (var j = 0; j < this.link_list[i].length; j++) {
+                        t_body += "<td class=s_" + j + ">" + this.link_list[i][j] + "</td>";
+                    }
+                }
+                $("#search_tbody").append(t_body + "</tr>");
+
+                //修改監聽
+                $(document).on("click", ".a_submit", function (event) {
+                    templateBody.choose_update("修改資料", event);
+                });
+                //刪除監聽
+                $(document).on("click", ".d_submit", function (event) {
+                    templateBody.choose_delete(event);
+                });
+            },
+            //顯示 查詢列表
+            search_choose: function (event) {
+                console.log(event.target.checked);
+                if (!event.target.checked) {
+                    $("#search_thead ." + event.target.id).hide();
+                    $("#search_tbody ." + event.target.id).hide();
+                } else {
+                    $("#search_thead ." + event.target.id).show();
+                    $("#search_tbody ." + event.target.id).show();
+                }
+            },
+            //選擇使用者-並建立監聽
+            user_choose: function () {
+                var user = "";
+                $("#c_u_id").empty();
+                user += '<option value=",,,">請選擇使用者 中/英</option>';
+                $.each(this.user_list, function (index, val) {
+                	user += "<option value=" + val + ">" + val[1] +" / "+val[2] +"</option>";
+                });
+                $("#c_u_id").append(user);
+
+                $(document).off("click", "#c_u_id");
+                $(document).on("change", "#c_u_id", function (event) {
+                	var res = event.target.value.split(",");
+                    $("#a_u_id").text(res[0]);
+                    $("#a_u_name").text(res[1]);
+                    $("#a_e_u_name").text(res[2]);
+                    $("#a_u_email").text(res[3]);
+                });
+            },
+            //清除新增/修該內容
+            rm_added: function () {
+                $("#a_u_type").text("新增資料");
+          
+              	//基本欄位
+              	$("#a_p_id").text(0);
+                $("#a_key_word").val("");
+                $("#a_key_item_word").val("");
+                $("#a_note").val("");
+				//user 資料
+				var user = ",,,";
+                $("#c_u_id").val(user).trigger("change");
+
+                this.choose_disabled(false);
+            },
+
+            //選擇  修改
+            choose_update: function (type, event) {
+                var id = event.target.attributes.purchasing_id.value;
+                $("#a_u_type").text(type);
+                $("#purchasing_tbody").empty();
+				//基本欄位
+                $("#a_key_word").val($(".t_row" + id + " .s_5")[0].innerText);
+                $("#a_key_item_word").val($(".t_row" + id + " .s_6")[0].innerText);
+                $("#a_note").val($(".t_row" + id + " .s_7")[0].innerText);
+				//user 資料
+				var user = "";
+				user +=$(".t_row" + id + " .s_1")[0].innerText+",";
+				user +=$(".t_row" + id + " .s_2")[0].innerText+",";
+				user +=$(".t_row" + id + " .s_3")[0].innerText+",";
+				user +=$(".t_row" + id + " .s_4")[0].innerText;
+                $("#c_u_id").val(user).trigger("change");
+                $("#a_p_id").text($(".t_row" + id + " .s_0")[0].innerText);
+                this.choose_disabled(false);
+            },
+
+            //移除條件
+            rm_purchasing: function (event) {
+                var id = event.target.attributes.purchasing_id.value;
+                if ($(".t_p_row" + id + " .a_row" + id).attr("disabled") == "disabled") {
+                    $(".t_p_row" + id + " .a_row" + id).attr("disabled", false);
+                } else {
+                    $(".t_p_row" + id + " .a_row" + id).attr("disabled", "disabled");
+                }
+            },
+            //選擇 刪除
+            choose_delete: function (event) {
+                var id = event.target.attributes.purchasing_id.value;
+                $("#a_u_type").text("移除資料");
+       
+                $("#a_p_id").text($(".t_row" + id + " .s_0")[0].innerText);
+                $("#a_u_id").text($(".t_row" + id + " .s_4")[0].innerText);
+                $("#a_u_group").text($(".t_row" + id + " .s_6")[0].innerText);
+
+                this.choose_update("移除資料", event);
+                this.choose_disabled("disabled");
+            },
+            //鎖定資料
+            choose_disabled: function (disabled) {
+            	  $("#a_key_word").attr("disabled", disabled);
+                  $("#a_key_item_word").attr("disabled", disabled);
+                  $("#a_note").attr("disabled", disabled);
+               
+
+                //鎖定新增清單
+                $("#c_u_id").attr("disabled", disabled);
+            },
+            //傳送 新增 or 修改 or 刪除
+            send_added_or_update_save: function () {
+            	var content = new Object();
+             
+                // 條件項目
+                content.id =     $("#a_p_id").text();
+                content.user_id =   $("#a_u_id").text();
+                content.name =   $("#a_u_name").text();
+                content.e_name = $("#a_e_u_name").text();
+                content.user_email =  $("#a_u_email").text();
+
+                content.key_word 		=  $("#a_key_word").val();
+                content.key_item_word 	=  $("#a_key_item_word").val();
+                content.note 			=  $("#a_note").val();
+
+                console.log(content);
+
+                var action = "C";
+                var url = "./added_purchasing_link.do";
+                var order = "search_update"; //指令
+                if ($("#a_u_type").text() == "修改資料") {
+                    action = "U";
+                    url = "./update_purchasing_link.do";
+                }
+                if ($("#a_u_type").text() == "移除資料") {
+                    action = "D";
+                    url = "./delete_purchasing_link.do";
+                }
+
+                var data = JSON.stringify({
+                    data: {
+                        datetime: "",
+                        action: action,
+                        whoami: main.loginData.account,
+                        cellBackName: "bodyAfter",
+                        cellBackOrder: order,
+                        content: content,
+                    },
+                });
+                main.ajaxSend(url, data);
+                return false; //防止真傳送
+            },
+            //傳送 查詢
+            send_search: function () {
+                var content = new Object();
+                content.name = $("#s_user_name").val();
+                content.kew_item_word = $("#s_kew_item_word").val();
+                content.kew_word = $("#s_kew_word").val();
+
+                var url = "./purchasing_link.do";
+                var order = "search_update"; //指令
+
+                var data = JSON.stringify({
+                    data: {
+                        datetime: "",
+                        action: "R",
+                        whoami: main.loginData.account,
+                        cellBackName: "bodyAfter",
+                        cellBackOrder: order,
+                        content: content,
+                    },
+                });
+                main.ajaxSend(url, data);
+            },
+            //Rsp-回傳值
+            bodyAfter: function (event) {
+                console.log("to index success");
+                switch (
+                    event.r_cellBackOrder //指令
+                ) {
+                    case "search_update":
+                        //空直免刷新
+                        if (event.r_content.templateInfo.body["link_list"] != null && event.r_content.templateInfo.body["link_list"] != "") {
+                            //刷新資料
+                            this.link_list = event.r_content.templateInfo.body["link_list"];
+                            this.search_update();
+                            this.rm_added();
+                        }
+                        break;
+                    case "update_body_nav":
+                        break;
+                }
+            },
+        },
+        //監聽事件移除
+        beforeDestroy: function () {
+            console.log("to beforeDestroy event");
+            $(document).off("click", "#search_choose input");         
+            $(document).off("click", "#s_submit");
+            $(document).off("click", "#a_c_submit");
+            $(document).off("click", ".a_submit");         
+            $(document).off("click", ".d_submit");
+            $(document).off("change", "#c_u_id");
+        },
+    });
+</script>

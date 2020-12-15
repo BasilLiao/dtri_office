@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dtri.com.db.pgsql.dao.PurchasingDao">
+	<!-- CRUD 權限設定 -->
+	<select id="queryAll" resultType="PurchasingEntity">
+		SELECT * FROM purchasing_link
+		<where>
+			<if test="key_word != ''">
+				key_word like  '%' || #{key_word} || '%' 
+			</if>
+			<if test="key_item_word != ''">
+				AND key_item_word like  '%' || #{key_item_word} || '%' 
+			</if>
+			<if test="user_name != ''">
+				AND user_name LIKE '%' || #{user_name} || '%' 
+			</if>
+		</where>
+		ORDER by user_name,id;
+	</select>
+
+	<!-- 新建群組/權限 -->
+	<insert id="addedOne" parameterType="PurchasingEntity">
+		INSERT INTO purchasing_link(
+		sys_create_date,sys_create_user,sys_modify_date,sys_modify_user,
+		user_id,user_name,user_e_name,user_email,
+		key_word,key_item_word,note,useful)
+		VALUES(
+		#{sys_create_date},#{sys_create_user},#{sys_modify_date},#{sys_modify_user},
+		#{user_id},#{user_name},#{user_e_name},#{user_email},
+		#{key_word},#{key_item_word},#{note},#{useful});
+	</insert>
+	<!-- 更新對應清單 -->
+	<update id="updateOne" parameterType="PurchasingEntity">
+		UPDATE purchasing_link SET
+		sys_modify_date = #{sys_modify_date},
+		sys_modify_user = #{sys_modify_user}, 
+		user_id = #{user_id},
+		user_name = #{user_name},
+		user_e_name = #{user_e_name},
+		user_email = #{user_email},
+		key_word = #{key_word},
+		key_item_word = #{key_item_word},
+		note = #{note},
+		useful = #{useful} 
+		WHERE id = #{id};
+	</update>
+
+	<!-- 移除群組 -->
+	<delete id="deleteOne" parameterType="PurchasingEntity">
+		DELETE FROM
+		purchasing_link WHERE id = #{id};
+	</delete>
+	
+</mapper>

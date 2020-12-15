@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dtri.com.db.pgsql.dao.SoftwareVersionDao">
+
+	<!-- 查詢 資料 -->
+	<select id="queryAll" resultType="SoftwareVersionEntity">
+		SELECT *
+		FROM software_version
+		<where>
+			<if test="client_name !=null">
+				AND client_name like '%' || #{client_name} || '%'
+			</if>
+			<if test="bom_product_id !=null">
+				AND bom_product_id like '%' || #{bom_product_id} || '%'
+			</if>
+			<if test="product_model_in !=null">
+				AND product_model_in like '%' || #{product_model_in} || '%'
+			</if>
+			<if test="id >0">
+				AND id = #{id} 
+			</if>
+		</where>
+	</select>
+	<!-- 添加 -->
+	<insert id="addedOne" parameterType="SoftwareVersionEntity">
+		INSERT INTO
+		software_version(
+		sys_create_date,sys_create_user,sys_modify_date,sys_modify_user,
+		client_name,product_model_in,bom_id,bom_product_id,mb_ver,
+		mb_ver_ecn,bios,ec,nvram,os,
+		note,note1,note2)
+		VALUES
+		(#{sys_create_date},#{sys_create_user},#{sys_modify_date},#{sys_modify_user},
+		#{client_name},#{product_model_in},#{bom_id},#{bom_product_id},#{mb_ver},
+		#{mb_ver_ecn},#{bios},#{ec},#{nvram},#{os},
+		#{note},#{note1},#{note2});
+	</insert>
+	<!-- 依照 更新 -->
+	<update id="updateOne" parameterType="SoftwareVersionEntity">
+		UPDATE
+		software_version 
+		SET 
+		sys_modify_date = #{sys_modify_date},
+		sys_modify_user = #{sys_modify_user},
+		client_name = #{client_name},
+		product_model_in = #{product_model_in},
+		bom_id = #{bom_id},
+		bom_product_id = #{bom_product_id},
+		mb_ver = #{mb_ver},
+		mb_ver_ecn = #{mb_ver_ecn},
+		bios = #{bios},
+		ec = #{ec},
+		nvram = #{nvram},
+		os = #{os},
+		note = #{note},
+		note1 = #{note1},
+		note2 = #{note2}
+		<where>
+			<if test="id!=null">
+				AND id = #{id}
+			</if>
+			<if test="id==null and client_name!=null and bom_product_id!=null">
+				AND client_name = #{client_name} AND bom_product_id = #{bom_product_id}
+			</if>
+		</where>
+		
+	</update>
+	<delete id="deleteOne" parameterType="SoftwareVersionEntity">
+		DELETE FROM software_version
+		WHERE id = #{id};
+	</delete>
+</mapper>

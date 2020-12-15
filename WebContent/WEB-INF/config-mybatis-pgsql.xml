@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="lazyLoadingEnabled" value="false" />
+		<setting name="aggressiveLazyLoading" value="true" />
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+	</settings>
+	<typeAliases>
+		<typeAlias alias="UserEntity" type="dtri.com.db.entity.UserEntity" />
+		<typeAlias alias="GroupEntity" type="dtri.com.db.entity.GroupEntity" />
+		<typeAlias alias="PermissionEntity" type="dtri.com.db.entity.PermissionEntity" />
+		<typeAlias alias="BomTypeItemEntity" type="dtri.com.db.entity.BomTypeItemEntity" />
+		<typeAlias alias="BomProductEntity" type="dtri.com.db.entity.BomProductEntity" />
+		<typeAlias alias="BomGroupEntity" type="dtri.com.db.entity.BomGroupEntity" />
+		<typeAlias alias="PurchasingEntity" type="dtri.com.db.entity.PurchasingEntity" />
+		<typeAlias alias="PurchasingSettingEntity" type="dtri.com.db.entity.PurchasingSettingEntity" />
+		<typeAlias alias="PurchasingListEntity" type="dtri.com.db.entity.PurchasingListEntity" />
+		<typeAlias alias="PurchasingMailEntity" type="dtri.com.db.entity.PurchasingMailEntity" />
+		<typeAlias alias="ProductionRecordsEntity" type="dtri.com.db.entity.ProductionRecordsEntity" />
+		<typeAlias alias="SoftwareVersionEntity" type="dtri.com.db.entity.SoftwareVersionEntity" />
+	</typeAliases>
+</configuration>

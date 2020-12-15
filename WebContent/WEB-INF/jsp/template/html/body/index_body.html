@@ -1,0 +1,54 @@
+<div class="pt-3 row border shadow" id="index_body">
+    <div class="col-md-8 border">
+        <div class="row mb-3">
+            <h1 class="h3">Well Come ERP</h1>
+        </div>
+    </div>
+
+    <div class="col-md-4 border">
+        <div class="row mb-3">
+            <h1 class="h3">Well Come ERP</h1>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-5">Check</div>
+            <div class="col-md-7" id="index_check"></div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-5">Account is</div>
+            <div class="col-md-7" id="index_account"></div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-5">Name is</div>
+            <div class="col-md-7" id="index_name"></div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-5">Message</div>
+            <div class="col-md-7" id="index_message"></div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-5">Action</div>
+            <div class="col-md-7" id="index_action"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    console.log("index_body");
+    templateBody = new Vue({
+        el: "#index_body",
+        data: {},
+        created: function () {
+            //初始化
+            $("#index_account").text(main.loginData.account);
+            $("#index_name").text(main.loginData.name);
+            $("#index_check").text(main.allData.r_status);
+            $("#index_message").text(main.allData.r_message);
+        },
+        methods: {
+            destroy_exit: function () {},
+        },
+    });
+</script>

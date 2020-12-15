@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="dtri.com.db.pgsql.dao.PurchasingListSettingDao">
+	<!-- CRUD 權限設定 -->
+	<select id="queryAll" resultType="PurchasingListEntity">
+		SELECT * FROM purchasing_list
+		<where>
+			<if test="user_name != ''">
+				user_name LIKE '%' || #{user_name} || '%'
+			</if>
+			<if test="erp_item_no != ''">
+				AND erp_item_no LIKE '%' || #{erp_item_no} || '%'
+			</if>
+			<if test="erp_item_name != ''">
+				AND erp_item_name LIKE '%' || #{erp_item_name} || '%'
+			</if>
+			<if test="erp_s_date != null and erp_e_date !=null">
+				AND (erp_in_date BETWEEN #{erp_s_date} AND #{erp_e_date})
+			</if>
+		</where>
+		ORDER by sys_modify_date ${purchasing_limit}<!-- id OFFSET #{page_OFFSET}  LIMIT 100 -->;
+	</select>
+	<!-- 設定 -->
+	<select id="querySetting" resultType="PurchasingSettingEntity">
+		SELECT * FROM purchasing_setting
+		<where>
+			set_type = 1
+		</where>
+		ORDER by sys_modify_date;
+	</select>
+	<!-- 信件範例內容 -->
+	<select id="queryMail" resultType="PurchasingMailEntity">
+		SELECT * FROM purchasing_mail
+		<where>
+			id = 1
+		</where>
+		ORDER by sys_modify_date;
+	</select>
+	<delete id="deleteExpired" parameterType="PurchasingMailEntity">
+		DELETE FROM purchasing_list 
+		WHERE erp_in_date <![CDATA[ < ]]> #{erp_in_date};
+	</delete>
+
+	<!-- 更新對應清單 -->
+	<update id="update_m_One" parameterType="PurchasingMailEntity">
+		UPDATE purchasing_mail SET
+		sys_modify_date = #{sys_modify_date},
+		sys_modify_user = #{sys_modify_user},
+		mail_content = #{mail_content}
+		WHERE id = #{id};
+	</update>
+	<update id="update_s_One" parameterType="PurchasingSettingEntity">
+		UPDATE purchasing_setting SET
+		sys_create_date = #{sys_create_date},
+		sys_create_user = #{sys_create_user},
+		sys_modify_date = #{sys_modify_date},
+		sys_modify_user = #{sys_modify_user},
+		set_value = #{set_value}
+		WHERE set_name = #{set_name};
+	</update>
+	
+	<insert id="AddedOne" parameterType="PurchasingListEntity">
+	INSERT INTO
+		purchasing_list(
+		sys_create_date,sys_create_user,sys_modify_date,sys_modify_user,
+		erp_order_id,
+		erp_item_ns,
+		erp_item_no,
+		erp_item_name,
+		erp_store_name,
+		erp_store_email,
+		erp_item_nb,
+		erp_in_date,
+		user_name,user_mail,sys_type,sys_send_time)
+		VALUES(
+		#{sys_create_date},#{sys_create_user},#{sys_modify_date},#{sys_modify_user},
+		#{erp_order_id},
+		#{erp_item_ns},
+		#{erp_item_no},
+		#{erp_item_name},
+		#{erp_store_name},
+		#{erp_store_email},
+		#{erp_item_nb},
+		#{erp_in_date},
+		#{user_name},#{user_mail},#{sys_type},#{sys_send_time});
+	</insert>
+</mapper>

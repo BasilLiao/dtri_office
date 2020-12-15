@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dtri.com.db.pgsql.dao.GroupDao">
+    <!-- CRUD 權限設定 -->
+    <select id="queryAll" resultType="GroupEntity">
+        SELECT * FROM system_group WHERE name ${checkName} #{byName} AND useful != ${useful} ORDER by id,permission_id;
+    </select>
+
+    <!-- 新建群組/權限 -->
+    <insert id="addedOne" parameterType="GroupEntity">
+        INSERT INTO system_group( sys_create_date,sys_create_user,sys_modify_date,sys_modify_user, id,name,note,useful, permission_type,permission_id,permission_control,permission,permission_group,permission_name,nbdesc) VALUES(
+        #{sys_create_date},#{sys_create_user},#{sys_modify_date},#{sys_modify_user}, #{id},#{name},#{note},#{useful}, #{permission_type},#{permission_id},#{permission_control},#{permission},#{permission_group},#{permission_name},#{nbdesc});
+    </insert>
+    <!-- 更新權限 /群組 -->
+    <update id="updateOne" parameterType="GroupEntity">
+        UPDATE system_group SET sys_modify_date = #{sys_modify_date}, sys_modify_user = #{sys_modify_user}, name = #{name}, permission = #{permission}, note = #{note}, useful = #{useful},nbdesc=#{nbdesc} WHERE id = #{id} AND permission_id =
+        #{permission_id};
+    </update>
+
+    <!-- 依照 侷限自動 權限矯正 使用者群組-->
+    <update id="updateAll">
+    	UPDATE system_group 
+		SET 
+		    permission_control =system_permission.control,
+		    permission_group = system_permission.group_name,
+		    permission_name = system_permission.name 
+		FROM 
+			 system_permission 
+		WHERE system_group.permission_id = system_permission.id;
+    </update>
+    <!-- 取得下個物件 -->
+    <select id="nextvalGroup" resultType="Integer">
+        select nextval('system_group_id_seq');
+    </select>
+    <!-- 移除群組 -->
+    <delete id="deleteGroupOne" parameterType="GroupEntity">
+        DELETE FROM system_group WHERE id = #{id};
+    </delete>
+    <!-- 移除權限 -->
+    <delete id="deletePermissionOne" parameterType="GroupEntity">
+        DELETE FROM system_group WHERE id = #{id} AND permission_id = #{permission_id};
+    </delete>
+</mapper>

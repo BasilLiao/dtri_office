@@ -1,0 +1,86 @@
+前 -> 後端溝通機制 API
+
+只有登入 -> index 為 http 
+其餘都是ajax 格式為 json
+
+backEnd to frontEnd 
+{
+	action 		: xxx ---->行為指示( 必須有值 )
+	check 		: xxx ---->成功與否( 必須有值 )
+	message 	: xxx ---->成功或失敗 訊息( 必須有值 )
+	date		: xxx ---->交易時間( 必須有值 )
+	dtri		: xxx ---->交易檢查碼( 必須有值  MD5 (帳號 + sessionid + dtri))
+	errorCode 	: xxx ---->失敗代碼( 可能有值 )
+	data		: xxx ---->主要資料( 可能有值 ,複合式內容參數)
+}
+
+frontEnd to backEnd 
+{
+	action 		: xxx ---->行為指示( 必須有值 )
+	dtri		: xxx ---->交易檢查碼( 必須有值 MD5 (帳號 + sessionid + dtri))
+	data		: xxx ---->主要資料( 可能有值 ,複合式內容參數)
+}
+v=======================登入=======================v
+##Request login :  登入 限定 : http (一般參數) POST
+
+inputAccount 	:帳號
+inputPassword	:密碼
+
+##Response login : 登入 限定 : http (JSON)
+data{
+	id 		:帳號序號
+	name	:使用者姓名
+	account	:帳號
+}
+^=======================登入=======================^
+v=======================登出/帳密錯誤=======================v
+logout : 限定 : ajax (JSON): ajax: /dataType : "JSON",/ type : "POST", / url : "./logout.do",
+
+##Request logout
+{
+	action 		: xxx ---->logout
+	dtri		: xxx ---->交易檢查碼( 必須有值 MD5 (帳號 + sessionid + dtri))
+	data{
+		account	:帳號
+	}
+}
+
+##Response 
+{
+	action 		: xxx ---->logout
+	check 		: xxx ---->成功與否( 必須有值 )
+	message 	: xxx ---->成功或失敗 訊息( 必須有值 )
+	date		: xxx ---->交易時間( 必須有值 )
+	dtri		: xxx ---->交易檢查碼( 必須有值  MD5 (帳號 + sessionid + dtri))
+	errorCode 	: xxx ---->失敗代碼( 可能有值 )
+	data{
+		account	:帳號
+	}
+}
+
+^=======================登出/帳密錯誤=======================^
+v=======================回首頁=======================v
+index : 限定 : ajax (JSON): ajax: /dataType : "JSON",/ type : "POST", / url : "./index.do",
+
+##Request logout
+{
+	action 		: xxx ---->index
+	dtri		: xxx ---->交易檢查碼( 必須有值 MD5 (帳號 + sessionid + dtri))
+	data{
+		account	:帳號
+	}
+}
+
+##Response 
+{
+	action 		: xxx ---->index
+	check 		: xxx ---->成功與否( 必須有值 )
+	message 	: xxx ---->成功或失敗 訊息( 必須有值 )
+	date		: xxx ---->交易時間( 必須有值 )
+	dtri		: xxx ---->交易檢查碼( 必須有值  MD5 (帳號 + sessionid + dtri))
+	errorCode 	: xxx ---->失敗代碼( 可能有值 )
+	data{
+		account	:帳號
+	}
+}
+^=======================回首頁=======================^

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dtri.com.db.mssql.dao.ERP_PurchasingListDao">
+
+	<!-- 查詢 資料 BOM清單 -->
+	<select id="queryERP_PurchasingList"
+		resultType="ERP_PurchasingEntity">
+		SELECT 
+		TD003,
+		TD004,
+		TD005,
+		TD006,
+		TD012,
+		TC004,
+		MA002,
+		MA011,
+		TD007,
+		MC002,
+		TD008,
+		TD015,
+		(TD008-TD015) AS TD008_TD015 ,
+		TD016,
+		TC001+'-'+TC002 AS TC001_TC002,
+		TC011
+		FROM [DTR_TW].[dbo].PURTC
+		left join [DTR_TW].[dbo].PURTD
+		ON PURTC.TC001+PURTC.TC002 = PURTD.TD001+PURTD.TD002
+		AND PURTD.TD016 = 'N' AND PURTC.TC014 = 'Y'
+		left join [DTR_TW].[dbo].PURMA AS PURMA
+		ON PURMA.MA001 = PURTC.TC004
+		left join [DTR_TW].[dbo].CMSMC AS CMSMC
+		ON CMSMC.MC001 = PURTD.TD007
+		WHERE TD004 is not null AND
+		(TD012 BETWEEN #{S_TD012} AND #{E_TD012} )
+
+		<if test="E_list!=null and E_list.size > 0">
+			AND (TC001+'-'+TC002+'-'+TD003+'-'+TD004) not in
+			<foreach item="item" index="index" collection="E_list"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		ORDER BY TD012,TC001,TC002,TD003
+	</select>
+
+</mapper>

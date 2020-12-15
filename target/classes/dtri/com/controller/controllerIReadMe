@@ -1,0 +1,15 @@
+請依照下列命名
+
+1.如果是 網站:請用網頁能名稱 => 
+index.jsp => controllerIndex.java
+
+2.如果是 API:請用功能名稱 => 
+查詢料件缺料資料(來自於 PUR_MOC_INV ) =>controllerPUR_MOC_INV.java
+
+3.如果是 測試API:請多加test =>
+查詢料件缺料資料(來自於 PUR_MOC_INV ) =>controllerTestPUR_MOC_INV.java
+
+4.如果是 特定對像街口:請用 對方伺服器名稱 =>
+查詢料件缺料資料(來自於 PUR_MOC_INV ) =>controllerForServerXXXXX.java
+
+

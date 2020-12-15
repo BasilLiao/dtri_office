@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dtri.com.db.pgsql.dao.UserDao">
+	<!-- check Account and Password 帳密登入 -->
+	<select id="queryByAccountAndPassword" resultType="UserEntity">
+		SELECT *
+		FROM system_user
+		WHERE account = #{account} AND password = #{password}
+	</select>
+	<!-- check Account 檢查帳號 -->
+	<select id="queryByAccount" resultType="UserEntity">
+		SELECT
+		id,account,name
+		FROM system_user
+		WHERE account = #{account}
+	</select>
+	<!-- 查詢 資料 -->
+	<select id="queryAll" resultType="UserEntity">
+		SELECT *
+		FROM system_user
+		<where>
+			<if test="useful>=0">
+				useful != #{useful} 
+			</if>
+			<if test="account !=''">
+				AND account like '%' || #{account} || '%' 
+			</if>
+			<if test="name !=''">
+				AND name like '%' || #{name} || '%' 
+			</if>
+			<if test="e_name !=''">
+				AND e_name like '%' || #{e_name} || '%' 
+			</if>
+			<if test="email !=''">
+				AND email like '%' || #{email} || '%' 
+			</if>
+			<if test="position !=''">
+				AND position like '%' || #{position} || '%' 
+			</if>
+		</where>
+
+	</select>
+	<!-- check 取出群組權限清單 -->
+	<select id="queryByPermission_id" resultType="GroupEntity">
+		SELECT *
+		FROM system_group
+		WHERE id = #{group_id} ORDER by nbdesc,permission_group;
+	</select>
+
+	<insert id="addedOne" parameterType="UserEntity">
+		INSERT INTO
+		system_user(
+		sys_create_date,sys_create_user,sys_modify_date,sys_modify_user,
+		name,position,account,password,email,
+		group_id,group_name,note,useful,e_name)
+		VALUES
+		(#{sys_create_date},#{sys_create_user},#{sys_modify_date},#{sys_modify_user},
+		#{name},#{position},#{account},#{password},#{email},
+		#{group_id},#{group_name},#{note},#{useful},#{e_name});
+	</insert>
+	<!-- 依照 侷限自動 權限矯正 使用者群組 -->
+	<update id="updateAll">
+		UPDATE system_user
+		SET
+		group_name = system_group.name
+		FROM
+		system_group
+		WHERE system_group.id = system_user.group_id;
+	</update>
+	<update id="updateOne" parameterType="UserEntity">
+		UPDATE
+		system_user
+		SET
+		sys_modify_date = #{sys_modify_date},
+		sys_modify_user =
+		#{sys_modify_user},
+		name = #{name},
+		position = #{position},
+		account =
+		#{account},
+		password = #{password},
+		email = #{email},
+		group_id =
+		#{group_id},
+		group_name = #{group_name},
+		note = #{note},
+		e_name =
+		#{e_name},
+		useful = #{useful}
+		WHERE id = #{id};
+	</update>
+	<delete id="deleteOne" parameterType="PermissionEntity">
+		DELETE FROM system_user
+		WHERE id = #{id};
+	</delete>
+</mapper>
