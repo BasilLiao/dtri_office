@@ -569,6 +569,8 @@
             s_4: 0, //當前產品ID
             d_1: "", //當前的 投線日
             d_2: "", //當前的 出貨日
+            
+            isDragging : false,//移動
         },
         created: function () {
             //初始化
@@ -1085,6 +1087,10 @@
                 var twoDigitMonth = fullDate.getMonth() + 1 >= 10 ? fullDate.getMonth() + 1 : "0" + (fullDate.getMonth() + 1);
                 var currentDate = fullDate.getFullYear() + "-" + twoDigitMonth + "-" + fullDate.getDate();
                 $("#c2_note").text("表單編號:QR-701-06 / 規格負責人 : " + $(".t_row" + id + " .s_3")[0].innerText + " / 建單日期 : " + currentDate + " / 建單人 : " + $("#nav_account").text() + " / 單據來源 : " + come_from);
+            	
+                //可拖曳位置(方便站台排序)
+                $('.itemList ').sortable();
+                $('.itemList ').disableSelection();
             },
 	       	//比對規格->自動帶入軟體定義
             sofwareVer_in:function(){
