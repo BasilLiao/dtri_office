@@ -231,8 +231,8 @@ public class ProductionPrintService {
 		if (!content.isNull("product_model") && !content.get("product_model").equals(""))
 			entity.setProduct_model(content.getString("product_model"));
 		// 工單號?
-		if (!content.isNull("production_id") && !content.get("production_id").equals(""))
-			entity.setId(content.getString("production_id"));
+		if (!content.isNull("id") && !content.get("id").equals(""))
+			entity.setId(content.getString("id"));
 		// 產品料號
 		if (!content.isNull("bom_product_id") && !content.get("bom_product_id").equals(""))
 			entity.setBom_product_id(content.getString("bom_product_id"));

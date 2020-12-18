@@ -18,12 +18,12 @@
                     <div class="row mb-5">
                         <div class="col-md-3">
                             <div class="row">
-                                <div class="col-md-12 text-left">關鍵字(料號) : <input class="col-md-7" type="text" id="s_kew_word" placeholder="Ex:0800092000" required autofocus /></div>
+                                <div class="col-md-12 text-left">關鍵字(料號) : <input class="col-md-7" type="text" id="s_key_word" placeholder="Ex:0800092000" required autofocus /></div>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="row">
-                                <div class="col-md-12 text-left">關鍵字(品號) : <input class="col-md-7" type="text" id="s_kew_item_word" placeholder="Ex:螺絲釘" required /></div>
+                                <div class="col-md-12 text-left">關鍵字(品號) : <input class="col-md-7" type="text" id="s_key_item_word" placeholder="Ex:螺絲釘" required /></div>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -442,8 +442,8 @@
             send_search: function () {
                 var content = new Object();
                 content.name = $("#s_user_name").val();
-                content.kew_item_word = $("#s_kew_item_word").val();
-                content.kew_word = $("#s_kew_word").val();
+                content.key_item_word = $("#s_key_item_word").val();
+                content.key_word = $("#s_key_word").val();
 
                 var url = "./purchasing_link.do";
                 var order = "search_update"; //指令

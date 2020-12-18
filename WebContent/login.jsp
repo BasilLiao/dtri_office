@@ -67,7 +67,8 @@ body {
 	<div id="footer" class="mt-5 mb-3">
 		<div class="text-muted text-center">
 			<p>請使用 1.Brave 2.Chrome 3.Microsoft Edge 瀏覽器
-			<br>最佳解析度為 1366*768 以上. </p>
+			<br>最佳解析度為 1366*768 以上.
+			<br>任何問題 需求 請洽詢 系統管理員 分機:321 </p>
 			<p>&copy; 2020 DT Research, Inc. All Rights Reserved.<br>
 			版本: Beta v0.68.1</p>
 		</div>
