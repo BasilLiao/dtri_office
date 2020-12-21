@@ -336,7 +336,7 @@
                     d_submit += '<button user_id="' + s_list + '" class="btn btn-danger btn-sm btn-block d_submit">';
                     d_submit += "刪</button></div>";
 
-                    $("#search_tbody").append('<tr class="page_all t_row' + s_list + ' '+page_group+'"><th class="ml-0 col-md-12 row">' + a_submit + d_submit + "</th></tr>");
+                    $("#search_tbody").append('<tr class="page_all t_row' + s_list + ' '+page_group+'" style="white-space: nowrap;"><th class="ml-0 col-md-12 row">' + a_submit + d_submit + "</th></tr>");
                     //計數量
                     $("#search_tbody .t_row" + this.search_list[i][id_key]).append("<td >" + i + "</td>");
 				

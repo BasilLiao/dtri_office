@@ -134,7 +134,7 @@ public class IndexController {
 		System.out.println("---controller - sessionUpdate");
 		// Step1.響應一下
 		JSONObject r_allData = new JSONObject();
-		r_allData.put("r_message", "延長登入 600 秒 !!");
+		r_allData.put("r_message", "延長登入 900 秒 !!");
 		return r_allData.toString();
 	}
 }

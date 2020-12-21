@@ -88,7 +88,7 @@
             },
             //倒數計時
             countDownId: "",
-            countDownSecond: 60
+            countDownSecond: 300
         },
         created: function () {
             //初始化
@@ -107,7 +107,7 @@
             ajaxSend: function (url, dataSend) {
                 //進入倒數中
                 clearInterval(this.countDownId);
-                this.countDownSecond = 550;
+                this.countDownSecond = 800;
                 main.timeOut(true);
                 //進入運作中
                 main.loading(true);
@@ -168,7 +168,7 @@
             //timeOut 到計時 登出(提醒失效)
             countDown: function () {
                 this.countDownSecond -= 1;
-                if (this.countDownSecond == 15) {
+                if (this.countDownSecond == 60) {
                     $("#countDown").removeClass("d-none");
                 }
                 if (this.countDownSecond < 0) {
@@ -177,16 +177,16 @@
                     templateNav.signout();
                 }
                 $("#timeOutmsg h2").text("程序登出中....請點我繼續..." + this.countDownSecond);
-                //console.log(this.countDownSecond);
+                console.log("倒數登出 : "+this.countDownSecond);
             },
             timeOut: function (check) {
                 if (check) {
                     //開始計時
-                    this.countDownId = setInterval(this.countDown, 550); //每秒執行一次，賦值
+                    this.countDownId = setInterval(this.countDown, 1000); //每秒執行一次，賦值
                 } else {
                     //啟動計時
                     clearInterval(this.countDownId);
-                    this.countDownSecond = 550;
+                    this.countDownSecond = 800;
                     $("#countDown").addClass("d-none");
                     //觸發紀錄
                     var url = "./sessionUpdate.do";

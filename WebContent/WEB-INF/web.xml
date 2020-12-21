@@ -58,6 +58,6 @@
 		<location>/login.jsp</location>
 	</error-page>
 	<session-config>
-		<session-timeout>10</session-timeout>
+		<session-timeout>15</session-timeout>
 	</session-config>
 </web-app>

@@ -155,12 +155,12 @@
 	                                </div>
 	                            </div>
 	                            <div class="col-md-3 p-0">
-	                                <div class="col-md-12 ">
+	                       		<div class="col-md-12">
 	                                    <div class="row">
 	                                        <div class="col-md-4 p-2 pr-0 border border-secondary"><b>開工日期</b></div>
 	                                        <div class="col-md-8 p-2 pr-0 border border-secondary" id="a_e_d"></div>
 	                                    </div>
-	                                </div>
+	                          </div>
 	                            </div>
 	                            <div class="col-md-3 p-0">
 	                                <div class="col-md-12 ">
@@ -369,6 +369,7 @@
             });
             //查詢監聽
             $(document).on("click", "#s_submit", function (event) {
+            	templateBody.change_page_init();
                 templateBody.send_search();
             });
             //清除修改
@@ -423,7 +424,7 @@
                     d_submit += '<button purchasing_id="' + list_id + '" class="btn btn-danger btn-sm btn-block d_submit">';
                     d_submit += "廢</button></div>";
 
-                    t_body += '<tr class="page_all t_row' + list_id + ' '+page_group+'" style="white-space: nowrap;" ><th class="ml-0 col-md-12 row">' + a_submit + d_submit + "</th>";
+                    t_body += '<tr class="page_all t_row'+ list_id +' '+ page_group+ '" style="white-space: nowrap;" ><th class="ml-0 col-md-12 row">' + a_submit + d_submit + "</th>";
                     //計數量
                     t_body += "<td>" + (i ) + "</td>";
                     //關聯內容
@@ -579,7 +580,7 @@
 			//頁數-刷新
 			change_page_update : function() {
 				//頁數-取得當前最大筆數 && 頁數
-				this.page_max = this.item_list.length;
+				this.page_max = this.item_list.length-2;
 				$(".p_n").removeClass("disabled");
 				if (this.page_max < this.page_max_total) {
 					$(".p_n").addClass("disabled");
@@ -653,10 +654,8 @@
 							var now_page = i + (this.page_batch * 10);
 							var next_page = i
 									+ ((this.page_batch + 1) * 10);
-							$(".p" + now_page)
-									.addClass("p" + next_page);
-							$(".p" + next_page).removeClass(
-									"p" + now_page);
+							$(".p" + now_page).addClass("p" + next_page);
+							$(".p" + next_page).removeClass("p" + now_page);
 							$(".p" + next_page + " a").text(next_page);
 							$(".p" + next_page + " a").attr("id",
 									"p" + next_page);
