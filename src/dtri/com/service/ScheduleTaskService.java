@@ -284,7 +284,7 @@ public class ScheduleTaskService {
 	// 每日18:00分執行一次
 	// 系統 備份(pgsql+ftp)
 	@Async
-	@Scheduled(cron = "0 0 18 ? * *")
+	@Scheduled(cron = "0 20 16 ? * *")
 	public void backupDataBase() {
 		System.out.println("每隔1天 早上18點0分 執行一次：" + new Date());
 		logger.info("每隔1天 早上18點0分 執行一次：" + new Date());

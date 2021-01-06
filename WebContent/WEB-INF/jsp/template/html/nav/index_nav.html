@@ -1,11 +1,8 @@
-<nav class="navbar navbar-dark bg-primary navbar-expand-lg pt-0 pb-0 shadow"
-	id="index_nav">
+<nav class="navbar navbar-dark bg-primary navbar-expand-lg pt-0 pb-0 shadow" id="index_nav">
 	<div class="col-md-1" id="">
 		<a class="navbar-brand" href="#">Menu</a>
 	</div>
-	<button class="navbar-toggler" type="button" data-toggle="collapse"
-		data-target="#navbarNav" aria-controls="navbarNav"
-		aria-expanded="false" aria-label="Toggle navigation">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse navbar-collapse p-0 col-md-8" id="navbarNav">
@@ -18,100 +15,92 @@
 		您好!
 	</div>
 	<div class="col-md-1">
-		<button class="btn btn-sm btn-warning btn-block" type="submit"
-			onclick="templateNav.signout()" >登出</button>
+		<button class="btn btn-sm btn-warning btn-block" type="submit" onclick="templateNav.signout()">登出</button>
 	</div>
 
 </nav>
 <script type="text/javascript">
 	console.log("index_nav");
-	templateNav = new Vue(
-			{
-				el : "#index_nav",
-				data : {
-					navList : '<li class="nav-item dropdown "><a class="nav-link dropdown-toggle " href="#" data-toggle="dropdown">請輸入值</a><div class="m-0 dropdown-menu shadow pt-2 pb-0"></div></li>',
-					navItem : '<a class="dropdown-item border border-light" href="#">請輸入值</a>',
-					//導覽區塊 相關值
-					userName : "",
-					position : "",
-					nav : "",
-				},
-				created : function() {
-					//初始化
-					this.userName = main.contentData.longinInfo.name;
-					this.position = main.contentData.longinInfo.position;
-					this.nav = main.contentData.templateInfo.nav;
-					//浮動建立 導覽
-					for (var i = 0; i < this.nav.length; i++) {
-						var htmlnav = $(this.navList);
-						//功能群組名稱
-						htmlnav[0].children[0].textContent = this.nav[i].group_name;
-						for (var j = 0; j < this.nav[i].group_item.length; j++) {
-							//功能清單名稱/href
-							htmlnav[0].children[1].innerHTML = htmlnav[0].children[1].innerHTML
-									+ '<a style="font-size: 17px;" class="dropdown-item border-bottom border-secondar rounded" nameurl='
-									+ this.nav[i].group_item[j].split(" ")[0]
-									+ ' href="#">'
-									+ this.nav[i].group_item[j].split(" ")[1]
-									+ "</a>";
-							$(".navbar-nav").append(htmlnav);
-						}
-					}
-					$("#nav_account").text(main.loginData.name);
-					//console.log(htmlnav[0].children[1]);
-				},
-				methods : {
-					//Req-回家
-					index : function() {
-						var url = "./index.do";
-						var urlvalue = "update_body"; //指令
-						this.jsonSend(url, urlvalue);
+	templateNav = new Vue({
+		el : "#index_nav",
+		data : {
+			navList : '<li class="nav-item dropdown "><a class="nav-link dropdown-toggle " href="#" data-toggle="dropdown">請輸入值</a><div class="m-0 dropdown-menu shadow pt-2 pb-0"></div></li>',
+			navItem : '<a class="dropdown-item border border-light" href="#">請輸入值</a>',
+			//導覽區塊 相關值
+			userName : "",
+			position : "",
+			nav : "",
+		},
+		created : function() {
+			//初始化
+			this.userName = main.contentData.longinInfo.name;
+			this.position = main.contentData.longinInfo.position;
+			this.nav = main.contentData.templateInfo.nav;
+			//浮動建立 導覽
+			for (var i = 0; i < this.nav.length; i++) {
+				var htmlnav = $(this.navList);
+				//功能群組名稱
+				htmlnav[0].children[0].textContent = this.nav[i].group_name;
+				for (var j = 0; j < this.nav[i].group_item.length; j++) {
+					//功能清單名稱/href
+					htmlnav[0].children[1].innerHTML = htmlnav[0].children[1].innerHTML + '<a style="font-size: 17px;" class="dropdown-item border-bottom border-secondar rounded" nameurl='
+							+ this.nav[i].group_item[j].split(" ")[0] + ' href="#">' + this.nav[i].group_item[j].split(" ")[1] + "</a>";
+					$(".navbar-nav").append(htmlnav);
+				}
+			}
+			$("#nav_account").text(main.loginData.name);
+			//console.log(htmlnav[0].children[1]);
+		},
+		methods : {
+			//Req-回家
+			index : function() {
+				var url = "./index.do";
+				var urlvalue = "update_body"; //指令
+				this.jsonSend(url, urlvalue);
+			},
+			//Req-登出
+			signout : function() {
+				var url = "./logout.do";
+				var urlvalue = "logout"; //指令
+				this.jsonSend(url, urlvalue);
+			},
+			// 轉跳單元-包裝 -> 傳送(url 位置/urlvalue 指令)
+			jsonSend : function(url, order) {
+				var data = JSON.stringify({
+					data : {
+						datetime : "",
+						action : "S",
+						whoami : main.loginData.account,
+						cellBackName : "navAfter",
+						cellBackOrder : order,
+						content : "",
 					},
-					//Req-登出
-					signout : function() {
-						var url = "./logout.do";
-						var urlvalue = "logout"; //指令
-						this.jsonSend(url, urlvalue);
-					},
-					// 轉跳單元-包裝 -> 傳送(url 位置/urlvalue 指令)
-					jsonSend : function(url, order) {
-						var data = JSON.stringify({
-							data : {
-								datetime : "",
-								action : "S",
-								whoami : main.loginData.account,
-								cellBackName : "navAfter",
-								cellBackOrder : order,
-								content : "",
-							},
-						});
-						main.ajaxSend(url, data);
-					},
-					//Rsp-回傳值
-					navAfter : function(event) {
-						console
-								.log("to index success:"
-										+ event.r_cellBackOrder);
-						switch (event.r_cellBackOrder //指令
-						) {
-						case "update_body":
-							//index_body.destroy 重置(銷毀先前參數)
-							templateBody.$destroy();
-							//回首頁 or 切換單元
-							$("#body").load(event.r_content.template["body"]);
-							break;
-						case "logout":
-							//登出
-							console.log("to logout success");
-							templateBody.$destroy();
-							templateNav.$destroy();
-							$("#body").load(event.r_content.template["body"]);
-							$("#nav").load(event.r_content.template["nav"]);
-							break;
-						}
-					},
-				},
-			});
+				});
+				main.ajaxSend(url, data);
+			},
+			//Rsp-回傳值
+			navAfter : function(event) {
+				console.log("to index success:" + event.r_cellBackOrder);
+				switch (event.r_cellBackOrder //指令
+				) {
+				case "update_body":
+					//index_body.destroy 重置(銷毀先前參數)
+					templateBody.$destroy();
+					//回首頁 or 切換單元
+					$("#body").load(event.r_content.template["body"]);
+					break;
+				case "logout":
+					//登出
+					console.log("to logout success");
+					templateBody.$destroy();
+					templateNav.$destroy();
+					$("#body").load(event.r_content.template["body"]);
+					$("#nav").load(event.r_content.template["nav"]);
+					break;
+				}
+			},
+		},
+	});
 	//監聽 轉跳物件
 	$(".navbar-nav .dropdown-menu .dropdown-item").click(function(event) {
 		console.log(event.target.attributes.nameurl.value);

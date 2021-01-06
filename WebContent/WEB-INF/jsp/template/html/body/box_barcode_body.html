@@ -1,410 +1,409 @@
 <style>
-#inputTable,
-#outputTable{
-    width:100%;
+#inputTable, #outputTable {
+	width: 100%;
 }
-#inputTable th,
-#outputTable th{
-    white-space: nowrap;
-    text-align: center;
+
+#inputTable th, #outputTable th {
+	white-space: nowrap;
+	text-align: center;
 }
-.tableDarkBorder,
-.tableDarkBorder th,
-.tableDarkBorder td{
-    border-color:#666;
+
+.tableDarkBorder, .tableDarkBorder th, .tableDarkBorder td {
+	border-color: #666;
 }
-#inputTable td.delete{
-    cursor:pointer;
-    color:#f00;
-    text-align: center;
+
+#inputTable td.delete {
+	cursor: pointer;
+	color: #f00;
+	text-align: center;
 }
-#inputTable td.add{
-    cursor:pointer;
-    color:#49b633;
-    text-align: center;
+
+#inputTable td.add {
+	cursor: pointer;
+	color: #49b633;
+	text-align: center;
 }
-#inputTable td.error{
-    background-color: #fcc;
+
+#inputTable td.error {
+	background-color: #fcc;
 }
-#inputTable td.textCenter{
-    text-align: center;
+
+#inputTable td.textCenter {
+	text-align: center;
 }
 </style>
 <div class="row border" id="box_barcode_body">
-    <div class="col-md-12 border">
-        <!-- 功能: 查詢 /新增 /修改 -->
-        <div class="mt-3 mb-3 border">
-            <div class="mb-3">
-                <h3>
-                    <b>出貨分裝條碼表 產生器</b>
-                </h3>
-            </div>
-            <!-- 個人修改功能 -->
-            <div class="border border-primary mb-3">
-                <div class="row mb-2">
-                    <div class="col-md-5">
-                        <a class="btn btn-success" data-toggle="collapse" href="#inputArea" role="button" aria-expanded="true" aria-controls="inputArea"> 資料輸入 : </a>
-                    </div>
-                </div>
+	<div class="col-md-12 border">
+		<!-- 功能: 查詢 /新增 /修改 -->
+		<div class="mt-3 mb-3 border">
+			<div class="mb-3">
+				<h3>
+					<b>出貨分裝條碼表 產生器</b>
+				</h3>
+			</div>
+			<!-- 個人修改功能 -->
+			<div class="border border-primary mb-3">
+				<div class="row mb-2">
+					<div class="col-md-5">
+						<a class="btn btn-success" data-toggle="collapse" href="#inputArea" role="button" aria-expanded="true" aria-controls="inputArea"> 資料輸入 : </a>
+					</div>
+				</div>
 
-                <div class="collapse show" id="inputArea">
-                    <!-- 新增 或 修改 或 刪除(內容) -->
-                    <div class="row mb-3 mt-3" style="margin:0">
-                        <table id="inputTable" class="table-sm table-bordered tableDarkBorder">
-                            <thead>
-                                <tr>
-                                    <th>P/O</th>
-                                    <th>UPN</th>
-                                    <th>LOT</th>
-                                    <th>DATE</th>
-                                    <th>Amount</th>
-                                    <th>Number /One Box<span class="boxNumber"></span></th>
-                                    <th>SN (Only Tablet)</th>
-                                    <th>Delete</th>
-                                    <th>Add</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td contenteditable="true" class="poitem item_po" ></td>
-                                    <td contenteditable="true" class="item item_upn" ></td>
-                                    <td contenteditable="true" class="item item_lot" ></td>
-                                    <td contenteditable="true" class="item item_date" title="Ex:時間"></td>
-                                    <td contenteditable="true" class="amount textCenter" title="Ex:總數量"></td>
-                                    <td contenteditable="true" class="number textCenter" title="Ex:一箱可裝多少"></td>
-                                    <td contenteditable="true" class="startNumber textCenter" title="Ex:流水序號開頭"></td>
-                                    <td class="delete textCenter">Delete</td>
-                                    <td class="add textCenter">Add</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-2">
-                        <div class="">
-                            <button id="submitInput" class="btn btn-primary btn-block">送出</button>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="">
-                            <button id="exportOutput" class="btn btn-warning btn-block">匯出結果</button>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="">
-                            <button id="exportInput" class="btn btn-warning btn-block">匯出輸入資料</button>
-                        </div>
-                    </div>
-                    <div class="col-md-3"></div>
-                </div>
-             </div>
-             
-              <div class="border border-primary">
-                <div class="row mb-2">
-                    <div class="col-md-5">
-                        <a class="btn btn-success" data-toggle="collapse" href="#outputArea" role="button" aria-expanded="true" aria-controls="outputArea"> 結果表格 : </a>
-                    </div>
-                </div>
-                <div class="collapse show" id="outputArea">
-                    <div class="row mb-3 mt-3" style="margin:0">
-                        <table id="outputTable" class="table-sm table-bordered tableDarkBorder">
-                            <thead></thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+				<div class="collapse show" id="inputArea">
+					<!-- 新增 或 修改 或 刪除(內容) -->
+					<div class="row mb-3 mt-3" style="margin: 0">
+						<table id="inputTable" class="table-sm table-bordered tableDarkBorder">
+							<thead>
+								<tr>
+									<th>P/O</th>
+									<th>UPN</th>
+									<th>LOT</th>
+									<th>DATE</th>
+									<th>Amount</th>
+									<th>Number /One Box<span class="boxNumber"></span></th>
+									<th>SN (Only Tablet)</th>
+									<th>Delete</th>
+									<th>Add</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td contenteditable="true" class="poitem item_po"></td>
+									<td contenteditable="true" class="item item_upn"></td>
+									<td contenteditable="true" class="item item_lot"></td>
+									<td contenteditable="true" class="item item_date" title="Ex:時間"></td>
+									<td contenteditable="true" class="amount textCenter" title="Ex:總數量"></td>
+									<td contenteditable="true" class="number textCenter" title="Ex:一箱可裝多少"></td>
+									<td contenteditable="true" class="startNumber textCenter" title="Ex:流水序號開頭"></td>
+									<td class="delete textCenter">Delete</td>
+									<td class="add textCenter">Add</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-md-3"></div>
+					<div class="col-md-2">
+						<div class="">
+							<button id="submitInput" class="btn btn-primary btn-block">送出</button>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="">
+							<button id="exportOutput" class="btn btn-warning btn-block">匯出結果</button>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="">
+							<button id="exportInput" class="btn btn-warning btn-block">匯出輸入資料</button>
+						</div>
+					</div>
+					<div class="col-md-3"></div>
+				</div>
+			</div>
+
+			<div class="border border-primary">
+				<div class="row mb-2">
+					<div class="col-md-5">
+						<a class="btn btn-success" data-toggle="collapse" href="#outputArea" role="button" aria-expanded="true" aria-controls="outputArea"> 結果表格 : </a>
+					</div>
+				</div>
+				<div class="collapse show" id="outputArea">
+					<div class="row mb-3 mt-3" style="margin: 0">
+						<table id="outputTable" class="table-sm table-bordered tableDarkBorder">
+							<thead></thead>
+							<tbody></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <script type="text/javascript">
-var init = function(){
-    $(document).on('click', 'td.add', createNewEditTr);
-    $(document).on('click', 'td.delete', deleteEditTr);
-    $(document).on('focusout', '#inputTable td', function(){$(this).removeClass('error')});
-    $(document).on('click', '#submitInput', createOutputTable);
-    $(document).on('click', '#exportInput', exportCSV1);
-    $(document).on('click', '#exportOutput', exportCSV2);
-    $.getScript('./thirdparty/js/FileSaver.min.js');
-    $.getScript('./thirdparty/js/downloadCSV.js');
-}
-var createNewEditTr = function(){
-    //console.error('createNewEditTr');
-    var $tr = $(this).closest('tr'),
-    $newTr = $tr.clone();
-    $newTr.find('td').not('.delete, .add').html('');
-    $tr.after($newTr);
-}
-var deleteEditTr = function(){
-    var $tr = $(this).closest('tr'),
-    $trs = $('#inputTable tbody').find('tr');
-    if($trs.length == 1){
-        $tr.find('td').not('.delete, .add').html('');
-    }else{
-        $tr.remove();
-    }
-}
-var leftPad = function(t, n){
-    t = t + '';
-    if(t.length < n)return leftPad('0' + t, n);
-    return t;
-}
-var createOutputTable = function(){
-    var maxTd = 0,
-    $trs = $('#inputTable tbody tr'),
-    boxNumber = 0;
-    $('#outputTable tbody').empty();
-    $trs.each(function(i, tr){
-        var $tr = $(tr), hasNumber,
-        amount = $tr.find('.amount').text().trim(),
-        number = $tr.find('.number').text().trim(),
-        startNumber = $tr.find('.startNumber').text().trim(),
-        numberLength = 0,
-        error = false;
-        if(amount.match(/^\d+$/)){
-            amount = parseInt(amount);
-        }else{
-            $tr.find('.amount').addClass('error');
-            error = true;
-        }
-        if(amount > 10000){
-            $tr.find('.amount').addClass('error');
-            error = true;
-        }
-        if(number.match(/^\d+$/)){
-            number = parseInt(number);
-        }else{
-            $tr.find('.number').addClass('error');
-            error = true;
-        }
-        if(startNumber == ''){
-            frontText = '';
-        }else{
-            var re = startNumber.match(/\D?(\d+)$/);
-            if(re){
-                frontText = startNumber.substr(0, startNumber.length - re[1].length);
-                startNumber = re[1];
-                numberLength = startNumber.length;
-            }else{
-                $tr.find('.startNumber').addClass('error');
-                error = true;
-                frontText = startNumber;
-                startNumber = '0';
-                numberLength = 0;
-            }
-        }
-        if(startNumber.match(/^\d+$/)){
-            startNumber = parseInt(startNumber);
-            hasNumber = true;
-            if(maxTd < number)maxTd = number;
-        }else{
-            hasNumber = false;
-        }
-        var tmp = {
-            amount: amount,
-            number: number,
-            hasNumber: hasNumber,
-            frontText: frontText,
-            startNumber: startNumber,
-            numberLength: numberLength,
-            error: error
-        }
-        $tr.data('data', tmp);
-        if(!error){
-            boxNumber += Math.ceil(amount / number);
-        }
-    });
-    $('#inputTable .boxNumber').html('('+boxNumber+')');
-    if(maxTd == 0){
-        createThead1();
-    }else{
-        createThead2(maxTd);
-    }
-    $trs.each(function(i, tr){
-        if(maxTd == 0){
-            createOneInput1($(tr));
-        }else{
-            createOneInput2($(tr), maxTd);
-        }
-        
-    });
-}
-var createThead1 = function(){
-    $('#outputTable thead').empty();
-    var $thead = $('<tr></tr>');
+	var init = function() {
+		$(document).on('click', 'td.add', createNewEditTr);
+		$(document).on('click', 'td.delete', deleteEditTr);
+		$(document).on('focusout', '#inputTable td', function() {
+			$(this).removeClass('error')
+		});
+		$(document).on('click', '#submitInput', createOutputTable);
+		$(document).on('click', '#exportInput', exportCSV1);
+		$(document).on('click', '#exportOutput', exportCSV2);
+		$.getScript('./thirdparty/js/FileSaver.min.js');
+		$.getScript('./thirdparty/js/downloadCSV.js');
+	}
+	var createNewEditTr = function() {
+		//console.error('createNewEditTr');
+		var $tr = $(this).closest('tr'), $newTr = $tr.clone();
+		$newTr.find('td').not('.delete, .add').html('');
+		$tr.after($newTr);
+	}
+	var deleteEditTr = function() {
+		var $tr = $(this).closest('tr'), $trs = $('#inputTable tbody').find('tr');
+		if ($trs.length == 1) {
+			$tr.find('td').not('.delete, .add').html('');
+		} else {
+			$tr.remove();
+		}
+	}
+	var leftPad = function(t, n) {
+		t = t + '';
+		if (t.length < n)
+			return leftPad('0' + t, n);
+		return t;
+	}
+	var createOutputTable = function() {
+		var maxTd = 0, $trs = $('#inputTable tbody tr'), boxNumber = 0;
+		$('#outputTable tbody').empty();
+		$trs
+				.each(function(i, tr) {
+					var $tr = $(tr), hasNumber, amount = $tr.find('.amount').text().trim(), number = $tr.find('.number').text().trim(), startNumber = $tr.find('.startNumber').text().trim(), numberLength = 0, error = false;
+					if (amount.match(/^\d+$/)) {
+						amount = parseInt(amount);
+					} else {
+						$tr.find('.amount').addClass('error');
+						error = true;
+					}
+					if (amount > 10000) {
+						$tr.find('.amount').addClass('error');
+						error = true;
+					}
+					if (number.match(/^\d+$/)) {
+						number = parseInt(number);
+					} else {
+						$tr.find('.number').addClass('error');
+						error = true;
+					}
+					if (startNumber == '') {
+						frontText = '';
+					} else {
+						var re = startNumber.match(/\D?(\d+)$/);
+						if (re) {
+							frontText = startNumber.substr(0, startNumber.length - re[1].length);
+							startNumber = re[1];
+							numberLength = startNumber.length;
+						} else {
+							$tr.find('.startNumber').addClass('error');
+							error = true;
+							frontText = startNumber;
+							startNumber = '0';
+							numberLength = 0;
+						}
+					}
+					if (startNumber.match(/^\d+$/)) {
+						startNumber = parseInt(startNumber);
+						hasNumber = true;
+						if (maxTd < number)
+							maxTd = number;
+					} else {
+						hasNumber = false;
+					}
+					var tmp = {
+						amount : amount,
+						number : number,
+						hasNumber : hasNumber,
+						frontText : frontText,
+						startNumber : startNumber,
+						numberLength : numberLength,
+						error : error
+					}
+					$tr.data('data', tmp);
+					if (!error) {
+						boxNumber += Math.ceil(amount / number);
+					}
+				});
+		$('#inputTable .boxNumber').html('(' + boxNumber + ')');
+		if (maxTd == 0) {
+			createThead1();
+		} else {
+			createThead2(maxTd);
+		}
+		$trs.each(function(i, tr) {
+			if (maxTd == 0) {
+				createOneInput1($(tr));
+			} else {
+				createOneInput2($(tr), maxTd);
+			}
 
-    $thead.append('<th>P / O</th>');
-    $thead.append('<th>UPN</th>');
-    $thead.append('<th>LOT</th>');
-    $thead.append('<th>DATE</th>');
-    $thead.append('<th>QTY</th>');
-    $('#outputTable thead').append($thead);
-}
-var createOneInput1 = function($tr){
-    var data = $tr.data('data');
-    if(data.error)return;
+		});
+	}
+	var createThead1 = function() {
+		$('#outputTable thead').empty();
+		var $thead = $('<tr></tr>');
 
-    var $trModel = $('<tr></tr>');
-    $trModel.append('<td>'+$tr.find('.item_po').text().trim()+'</td>');
-    $trModel.append('<td>'+$tr.find('.item_upn').text().trim()+'</td>');
-    $trModel.append('<td>'+$tr.find('.item_lot').text().trim()+'</td>');
-    $trModel.append('<td>'+$tr.find('.item_date').text().trim()+'</td>');
+		$thead.append('<th>P / O</th>');
+		$thead.append('<th>UPN</th>');
+		$thead.append('<th>LOT</th>');
+		$thead.append('<th>DATE</th>');
+		$thead.append('<th>QTY</th>');
+		$('#outputTable thead').append($thead);
+	}
+	var createOneInput1 = function($tr) {
+		var data = $tr.data('data');
+		if (data.error)
+			return;
 
-    var i, $newTr,
-    boxNumber = Math.floor(data.amount / data.number),
-    lastBox = data.amount % data.number;
-    for(i = 0 ; i < boxNumber ; i++){
-        $newTr = $trModel.clone();
-        $newTr.append('<td class="textCenter">'+data.number+'</td>');
-        $('#outputTable tbody').append($newTr);
-    }
-    if(lastBox > 0){
-        $newTr = $trModel.clone();
-        $newTr.append('<td class="textCenter">'+lastBox+'</td>');
-        $('#outputTable tbody').append($newTr);
-    }
-}
-var createThead2 = function(maxTd){
-    $('#outputTable thead').empty();
-    var $thead = $('<tr></tr>');
+		var $trModel = $('<tr></tr>');
+		$trModel.append('<td>' + $tr.find('.item_po').text().trim() + '</td>');
+		$trModel.append('<td>' + $tr.find('.item_upn').text().trim() + '</td>');
+		$trModel.append('<td>' + $tr.find('.item_lot').text().trim() + '</td>');
+		$trModel.append('<td>' + $tr.find('.item_date').text().trim() + '</td>');
 
-    $thead.append('<th>P / O</th>');
-    $thead.append('<th>LOT</th>');
-    $thead.append('<th>UPN</th>');
-    for(var i = 1 ; i <= maxTd ; i++){
-        $thead.append('<th>SN'+i+'</th>');
-    }
-    $thead.append('<th>DATE</th>');
-    $thead.append('<th>QTY</th>');
-    $('#outputTable thead').append($thead);
-}
-var createOneInput2 = function($tr, maxTd){
-    var data = $tr.data('data');
-    if(data.error)return;
+		var i, $newTr, boxNumber = Math.floor(data.amount / data.number), lastBox = data.amount % data.number;
+		for (i = 0; i < boxNumber; i++) {
+			$newTr = $trModel.clone();
+			$newTr.append('<td class="textCenter">' + data.number + '</td>');
+			$('#outputTable tbody').append($newTr);
+		}
+		if (lastBox > 0) {
+			$newTr = $trModel.clone();
+			$newTr.append('<td class="textCenter">' + lastBox + '</td>');
+			$('#outputTable tbody').append($newTr);
+		}
+	}
+	var createThead2 = function(maxTd) {
+		$('#outputTable thead').empty();
+		var $thead = $('<tr></tr>');
 
-    var $trModel = $('<tr></tr>');
-    $trModel.append('<td>'+$tr.find('.item_po').text().trim()+'</td>');
-    $trModel.append('<td>'+$tr.find('.item_lot').text().trim()+'</td>');
-    $trModel.append('<td>'+$tr.find('.item_upn').text().trim()+'</td>');
-    for(var i = 1 ; i <= maxTd ; i++){
-        $trModel.append('<td class="sn'+i+'"></td>');
-    }
-    $trModel.append('<td>'+$tr.find('.item_date').text().trim()+'</td>');
-    $trModel.append('<td class="qty"></td>');
+		$thead.append('<th>P / O</th>');
+		$thead.append('<th>LOT</th>');
+		$thead.append('<th>UPN</th>');
+		for (var i = 1; i <= maxTd; i++) {
+			$thead.append('<th>SN' + i + '</th>');
+		}
+		$thead.append('<th>DATE</th>');
+		$thead.append('<th>QTY</th>');
+		$('#outputTable thead').append($thead);
+	}
+	var createOneInput2 = function($tr, maxTd) {
+		var data = $tr.data('data');
+		if (data.error)
+			return;
 
-    var i, n, $newTr,
-    boxNumber = Math.floor(data.amount / data.number),
-    lastBox = data.amount % data.number,
-    index = data.startNumber;
-    for(i = 0 ; i < boxNumber ; i++){
-        $newTr = $trModel.clone();
-        $newTr.find('.qty').html(data.number);
-        if(data.hasNumber){
-            for(n = 1 ; n <= data.number ; n++){
-                $newTr.find('.sn' + n).html(data.frontText + leftPad(index, data.numberLength));
-                index++
-            }
-        }
-        $('#outputTable tbody').append($newTr);
-    }
-    if(lastBox > 0){
-        $newTr = $trModel.clone();
-        $newTr.find('.qty').html(lastBox);
-        if(data.hasNumber){
-            for(n = 1 ; n <= lastBox ; n++){
-                $newTr.find('.sn' + n).html(data.frontText + leftPad(index, data.numberLength));
-                index++
-            }
-        }
-        $('#outputTable tbody').append($newTr);
-    }
-}
-var exportCSV1 = function(){
-    var dataAry = window.table2Array($('#inputTable'), null, null, 0, 6);
-    var d = new Date();
-    var n = function(s){return (s<10)?'0'+s:''+s;}
-    var fileName = 'input_' + d.getFullYear() + '-' + n(d.getMonth()) + '-' + n(d.getDate());
-    window.downloadCSV(dataAry, fileName);
-}
-var exportCSV2 = function(){
-    var dataAry = window.table2Array($('#outputTable'));
-    var d = new Date();
-    var n = function(s){return (s<10)?'0'+s:''+s;}
-    var fileName = 'output_' + d.getFullYear() + '-' + n(d.getMonth()) + '-' + n(d.getDate());
-    window.downloadCSV(dataAry, fileName);
-}
-console.log("box_barcode_body");
-templateBody = new Vue({
-    el: "#box_barcode_body",
-    data: {
-        search_list: "",
-    },
-    created: function () {
-        //初始化
-        console.log(main.contentData.templateInfo.body["only_user"]);
-        this.search_list = main.contentData.templateInfo.body["only_user"];
+		var $trModel = $('<tr></tr>');
+		$trModel.append('<td>' + $tr.find('.item_po').text().trim() + '</td>');
+		$trModel.append('<td>' + $tr.find('.item_lot').text().trim() + '</td>');
+		$trModel.append('<td>' + $tr.find('.item_upn').text().trim() + '</td>');
+		for (var i = 1; i <= maxTd; i++) {
+			$trModel.append('<td class="sn'+i+'"></td>');
+		}
+		$trModel.append('<td>' + $tr.find('.item_date').text().trim() + '</td>');
+		$trModel.append('<td class="qty"></td>');
 
-        //t_body
-        this.def_modify();
+		var i, n, $newTr, boxNumber = Math.floor(data.amount / data.number), lastBox = data.amount % data.number, index = data.startNumber;
+		for (i = 0; i < boxNumber; i++) {
+			$newTr = $trModel.clone();
+			$newTr.find('.qty').html(data.number);
+			if (data.hasNumber) {
+				for (n = 1; n <= data.number; n++) {
+					$newTr.find('.sn' + n).html(data.frontText + leftPad(index, data.numberLength));
+					index++
+				}
+			}
+			$('#outputTable tbody').append($newTr);
+		}
+		if (lastBox > 0) {
+			$newTr = $trModel.clone();
+			$newTr.find('.qty').html(lastBox);
+			if (data.hasNumber) {
+				for (n = 1; n <= lastBox; n++) {
+					$newTr.find('.sn' + n).html(data.frontText + leftPad(index, data.numberLength));
+					index++
+				}
+			}
+			$('#outputTable tbody').append($newTr);
+		}
+	}
+	var exportCSV1 = function() {
+		var dataAry = window.table2Array($('#inputTable'), null, null, 0, 6);
+		var d = new Date();
+		var n = function(s) {
+			return (s < 10) ? '0' + s : '' + s;
+		}
+		var fileName = 'input_' + d.getFullYear() + '-' + n(d.getMonth()) + '-' + n(d.getDate());
+		window.downloadCSV(dataAry, fileName);
+	}
+	var exportCSV2 = function() {
+		var dataAry = window.table2Array($('#outputTable'));
+		var d = new Date();
+		var n = function(s) {
+			return (s < 10) ? '0' + s : '' + s;
+		}
+		var fileName = 'output_' + d.getFullYear() + '-' + n(d.getMonth()) + '-' + n(d.getDate());
+		window.downloadCSV(dataAry, fileName);
+	}
+	console.log("box_barcode_body");
+	templateBody = new Vue({
+		el : "#box_barcode_body",
+		data : {
+			search_list : "",
+		},
+		created : function() {
+			//初始化
+			console.log(main.contentData.templateInfo.body["only_user"]);
+			this.search_list = main.contentData.templateInfo.body["only_user"];
 
-        //清除修改
-        //$(document).on("click", "#a_c_submit", function (event) {
-        //    templateBody.def_modify();
-        //});
-        init();
-    },
-    methods: {
-        //還原預設
-        def_modify: function () {
-        },
-        //傳送 修改
-        send_added_or_update_save: function () {
-            var content = new Object();
-            var action = "U";
-            var url = "./update_basic_user.do";
-            var order = "search_update"; //指令
+			//t_body
+			this.def_modify();
 
-            var data = JSON.stringify({
-                data: {
-                    datetime: "",
-                    action: action,
-                    whoami: main.loginData.account,
-                    cellBackName: "bodyAfter",
-                    cellBackOrder: order,
-                    content: content,
-                },
-            });
-            main.ajaxSend(url, data);
-            return false; //防止真傳送
-        },
-        //Rsp-回傳值-指令
-        bodyAfter: function (event) {
-            console.log("to index success");
-            switch (event.r_cellBackOrder) {
-                case "search_update":
-                    //刷新資料
-                    if (event.r_content.templateInfo.body["list"] != null && event.r_content.templateInfo.body["list"] != "") {
-                        this.search_list = event.r_content.templateInfo.body["list"];
-                        this.search_update();
-                    }
-                    break;
-                case "update_body_nav":
-                    break;
-            }
-        },
-    },
-    //移除監聽事件
-    beforeDestroy: function () {
-        console.log("to beforeDestroy event");
-        //$(document).off("click", "#a_c_submit");
-        $(document).off('click', 'td.add');
-        $(document).off('click', 'td.delete');
-        $(document).off('focusout', '#inputTable td');
-        $(document).off('click', '#submitInput');
-        $(document).off('click', '#exportInput');
-        $(document).off('click', '#exportOutput');
-    },
-});
+			//清除修改
+			//$(document).on("click", "#a_c_submit", function (event) {
+			//    templateBody.def_modify();
+			//});
+			init();
+		},
+		methods : {
+			//還原預設
+			def_modify : function() {
+			},
+			//傳送 修改
+			send_added_or_update_save : function() {
+				var content = new Object();
+				var action = "U";
+				var url = "./update_basic_user.do";
+				var order = "search_update"; //指令
+
+				var data = JSON.stringify({
+					data : {
+						datetime : "",
+						action : action,
+						whoami : main.loginData.account,
+						cellBackName : "bodyAfter",
+						cellBackOrder : order,
+						content : content,
+					},
+				});
+				main.ajaxSend(url, data);
+				return false; //防止真傳送
+			},
+			//Rsp-回傳值-指令
+			bodyAfter : function(event) {
+				console.log("to index success");
+				switch (event.r_cellBackOrder) {
+				case "search_update":
+					//刷新資料
+					if (event.r_content.templateInfo.body["list"] != null && event.r_content.templateInfo.body["list"] != "") {
+						this.search_list = event.r_content.templateInfo.body["list"];
+						this.search_update();
+					}
+					break;
+				case "update_body_nav":
+					break;
+				}
+			},
+		},
+		//移除監聽事件
+		beforeDestroy : function() {
+			console.log("to beforeDestroy event");
+			//$(document).off("click", "#a_c_submit");
+			$(document).off('click', 'td.add');
+			$(document).off('click', 'td.delete');
+			$(document).off('focusout', '#inputTable td');
+			$(document).off('click', '#submitInput');
+			$(document).off('click', '#exportInput');
+			$(document).off('click', '#exportOutput');
+		},
+	});
 </script>

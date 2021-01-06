@@ -22,6 +22,7 @@
 		<typeAlias alias="PurchasingListEntity" type="dtri.com.db.entity.PurchasingListEntity" />
 		<typeAlias alias="PurchasingMailEntity" type="dtri.com.db.entity.PurchasingMailEntity" />
 		<typeAlias alias="ProductionRecordsEntity" type="dtri.com.db.entity.ProductionRecordsEntity" />
+		<typeAlias alias="ProductionSnEntity" type="dtri.com.db.entity.ProductionSnEntity" />
 		<typeAlias alias="SoftwareVersionEntity" type="dtri.com.db.entity.SoftwareVersionEntity" />
 	</typeAliases>
 </configuration>

@@ -45,7 +45,10 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 			// Step1-2.檢查資料完整性
 			UserEntity user = loginService.getSessionUserBean();
 			List<GroupEntity> groupEntity = loginService.getSessionGroupBean();
+			//行政人員-檢查
 			Boolean check = loginService.checkUser(user, groupEntity);
+			//作業員-檢查
+			
 			if (check) {
 				// Step1-3.通過
 				return true;

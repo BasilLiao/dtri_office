@@ -14,9 +14,9 @@
 		-webkit-print-color-adjust: exact;
 	}
 }
-.group-list-10{
-	font-size: 1.2rem;
 
+.group-list-10 {
+	font-size: 1.2rem;
 }
 
 #table2 th {
@@ -36,17 +36,14 @@
 	margin: 0;
 }
 
-
-
 #table2 [contenteditable] {
 	font-weight: bold;
 }
 
- thead .textN2 {
+thead .textN2 {
 	font-size: 1.5rem;
 	line-height: 20px;
 	height: 40px;
-
 }
 
 #table2 .line2 td, #table2 .line2 th {
@@ -68,13 +65,12 @@
 	padding: 0 10px;
 }
 
-
 #table2 .sign th {
 	font-size: 1.5rem;
 }
 
-[contentEditable=true]:empty:not(:focus):before{
-    content:attr(data-text)
+[contentEditable=true]:empty:not(:focus):before {
+	content: attr(data-text)
 }
 </style>
 <div class="row border" id="bom_print_body">
@@ -90,9 +86,7 @@
 			<div class="mb-3 border border-primary shadow">
 				<div class="row mb-2">
 					<div class="col-md-5  mt-1 ml-1">
-						<a class="btn btn-success" data-toggle="collapse"
-							href="#collapseSearch" role="button" aria-expanded="true"
-							aria-controls="collapseSearch"> 查詢功能 : </a>
+						<a class="btn btn-success" data-toggle="collapse" href="#collapseSearch" role="button" aria-expanded="true" aria-controls="collapseSearch"> 查詢功能 : </a>
 					</div>
 				</div>
 				<div class="collapse show" id="collapseSearch">
@@ -100,32 +94,25 @@
 						<div class="row">
 							<div class="col-md-6 border border-primary">
 								<div class="text-left mb-2 mt-2">
-									項目群組: <select class="md-12 a_row2" id="s_g_item"
-										name="s_g_item">
+									項目群組: <select class="md-12 a_row2" id="s_g_item" name="s_g_item">
 										<option value="">請選擇</option>
 									</select>
 								</div>
 								<div class="text-left mb-2 mt-2">
-									支項項目: <select class="md-12 a_row2" id="s_i_item"
-										name="s_i_item">
+									支項項目: <select class="md-12 a_row2" id="s_i_item" name="s_i_item">
 										<option value="">請選擇</option>
 									</select>
 								</div>
 								<div class="text-left mb-2 mt-2">
-									產品型號: <input class="col-md-7" type="text" id="s_model"
-										name="s_model" placeholder="Ex:型號123456" required autofocus />
+									產品型號: <input class="col-md-7" type="text" id="s_model" name="s_model" placeholder="Ex:型號123456" required autofocus />
 								</div>
 								<div class="text-left mb-2 mt-2">
-									BOM料號: <input class="col-md-7" type="text" id="s_bom_number"
-										name="s_bom_number" placeholder="Ex:A513-8745940-123" required
-										autofocus />
+									BOM料號: <input class="col-md-7" type="text" id="s_bom_number" name="s_bom_number" placeholder="Ex:A513-8745940-123" required autofocus />
 								</div>
 								<div class="row mb-2 mt-2">
 									<div class="col-md-4"></div>
 									<div class="col-md-4">
-										<button id="s_l_submit"
-											class="col-md-12 btn btn-primary btn-block mr-2"
-											type="submit">條件選擇</button>
+										<button id="s_l_submit" class="col-md-12 btn btn-primary btn-block mr-2" type="submit">條件選擇</button>
 									</div>
 									<div class="col-md-4"></div>
 								</div>
@@ -137,13 +124,10 @@
 								<div class="mb-2 mt-2 row">
 									<div class="col-md-3"></div>
 									<div class="col-md-3">
-										<button id="s_submit"
-											class="col-md-12 btn btn-primary btn-block mr-2"
-											type="submit">條件查詢</button>
+										<button id="s_submit" class="col-md-12 btn btn-primary btn-block mr-2" type="submit">條件查詢</button>
 									</div>
 									<div class="col-md-3">
-										<button id="s_c_submit"
-											class="col-md-12 btn btn-warning btn-block" type="button">條件清除</button>
+										<button id="s_c_submit" class="col-md-12 btn btn-warning btn-block" type="button">條件清除</button>
 									</div>
 									<div class="col-md-3"></div>
 								</div>
@@ -157,9 +141,7 @@
 				<div class="border">
 					<div class="row mb-2">
 						<div class="col-md-5  mt-1 ml-1">
-							<a class="btn btn-success" data-toggle="collapse"
-								href="#collapseFinish" role="button" aria-expanded="true"
-								aria-controls="collapseFinish"> 查詢結果 : </a>
+							<a class="btn btn-success" data-toggle="collapse" href="#collapseFinish" role="button" aria-expanded="true" aria-controls="collapseFinish"> 查詢結果 : </a>
 						</div>
 					</div>
 					<div class="collapse show" id="collapseFinish">
@@ -171,8 +153,7 @@
 							</div>
 							<!-- 顯示內容 -->
 							<div class="row">
-								<table style="min-height: 480px;" 
-									class="table table-sm table-hover table-striped table-bordered table-responsive">
+								<table style="min-height: 480px;" class="table table-sm table-hover table-striped table-bordered table-responsive">
 									<thead>
 										<tr id="search_thead" class="bg-primary">
 											<th scope="col" style="min-width: 60px;">功能</th>
@@ -184,35 +165,18 @@
 							</div>
 							<div aria-label="Page">
 								<ul class="pagination justify-content-center">
-									<li class="page-item p_p disabled"><a id="p_p"
-										class="page-link" href="#"
-										onclick="return templateBody.change_page(this);">Previous
-											10 </a></li>
-									<li class="page-item p_nb p1 active"><a id="p1"
-										class="page-link" href="#"
-										onclick="return templateBody.change_page(this);">1</a></li>
-									<li class="page-item p_nb p2"><a id="p2" class="page-link"
-										href="#" onclick="return templateBody.change_page(this);">2</a></li>
-									<li class="page-item p_nb p3"><a id="p3" class="page-link"
-										href="#" onclick="return templateBody.change_page(this);">3</a></li>
-									<li class="page-item p_nb p4"><a id="p4" class="page-link"
-										href="#" onclick="return templateBody.change_page(this);">4</a></li>
-									<li class="page-item p_nb p5"><a id="p5" class="page-link"
-										href="#" onclick="return templateBody.change_page(this);">5</a></li>
-									<li class="page-item p_nb p6"><a id="p6" class="page-link"
-										href="#" onclick="return templateBody.change_page(this);">6</a></li>
-									<li class="page-item p_nb p7"><a id="p7" class="page-link"
-										href="#" onclick="return templateBody.change_page(this);">7</a></li>
-									<li class="page-item p_nb p8"><a id="p8" class="page-link"
-										href="#" onclick="return templateBody.change_page(this);">8</a></li>
-									<li class="page-item p_nb p9"><a id="p9" class="page-link"
-										href="#" onclick="return templateBody.change_page(this);">9</a></li>
-									<li class="page-item p_nb p10"><a id="p10"
-										class="page-link" href="#"
-										onclick="return templateBody.change_page(this);">10</a></li>
-									<li class="page-item p_n disabled"><a id="p_n"
-										class="page-link" href="#"
-										onclick="return templateBody.change_page(this);">Next 10 </a></li>
+									<li class="page-item p_p disabled"><a id="p_p" class="page-link" href="#" onclick="return templateBody.change_page(this);">Previous 10 </a></li>
+									<li class="page-item p_nb p1 active"><a id="p1" class="page-link" href="#" onclick="return templateBody.change_page(this);">1</a></li>
+									<li class="page-item p_nb p2"><a id="p2" class="page-link" href="#" onclick="return templateBody.change_page(this);">2</a></li>
+									<li class="page-item p_nb p3"><a id="p3" class="page-link" href="#" onclick="return templateBody.change_page(this);">3</a></li>
+									<li class="page-item p_nb p4"><a id="p4" class="page-link" href="#" onclick="return templateBody.change_page(this);">4</a></li>
+									<li class="page-item p_nb p5"><a id="p5" class="page-link" href="#" onclick="return templateBody.change_page(this);">5</a></li>
+									<li class="page-item p_nb p6"><a id="p6" class="page-link" href="#" onclick="return templateBody.change_page(this);">6</a></li>
+									<li class="page-item p_nb p7"><a id="p7" class="page-link" href="#" onclick="return templateBody.change_page(this);">7</a></li>
+									<li class="page-item p_nb p8"><a id="p8" class="page-link" href="#" onclick="return templateBody.change_page(this);">8</a></li>
+									<li class="page-item p_nb p9"><a id="p9" class="page-link" href="#" onclick="return templateBody.change_page(this);">9</a></li>
+									<li class="page-item p_nb p10"><a id="p10" class="page-link" href="#" onclick="return templateBody.change_page(this);">10</a></li>
+									<li class="page-item p_n disabled"><a id="p_n" class="page-link" href="#" onclick="return templateBody.change_page(this);">Next 10 </a></li>
 								</ul>
 							</div>
 						</div>
@@ -223,22 +187,22 @@
 			<div class="mb-3 border border-primary shadow">
 				<div class="row mb-2 mt-1 ">
 					<div class="col-md-9 ml-1 " id="collapse_btn">
-						<a class="btn btn-success" data-toggle="collapse"
-							href="#collapseAdded" role="button" aria-expanded="false"
-							aria-controls="collapseAdded">生產注意事項 列印預覽 : </a>
+						<a class="btn btn-success" data-toggle="collapse" href="#collapseAdded" role="button" aria-expanded="false" aria-controls="collapseAdded">生產注意事項 列印預覽 : </a>
 					</div>
-					<div class="pt-2"><b>類型 : ></b></div>
-                    <div class="col-md-1 pl-0" id="">
+					<div class="pt-2">
+						<b>類型 : ></b>
+					</div>
+					<div class="col-md-1 pl-0" id="">
 						<select id="a_u_kind" class="custom-select p-1" id="inlineFormCustomSelect">
 							<option value="0" selected>技轉中</option>
 							<option value="1">可量產</option>
 						</select>
-                    </div>
-                    <div class="col-md-1 pl-0 pt-1" id="">
-                    	<button class=" btn-sm btn btn-primary btn-block" id="p_submit3" type="button" >修正</button>
-                    </div>
+					</div>
+					<div class="col-md-1 pl-0 pt-1" id="">
+						<button class=" btn-sm btn btn-primary btn-block" id="p_submit3" type="button">修正</button>
+					</div>
 				</div>
-				<div class="collapse" id="collapseAdded" >
+				<div class="collapse container" id="collapseAdded">
 					<div id="collapseAddedPrint" style="background: white;">
 						<table class="table table-bordered border border-dark">
 							<thead>
@@ -250,11 +214,11 @@
 								<tr>
 									<th width="15%" class="p-1 border border-dark" style="font-size: 1.3em;">工單號碼</th>
 									<td width="35%" class="p-0 border border-dark">
-										<div  id="a_u_id" contenteditable="true" class="can_rm p-2 textN2 border border-dark rounded" data-text=""></div>
+										<div id="a_u_id" contenteditable="true" class="can_rm p-2 textN2 border border-dark rounded" data-text=""></div>
 									</td>
 									<th width="15%" class="p-1 border border-dark" style="font-size: 1.3em;">訂單編號</th>
 									<td colspan="2" class="p-0 border border-dark">
-										<div  id="a_u_o_id" contenteditable="true" class="can_rm p-2 textN2 border border-dark rounded" data-text=""></div>
+										<div id="a_u_o_id" contenteditable="true" class="can_rm p-2 textN2 border border-dark rounded" data-text=""></div>
 									</td>
 								</tr>
 								<tr>
@@ -263,137 +227,106 @@
 										<div id="a_u_c" contenteditable="true" class="can_rm p-2 textN2 border border-dark rounded" data-text=""></div>
 									</td>
 									<th class="p-1 border border-dark" style="font-size: 1.3em;">數量</th>
-									<td  width="15%" class="p-0 border border-dark">
+									<td width="15%" class="p-0 border border-dark">
 										<div id="a_u_nb" contenteditable="true" class="can_rm p-2 textN2 border border-dark rounded" data-text=""></div>
-									</td> 
-									<td id="kind1" width="20%" class="p-0" class="can_rm border border-dark" data-text="(量產|技轉)單" style="text-align: center;font-weight: bold;font-size: 26px;" >
-									
 									</td>
+									<td id="kind1" width="20%" class="p-0 can_rm border border-dark" data-text="(量產|技轉)單" style="text-align: center; font-weight: bold; font-size: 26px;"></td>
 								</tr>
 								<tr style="font-size: 1.3em;">
-									<th class="p-1 border border-dark"  style="font-weight: bold;">產品型號</th>
+									<th class="p-1 border border-dark" style="font-weight: bold;">產品型號</th>
 									<td colspan="4" class="p-0">
 										<div class="row m-0">
 											<div id="a_u_model" class="col-md-3 p-1  border border-dark can_rm"></div>
-											<div class="col-md-2 p-1  border border-dark "  style="font-weight: bold;">BOM料號</div>
+											<div class="col-md-2 p-1  border border-dark " style="font-weight: bold;">BOM料號</div>
 											<div id="a_u_bom_id" class="d-none"></div>
 											<div id="a_u_bom_number" class="col-md-3 p-1  border border-dark  can_rm"></div>
-											<div class="col-md-3 pt-1 pl-2  border border-dark "  style="font-weight: bold;">主機板(硬體)版本</div>
+											<div class="col-md-3 pt-1 pl-2  border border-dark " style="font-weight: bold;">主機板(硬體)版本</div>
 											<div id="a_u_version_bios" class="col-md-1 p-1  border border-dark can_rm"></div>
 										</div>
 									</td>
 								</tr>
 								<tr>
 									<th style="font-size: 1.3em;" class="p-1 border border-dark">PM 備註</th>
-									<td colspan="4" class="p-0 border border-dark"><div id="a_u_note"
-											style="font-size: 14px; overflow: hidden; word-break: break-all;" class="can_rm"></div></td>
+									<td colspan="4" class="p-0 border border-dark"><div id="a_u_note" style="font-size: 14px; overflow: hidden; word-break: break-all;" class="can_rm"></div></td>
 								</tr>
 							</thead>
 							<tbody>
-								<tr >
+								<tr>
 									<td colspan="5" class="p-1 border border-dark">
 										<div class=" ml-0 p-0 col-md-12 itemList listLeft float-left" style="width: 50%; height: 825px;">
-											<div class="itemSample ml-1 p-1 border-right border-bottom border-secondary"
-												style="display: none; white-space: nowrap; overflow: hidden;line-height: 23px;">
-												<span class="name"	  style="font-size: 1.2rem; font-weight: bold; padding-right: 3px;"></span> 
-												<span class="content" style="font-size: 1.2rem; padding-right: 5px;"></span>
-												<span class="amount" style="font-size: 1.2rem;"></span>
+											<div class="itemSample ml-1 p-1 border-right border-bottom border-secondary" style="display: none; white-space: nowrap; overflow: hidden; line-height: 23px;">
+												<span class="name" style="font-size: 1.2rem; font-weight: bold; padding-right: 3px;"></span> <span class="content" style="font-size: 1.2rem; padding-right: 5px;"></span> <span
+													class="amount" style="font-size: 1.2rem;"></span>
 											</div>
 										</div>
-										<div class="itemList listRight float-left"
-											style="width: 50%; "></div>
+										<div class="itemList listRight float-left" style="width: 50%;"></div>
 									</td>
 								</tr>
 								<tr>
 									<td colspan="5" class="border border-dark p-3">
 										<div class="title " style="font-weight: bold;">包裝形態</div>
 										<div style="padding-left: 80px; overflow: hidden; margin-top: -22px;">
-											<div class="itemSample float-left col-md-4 row"
-												style="margin: 0 0px 10px 0; padding-right: 0;">
-												<label class="input-group-text"> <input	type="checkbox" />
+											<div class="itemSample float-left col-md-4 row" style="margin: 0 0px 10px 0; padding-right: 0;">
+												<label class="input-group-text"> <input type="checkbox" />
 												</label>
 												<div class="border col-9" style="padding: 3px;">
-												<div class="group-list-10 " style="height: 28px;" contenteditable="true">Power cord</div>
+													<div class="group-list-10 " style="height: 28px;" contenteditable="true">Power cord</div>
 												</div>
 											</div>
-											<div class="itemSample float-left col-md-4 row"
-												style="margin: 0 0px 10px 0; padding-right: 0;">
-												<label class="input-group-text"> <input
-													type="checkbox" />
+											<div class="itemSample float-left col-md-4 row" style="margin: 0 0px 10px 0; padding-right: 0;">
+												<label class="input-group-text"> <input type="checkbox" />
 												</label>
 												<div class="border col-9" style="padding: 3px;">
-													<div class="group-list-10" style="height: 28px;"
-														contenteditable="true">BOG</div>
+													<div class="group-list-10" style="height: 28px;" contenteditable="true">BOG</div>
 												</div>
 											</div>
-											<div class="itemSample float-left col-md-4 row"
-												style="margin: 0 0px 10px 0; padding-right: 0;">
-												<label class="input-group-text"> <input
-													type="checkbox" />
+											<div class="itemSample float-left col-md-4 row" style="margin: 0 0px 10px 0; padding-right: 0;">
+												<label class="input-group-text"> <input type="checkbox" />
 												</label>
 												<div class="border col-9" style="padding: 3px;">
-													<div class="group-list-10" style="height: 28px;"
-														contenteditable="true">License</div>
+													<div class="group-list-10" style="height: 28px;" contenteditable="true">License</div>
 												</div>
 											</div>
-											<div class="itemSample float-left col-md-4 row"
-												style="margin: 0 0px 10px 0; padding-right: 0;">
-												<label class="input-group-text"> <input
-													type="checkbox" />
+											<div class="itemSample float-left col-md-4 row" style="margin: 0 0px 10px 0; padding-right: 0;">
+												<label class="input-group-text"> <input type="checkbox" />
 												</label>
 												<div class="border col-9" style="padding: 3px;">
-													<div class="group-list-10" style="height: 28px;"
-														contenteditable="true">BOX Label</div>
+													<div class="group-list-10" style="height: 28px;" contenteditable="true">BOX Label</div>
 												</div>
 											</div>
-											<div class="itemSample float-left col-md-4 row"
-												style="margin: 0 0px 10px 0; padding-right: 0;">
-												<label class="input-group-text"> <input
-													type="checkbox" />
+											<div class="itemSample float-left col-md-4 row" style="margin: 0 0px 10px 0; padding-right: 0;">
+												<label class="input-group-text"> <input type="checkbox" />
 												</label>
 												<div class="border col-9" style="padding: 3px;">
-													<div class="group-list-10" style="height: 28px;"
-														contenteditable="true">Bulk Pack</div>
+													<div class="group-list-10" style="height: 28px;" contenteditable="true">Bulk Pack</div>
 												</div>
 											</div>
-											<div class="itemSample float-left col-md-4 row"
-												style="margin: 0 0px 10px 0; padding-right: 0;">
-												<label class="input-group-text"> <input
-													type="checkbox" />
+											<div class="itemSample float-left col-md-4 row" style="margin: 0 0px 10px 0; padding-right: 0;">
+												<label class="input-group-text"> <input type="checkbox" />
 												</label>
 												<div class="border col-9" style="padding: 3px;">
-													<div class="group-list-10" style="height: 28px;"
-														contenteditable="true">Retail Pack</div>
+													<div class="group-list-10" style="height: 28px;" contenteditable="true">Retail Pack</div>
 												</div>
 											</div>
-											<div class="itemSample float-left col-md-4 row"
-												style="margin: 0 0px 0 0; padding-right: 0;">
-												<label class="input-group-text"> <input
-													type="checkbox" />
+											<div class="itemSample float-left col-md-4 row" style="margin: 0 0px 0 0; padding-right: 0;">
+												<label class="input-group-text"> <input type="checkbox" />
 												</label>
 												<div class="border col-9" style="padding: 3px;">
-													<div class="group-list-10" style="height: 28px;"
-														contenteditable="true">作業系統OS</div>
+													<div class="group-list-10" style="height: 28px;" contenteditable="true">作業系統OS</div>
 												</div>
 											</div>
-											<div class="itemSample float-left col-md-4 row"
-												style="margin: 0 0px 0 0; padding-right: 0;">
-												<label class="input-group-text"> <input
-													type="checkbox" />
+											<div class="itemSample float-left col-md-4 row" style="margin: 0 0px 0 0; padding-right: 0;">
+												<label class="input-group-text"> <input type="checkbox" />
 												</label>
 												<div class="border col-9" style="padding: 3px;">
-													<div class="group-list-10" style="height: 28px;"
-														contenteditable="true">無</div>
+													<div class="group-list-10" style="height: 28px;" contenteditable="true">無</div>
 												</div>
 											</div>
-											<div class="itemSample float-left col-md-4 row"
-												style="margin: 0 0px 0 0; padding-right: 0;">
-												<label class="input-group-text"> <input
-													type="checkbox" />
+											<div class="itemSample float-left col-md-4 row" style="margin: 0 0px 0 0; padding-right: 0;">
+												<label class="input-group-text"> <input type="checkbox" />
 												</label>
 												<div class="border col-9" style="padding: 3px;">
-													<div class="group-list-10" style="height: 28px;"
-														contenteditable="true">無</div>
+													<div class="group-list-10" style="height: 28px;" contenteditable="true">無</div>
 												</div>
 											</div>
 										</div>
@@ -402,14 +335,11 @@
 								<tr>
 									<td colspan="5" class=" pb-0 border border-dark">
 										<div class="title" style="font-weight: bold;">備註</div>
-										<div class="p-1 border border-dark rounded" style="font-size: 1.1em; width: 100%; height: 220px;word-break: break-all;"
-											contenteditable="true"></div>
+										<div class="p-1 border border-dark rounded" style="font-size: 1.1em; width: 100%; height: 220px; word-break: break-all;" contenteditable="true"></div>
 									</td>
 								</tr>
 								<tr>
-									<td id="c1_note" class="pt-0 pb-0" colspan="5"
-										style="font-size: 0.5rem; text-align: right; padding-right: 10px;">表單編號:
-										QR-701-06 / 規格負責人: / 建單負責人:</td>
+									<td id="c1_note" class="pt-0 pb-0" colspan="5" style="font-size: 0.5rem; text-align: right; padding-right: 10px;">表單編號: QR-701-06 / 規格負責人: / 建單負責人:</td>
 								</tr>
 							</tbody>
 						</table>
@@ -417,43 +347,42 @@
 					<div class="row mb-3" id="printBtn">
 						<div class="col-md-4">
 							<div class="float-right row border border-primary rounded" style="padding-right: 0px;">
-							<label id="a_u_production" class="input-group-text">
-								<input  type="checkbox" checked="checked"></label> 
+								<label id="a_u_production" class="input-group-text"> <input type="checkbox" checked="checked"></label>
 								<div class="border" style="padding: 5px;">
-									<div class="" style="height: 24px;"><b>登記生產</b></div>
+									<div class="" style="height: 24px;">
+										<b>登記生產</b>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="">
-								<button id="p_submit" class="btn btn-primary btn-block"
-									type="button">列印內容</button>
+								<button id="p_submit" class="btn btn-primary btn-block" type="button">列印內容</button>
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="">
-								<button id="a_c_submit" class="btn btn-warning btn-block"
-									type="button">清除內容</button>
+								<button id="a_c_submit" class="btn btn-warning btn-block" type="button">清除內容</button>
 							</div>
 						</div>
 						<div class="col-md-4"></div>
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 	<!-- 浮動電梯 -->
-	<div class="text-center fixed-bottom m-3 " style="width:140px;font-family:Microsoft JhengHei;font-size:16px;left: auto;">
-		<div id="top" class="shadow from_move row p-2 m-2 bg-light border border-primary rounded" style="cursor:pointer;">
+	<div class="text-center fixed-bottom m-3 " style="width: 140px; font-family: Microsoft JhengHei; font-size: 16px; left: auto;">
+		<div id="top" class="shadow from_move row p-2 m-2 bg-light border border-primary rounded" style="cursor: pointer;">
 			<img class="col-md-3 pl-0 pr-0" alt="top" src="./thirdparty/images/move_arrow.gif" style="transform: rotate(-135deg);">
 			<div class="col-md-9 pr-0">Top</div>
 		</div>
-		<div id="collapseAdded_1" class="shadow from_move row p-2 m-2 bg-light border border-primary rounded" style="cursor:pointer;">
+		<div id="collapseAdded_1" class="shadow from_move row p-2 m-2 bg-light border border-primary rounded" style="cursor: pointer;">
 			<img class="col-md-3 pl-0 pr-0" alt="注意事項" src="./thirdparty/images/move_arrow.gif" style="transform: rotate(88deg);">
 			<div class="col-md-9 pr-0">注意事項</div>
 		</div>
-		<div id="collapseAdded_2" class="shadow from_move row p-2 m-2 bg-light border border-primary rounded" style="cursor:pointer;">
+		<div id="collapseAdded_2" class="shadow from_move row p-2 m-2 bg-light border border-primary rounded" style="cursor: pointer;">
 			<img class="col-md-3 pl-0 pr-0" alt="列印內容" src="./thirdparty/images/move_arrow.gif" style="transform: rotate(88deg);">
 			<div class="col-md-9 pr-0">列印內容</div>
 		</div>
@@ -463,181 +392,170 @@
 <script type="text/javascript">
 	console.log("bom_print_body");
 	templateBody = new Vue(
-	{
-		el : "#bom_print_body",
-		data : {
-			l_search_thead : "", //鎖定查詢
-			search_list : "",
-			group_list : "",
-			item_list : "",
-			item_nb_max : 0, //最大ID數
-			//分頁功能
-			page_max : 100,//當前本批 筆數
-			page_max_total : 100,//最大總數
-			page_batch : 0,//第幾批
-			page_batch_total : 100,//每批間格值
-			page_every : 10,//當前每頁筆數
-			page_stay : 1,//當前頁數
-			s_4:0,//當前產品ID
-			d_1:'',//當前的 投線日
-			d_2:'',//當前的 出貨日
-			current_report:"自訂",//當前報表來源
-		},
-		created : function() {
-			//初始化
-			console.log(main.contentData.templateInfo.body);
-			this.group_list = main.contentData.templateInfo.body["group_list"];
-			this.item_list = main.contentData.templateInfo.body["item_list"];
-			this.search_list = main.contentData.templateInfo.body["list"];
-			this.item_nb_max = main.contentData.templateInfo.body["group_list"].length + 1;
-			$("#group_id_0").text(this.item_nb_max);
-			$("#a_item").attr("group_id", this.item_nb_max);
+			{
+				el : "#bom_print_body",
+				data : {
+					l_search_thead : "", //鎖定查詢
+					search_list : "",
+					group_list : "",
+					item_list : "",
+					item_nb_max : 0, //最大ID數
+					//分頁功能
+					page_max : 100,//當前本批 筆數
+					page_max_total : 100,//最大總數
+					page_batch : 0,//第幾批
+					page_batch_total : 100,//每批間格值
+					page_every : 10,//當前每頁筆數
+					page_stay : 1,//當前頁數
+					s_4 : 0,//當前產品ID
+					d_1 : '',//當前的 投線日
+					d_2 : '',//當前的 出貨日
+					current_report : "自訂",//當前報表來源
+				},
+				created : function() {
+					//初始化
+					console.log(main.contentData.templateInfo.body);
+					this.group_list = main.contentData.templateInfo.body["group_list"];
+					this.item_list = main.contentData.templateInfo.body["item_list"];
+					this.search_list = main.contentData.templateInfo.body["list"];
+					this.item_nb_max = main.contentData.templateInfo.body["group_list"].length + 1;
+					$("#group_id_0").text(this.item_nb_max);
+					$("#a_item").attr("group_id", this.item_nb_max);
 
-			//t_choose
-			var min_width = 100;
-			for (var i = 0; i < this.search_list[0].length; i++) {
-				var choose_check = '[<div class="text-left form-check">';
-				choose_check += '<input class="form-check-input" type="checkbox" value="" id="s_' + i + '" checked>';
-				choose_check += '<label class="form-check-label" for="s_' + i + '">'
-						+ this.search_list[0][i] + "</label>";
-				choose_check += "</div>]";
-				$("#search_choose").append(choose_check);
-			}
-			//t_header
-			for (var i = 0; i < this.search_list[0].length; i++) {
-				if (i == 0 || i == 2 || i == 5 || i == 7) {
-					min_width = 180;
-				}
-				if (i == 6) {
-					min_width = 150;
-				}
-				if (i == 10) {
-					min_width = 100;
-				}
-				$("#search_thead").append(
-						'<th style="min-width: ' + min_width + 'px;" class="s_' + i + '" scope="col">'
-								+ this.search_list[0][i] + "</th>");
-				min_width = 80;
-			}
-			//t_body
-			this.search_update();
-			//t_body_group
-			this.group_choose();
-			//建立 選項
-			this.group_item_choose("s_g_item", -1);
-			this.group_item_choose("a_g_item_0", 0);
+					//t_choose
+					var min_width = 100;
+					for (var i = 0; i < this.search_list[0].length; i++) {
+						var choose_check = '[<div class="text-left form-check">';
+						choose_check += '<input class="form-check-input" type="checkbox" value="" id="s_' + i + '" checked>';
+						choose_check += '<label class="form-check-label" for="s_' + i + '">' + this.search_list[0][i] + "</label>";
+						choose_check += "</div>]";
+						$("#search_choose").append(choose_check);
+					}
+					//t_header
+					for (var i = 0; i < this.search_list[0].length; i++) {
+						if (i == 0 || i == 2 || i == 5 || i == 7) {
+							min_width = 180;
+						}
+						if (i == 6) {
+							min_width = 150;
+						}
+						if (i == 10) {
+							min_width = 100;
+						}
+						$("#search_thead").append('<th style="min-width: ' + min_width + 'px;" class="s_' + i + '" scope="col">' + this.search_list[0][i] + "</th>");
+						min_width = 80;
+					}
+					//t_body
+					this.search_update();
+					//t_body_group
+					this.group_choose();
+					//建立 選項
+					this.group_item_choose("s_g_item", -1);
+					this.group_item_choose("a_g_item_0", 0);
 
-			//動態監聽顯示Table 物件 查看開關
-			$(document).on("click", "#search_choose input",
-					function(event) {
+					//動態監聽顯示Table 物件 查看開關
+					$(document).on("click", "#search_choose input", function(event) {
 						templateBody.search_choose(event);
 					});
-			//查詢監聽
-			$(document).on("click", "#s_submit", function(event) {
-				//頁數-重製分頁
-				templateBody.change_page_init();
-				templateBody.send_search("");
-			});
-			//清除修改
-			$(document).on("click", "#a_c_submit", function(event) {
-				templateBody.rm_added();
-			});
-			$(document).on("click", "#p_submit", function(event) {
-				//頁數-重製分頁
-				templateBody.change_page_init();
-				templateBody.send_search("checked");
-			});
-			//移動
-			$(document).on("click", ".from_move", function(event) {
-				templateBody.from_move(event);
-			});
-			
-			//切換項目 監聽
-			$(document).on("change", "#s_g_item", function(event) {
-				templateBody.item_choose(event, -1);
-			});
+					//查詢監聽
+					$(document).on("click", "#s_submit", function(event) {
+						//頁數-重製分頁
+						templateBody.change_page_init();
+						templateBody.send_search("");
+					});
+					//清除修改
+					$(document).on("click", "#a_c_submit", function(event) {
+						templateBody.rm_added();
+					});
+					$(document).on("click", "#p_submit", function(event) {
+						//頁數-重製分頁
+						templateBody.change_page_init();
+						templateBody.send_search("checked");
+					});
+					//移動
+					$(document).on("click", ".from_move", function(event) {
+						templateBody.from_move(event);
+					});
 
-			//新增監聽
-			$(document).on("click", "#a_item", function(event) {
-				templateBody.added_item();
-			});
-			// 條件清除
-			$(document).on("click", "#s_c_submit", function(event) {
-				templateBody.rm_select();
-			});
-			//只單獨修正
-			$(document).on("click", "#p_submit3", function(event) {
-				templateBody.send_search('kind');
-			});
-			
-			//條件鎖定
-			$(document).on("click", "#s_l_submit", function(event) {
-				templateBody.lk_select();
-			});
-			
-			var lastContent = "";
-		},
-		methods : {
-			search_choose : function(event) {
-				console.log(event.target.checked);
-				if (!event.target.checked) {
-					$("#search_thead ." + event.target.id).hide();
-					$("#search_tbody ." + event.target.id).hide();
-				} else {
-					$("#search_thead ." + event.target.id).show();
-					$("#search_tbody ." + event.target.id).show();
-				}
-			},
-			//查詢更新
-			search_update : function() {
-				$("#search_tbody").empty();
-				//頁數-刷新
-				this.change_page_update();
-				//t_body
-				var checked = 10;
-				var kind = 11;
-				for (var i = 1; i < this.search_list.length; i++) {
-					//頁數-每頁顯示(不再顯示範圍內則隱藏)
-					var page_group = this.change_page_btn(i);
-					//功能
-					var s_list = this.search_list[i][4];
+					//切換項目 監聽
+					$(document).on("change", "#s_g_item", function(event) {
+						templateBody.item_choose(event, -1);
+					});
 
-					var a_submit = '<div class="md-6">';
-					a_submit += '<button user_id="' + s_list + '" class="btn btn-warning btn-sm btn-block a_submit">';
-					a_submit += "預覽</button></div>";
-					//有列印過的-
-					var success_color = "bg-light";
-					//只技轉中
-					var text_r = " text-danger";
-					//可量產
-					var text_g = " text-success";
-					
-					this.search_list[i][checked] !=""? success_color = "bg-light border border-success font-weight-bold":success_color = "";
-					this.search_list[i][kind] ==0? success_color+=text_r:success_color+=text_g;
-					$("#search_tbody").append('<tr class=" page_all  t_row'+s_list+' '+page_group+' "style="white-space: nowrap;"><th class="ml-0 col-md-12 row">'+ a_submit + '</th></tr>');
-					//計數量
-					$("#search_tbody .t_row" + this.search_list[i][4])
-							.append("<td >" + i + "</td>");
+					//新增監聽
+					$(document).on("click", "#a_item", function(event) {
+						templateBody.added_item();
+					});
+					// 條件清除
+					$(document).on("click", "#s_c_submit", function(event) {
+						templateBody.rm_select();
+					});
+					//只單獨修正
+					$(document).on("click", "#p_submit3", function(event) {
+						templateBody.send_search('kind');
+					});
 
-					for (var j = 0; j < this.search_list[i].length; j++) {
-						var color = '';
-						if(j ==5)color = success_color;
+					//條件鎖定
+					$(document).on("click", "#s_l_submit", function(event) {
+						templateBody.lk_select();
+					});
 
-						$("#search_tbody .t_row" + s_list).append(
-								"<td class='s_" + j + " "+color+"' >"
-										+ this.search_list[i][j]
-										+ "</td>");
-					}
-				}
-				//預覽監聽
-				$(document).off("click", ".a_submit");
-				$(document).on(
-						"click",
-						".a_submit",
-						function(event) {
+					var lastContent = "";
+				},
+				methods : {
+					search_choose : function(event) {
+						console.log(event.target.checked);
+						if (!event.target.checked) {
+							$("#search_thead ." + event.target.id).hide();
+							$("#search_tbody ." + event.target.id).hide();
+						} else {
+							$("#search_thead ." + event.target.id).show();
+							$("#search_tbody ." + event.target.id).show();
+						}
+					},
+					//查詢更新
+					search_update : function() {
+						$("#search_tbody").empty();
+						//頁數-刷新
+						this.change_page_update();
+						//t_body
+						var checked = 10;
+						var kind = 11;
+						for (var i = 1; i < this.search_list.length; i++) {
+							//頁數-每頁顯示(不再顯示範圍內則隱藏)
+							var page_group = this.change_page_btn(i);
+							//功能
+							var s_list = this.search_list[i][4];
+
+							var a_submit = '<div class="md-6">';
+							a_submit += '<button user_id="' + s_list + '" class="btn btn-warning btn-sm btn-block a_submit">';
+							a_submit += "預覽</button></div>";
+							//有列印過的-
+							var success_color = "bg-light";
+							//只技轉中
+							var text_r = " text-danger";
+							//可量產
+							var text_g = " text-success";
+
+							this.search_list[i][checked] != "" ? success_color = "bg-light border border-success font-weight-bold" : success_color = "";
+							this.search_list[i][kind] == 0 ? success_color += text_r : success_color += text_g;
+							$("#search_tbody").append('<tr class=" page_all  t_row'+s_list+' '+page_group+' "style="white-space: nowrap;"><th class="ml-0 col-md-12 row">' + a_submit + '</th></tr>');
+							//計數量
+							$("#search_tbody .t_row" + this.search_list[i][4]).append("<td >" + i + "</td>");
+
+							for (var j = 0; j < this.search_list[i].length; j++) {
+								var color = '';
+								if (j == 5)
+									color = success_color;
+
+								$("#search_tbody .t_row" + s_list).append("<td class='s_" + j + " "+color+"' >" + this.search_list[i][j] + "</td>");
+							}
+						}
+						//預覽監聽
+						$(document).off("click", ".a_submit");
+						$(document).on("click", ".a_submit", function(event) {
 							templateBody.choose_show("資料顯示", event);
-							if ($("#collapse_btn a").attr(
-									"aria-expanded") == "false") {
+							if ($("#collapse_btn a").attr("aria-expanded") == "false") {
 								$("#collapse_btn a").trigger("click");
 								$("#collapse2_btn a").trigger("click");
 							}
@@ -647,513 +565,461 @@
 								}, 'slow');
 							}, 500);
 						});
-			},
-			//選擇群組-並建立監聽
-			group_choose : function() {
-				var group = "";
-				$("#a_u_group_name select").empty();
-				group += '<option value="">請選擇</option>';
-				$.each(this.search_group, function(index, val) {
-					group += "<option value=" + val + ">" + index
-							+ "</option>";
-				});
-				$("#a_u_group_name select").append(group);
-
-				$(document)
-						.on(
-								"change",
-								"#a_u_group_name select",
-								function(event) {
-									$("#a_u_group_id").text(
-											event.target.value);
-								});
-			},
-			//移動電梯
-			from_move: function(event){
-				console.log(event.currentTarget.id);
-				if ($("#collapse_btn a").attr("aria-expanded") == "false") {
-					$("#collapse_btn a").trigger("click");
-				}
-				if ($("#collapse2_btn a").attr("aria-expanded") == "false") {
-					$("#collapse2_btn a").trigger("click");
-				}
-				
-				switch (event.currentTarget.id) {
-				case "top":
-					setTimeout(function() {
-						$("html,body").animate({
-							scrollTop : 80
-						}, 'slow');
-					}, 500);
-					break;
-				case "collapseAdded_1":
-					setTimeout(function() {
-						$("html,body").animate({
-							scrollTop : 1020
-						}, 'slow');
-					}, 500);
-					break;
-				case "collapseAdded_2":
-					setTimeout(function() {
-						$("html,body").animate({
-							scrollTop : 2020
-						}, 'slow');
-					}, 500);
-					break;
-				default:
-					break;
-				}
-			},
-			//選擇項目
-			item_choose : function(event, who) {
-				var s_i_item = "";
-				for (var i = 0; i < templateBody.item_list.length; i++) {
-					if (templateBody.item_list[i][0] == event.target.value) {
-						var value_i = "";
-						//項目
-						if (templateBody.item_list[i][2] == 1) {
-							value_i += "--| ";
-							for (var j = 4; j < templateBody.item_list[i].length - 1; j++) {
-								value_i += templateBody.item_list[i][j]
-										+ " | ";
-							}
-							value_i += "--";
-							s_i_item += "<option value=''>" + value_i
-									+ "</option>";
-						} else {
-							//內容
-							value_i += "| ";
-							for (var j = 4; j < templateBody.item_list[i].length - 1; j++) {
-								value_i += templateBody.item_list[i][j]
-										+ " | ";
-							}
-							s_i_item += "<option value='" + templateBody.item_list[i][2] + "'>"
-									+ value_i + "</option>";
-						}
-					}
-				}
-				//沒選擇的話
-				if (s_i_item == "") {
-					s_i_item = "<option value=''>請選擇</option>";
-				}
-				//如果是 "新增選擇" 的話 a_i_item_
-				if (who > -1) {
-					$("#item_id_" + who).text("");
-					$("#item_group_id_" + who).text(event.target.value);
-					$("#a_i_item_" + who).empty();
-					$("#a_i_item_" + who).append(s_i_item);
-				} else {
-					//如果是 "查詢選擇" 的話 s_i_item
-					$("#s_i_item").empty();
-					$("#s_i_item").append(s_i_item);
-				}
-			},
-			//選擇 群組-項目
-			group_item_choose : function(id, def) {
-				//s_choose s_g_item
-				var s_g_item = "<option value=''>請選擇</option>";
-				var group_name = "";
-				for (var i = 0; i < this.item_list.length; i++) {
-					if (group_name != this.item_list[i][1]) {
-						s_g_item += "<option value='" + this.item_list[i][0] + "'>"
-								+ this.item_list[i][1] + "</option>"; //群組
-						group_name = this.item_list[i][1];
-					}
-				}
-				$("#" + id).empty();
-				$("#" + id).append(s_g_item);
-			},
-			//更新 項目ID
-			item_one_choose : function(event) {
-				$("#item_id_" + event.target.attributes.item_id.value)
-						.text(event.target.value);
-			},
-			//清除新增/修該內容
-			rm_added : function() {
-				$('.can_rm').text("");
-				$('.itemSample label input').prop('checked',false);
-				$("#group_number_0").val(1);
-				$("#collapseAdded .itemList .item").remove();
-				
-			},
-			//清除選擇
-			rm_select : function() {
-				$("#s_l_list").empty();
-				$("#s_l_list").append(
-						'<div class="text-left mb-2 mt-2">條件清單:</div>');
-				$("#s_model").val("");
-				$("#s_bom_number").val("");
-				$("#s_g_item").val("").trigger("change");
-			},
-			//鎖定~
-			lk_select : function() {
-				var lk = "{";
-				lk += "'g_item':'" + $("#s_g_item").val() + "',";
-				lk += "'i_item':'" + $("#s_i_item").val() + "',";
-				lk += "'p_model':'" + $("#s_model").val() + "',";
-				lk += "'p_bom_number':'" + $("#s_bom_number").val()
-						+ "'}";
-
-				$("#s_l_list").append(
-						'<div class="text-left mb-2 mt-2">' + lk
-								+ "</div>");
-			},
-			//選擇  預覽
-			choose_show : function(a_u_type, event) {
-				this.rm_added();
-				var id = event.target.attributes.user_id.value;
-				var fullDate = new Date();
-				//convert month to 2 digits
-				var twoDigitMonth = fullDate.getMonth() + 1 >= 10 ? fullDate.getMonth() + 1: "0" + (fullDate.getMonth() + 1);
-				var currentDate = fullDate.getFullYear() + "-" + twoDigitMonth + "-" + fullDate.getDate();
-				this.s_4 = $(".t_row" + id + " .s_4")[0].innerText;
-				$("#a_u_model").text($(".t_row" + id + " .s_5")[0].innerText);
-				$("#a_u_version_bios").text($(".t_row" + id + " .s_6")[0].innerText);
-				$("#a_u_bom_number").text($(".t_row" + id + " .s_7")[0].innerText);
-				$("#a_u_bom_id").text($(".t_row" + id + " .s_4")[0].innerText);
-				$("#a_u_version_motherboard").text(
-						$(".t_row" + id + " .s_8")[0].innerText);
-				
-				$("#a_u_note").text(
-						$(".t_row" + id + " .s_9")[0].innerText);
-				$("#a_u_kind").val($(".t_row" + id + " .s_11")[0].innerText).change();
-				
-				if($(".t_row" + id + " .s_11")[0].innerText==1){		
-					$("#kind1").text("量產單");
-				}else{
-					$("#kind1").text("技轉單");
-				}
-
-				var group_tbody = "";
-				var $listLeft = $("#collapseAdded .listLeft");
-				var $listRight = $("#collapseAdded .listRight");
-				var $sample = $listLeft.find(".itemSample");
-				$listLeft.add($listRight).find(".item").remove();
-				var indexItemId = 5;
-				var indexId = 6;
-				var indexAmount = 8;
-				var indexOrder = 9;
-				var indexName = 11;
-				var indexContent = 12;
-				var $target = $listLeft;
-				var counting = 0;
-				var columnItemNumber = 25;
-				this.group_list.sort(function(a, b) {
-					return b[indexOrder] - a[indexOrder];
-				});
-				for (var i = 0; i < this.group_list.length; i++) {
-					if (id == this.group_list[i][indexItemId]
-							&& this.group_list[i][indexId] != 1) {
-						if (this.group_list[i][indexAmount] == 0)
-							continue;
-						var $new = $sample.clone().show().removeClass(
-								"itemSample").addClass("item");
-						$new.find(".name").html(
-								this.group_list[i][indexName] + ":");
-						var tmp = [];
-						for (var n = indexContent; n < this.group_list[i].length; n++) {
-							tmp.push(this.group_list[i][n]);
-						}
-						$new.find(".content").html(tmp.join(" "));
-						if (this.group_list[i][indexAmount] > 1) {
-							$new
-								.find(".amount")
-								.html("(x"+ this.group_list[i][indexAmount]	+ ")");
-						}
-						if (++counting > columnItemNumber)
-							$target = $listRight;
-						$target.append($new);
-					}
-				}
-				
-				$('#collapseAdded input[type="checkbox"]')
-						.change(
-								function() {
-									var checked = $(this).prop(
-											"checked");
-									if (checked) {
-										$(this)
-												.after(
-														'<input type="checkbox" checked="checked">');
-									} else {
-										$(this)
-												.after(
-														'<input type="checkbox">');
-									}
-									$(this).remove();
-								});
-				
-				$("#c1_note").text("表單編號:QR-701-06 / 規格負責人 : "+$(".t_row" + id + " .s_3")[0].innerText+" / 建單日期 : "+currentDate+" / 建單人 : "+$("#nav_account").text()+" / 單據來源:"+this.current_report);
-				
-			},
-			//頁數-初始化(新增 or 修改 or 刪除 or 條件 要重製)
-			change_page_init : function() {
-				//active 更換為第一格
-				var a = "active";
-				var d = "disabled";
-				$(".page-item").removeClass(a);
-				$(".page-item").removeClass(d);
-				for (var re_page = 1; re_page <= 10; re_page++) {
-					var now_page = re_page + (this.page_batch * 10);
-					//如果就在第一頁 不需更換
-					if (!$(".p" + now_page).hasClass("p" + re_page)) {
-						$(".p" + now_page).addClass("p" + re_page);
-						$(".p" + re_page).removeClass("p" + now_page);
-						$(".p" + re_page + " a").text(re_page);
-						$(".p" + re_page + " a").attr("id",
-								"p" + re_page);
-					}
-					if (re_page == 1) {
-						$(".p" + now_page).addClass(a);
-					}
-				}
-				//分頁功能
-				this.page_max = 100;//當前本批 筆數
-				this.page_max_total = 100;//最大總數
-				this.page_batch = 0;//第幾批
-				this.page_batch_total = 100;//每批間格值
-				this.page_every = 10;//當前每頁筆數
-				this.page_stay = 1;//當前頁數
-
-			},
-			//頁數-刷新
-			change_page_update : function() {
-				//頁數-取得當前最大筆數 && 頁數
-				this.page_max = this.search_list.length;
-				$(".p_n").removeClass("disabled");
-				if (this.page_max < this.page_max_total) {
-					$(".p_n").addClass("disabled");
-				}
-				$(".p_p").removeClass("disabled");
-				if (this.page_batch < 1) {
-					$(".p_p").addClass("disabled");
-				}
-				//頁數-隱藏多於頁數
-				$(".p_nb").addClass("disabled");
-
-			},
-			//頁數-換頁按鈕建置(頁數-每頁顯示)
-			change_page_btn : function(i) {
-				var d_none = "";
-				if (i > (this.page_every * this.page_stay)) {
-					d_none = "d-none";
-				}
-				//頁數-(個位數)+(十位數)
-				var page_group = "pg_"
-						+ (Math.floor((i - 1) / this.page_every) + 1 + (this.page_batch * 10));
-				var page_nb = "p"
-						+ (Math.floor((i - 1) / this.page_every) + 1 + (this.page_batch * 10));
-				$("." + page_nb).removeClass("disabled");
-				return page_group + " " + d_none;
-			},
-			//頁數-換頁查詢
-			change_page : function(event) {
-				var d = "disabled";
-				var d_n = "d-none";
-				var a = "active";
-				var pg = "pg_";
-				console.log("page btn is:" + event.text);
-				//選定頁數
-				if (event.id != "p_p" && event.id != "p_n") {
-					$(".page-item").removeClass(a);
-					$("." + event.id).addClass(a);
-
-					$(".page_all").addClass(d_n);
-					$("." + pg + event.text).removeClass(d_n);
-
-				} else if (event.id == "p_p") {//上10頁(批數 要大於1)
-					if (this.page_batch > 0) {
-						//換上一批次 頁數
-						$(".page-item").removeClass(a);
-
-						for (var i = 1; i <= 10; i++) {
-							var now_page = i + (this.page_batch * 10);
-							var previous_page = i
-									+ ((this.page_batch) * 10) - 10;
-							$(".p" + now_page).addClass(
-									"p" + previous_page);
-							$(".p" + previous_page).removeClass(
-									"p" + now_page);
-							$(".p" + previous_page + " a").text(
-									previous_page);
-							$(".p" + previous_page + " a").attr("id",
-									"p" + previous_page);
-							if (i == 1) {
-								$(".p" + previous_page).addClass(a);
-							}
-						}
-						this.page_batch -= 1;
-						this.send_search("");
-					}
-				} else if (event.id == "p_n") {//下10頁(必須滿100筆最大量 )
-					if (this.page_max >= this.page_max_total) {
-						//換下一批次 頁數
-						$(".page-item").removeClass(a);
-						for (var i = 1; i <= 10; i++) {
-							var now_page = i + (this.page_batch * 10);
-							var next_page = i
-									+ ((this.page_batch + 1) * 10);
-							$(".p" + now_page)
-									.addClass("p" + next_page);
-							$(".p" + next_page).removeClass(
-									"p" + now_page);
-							$(".p" + next_page + " a").text(next_page);
-							$(".p" + next_page + " a").attr("id",
-									"p" + next_page);
-							if (i == 1) {
-								$(".p" + next_page).addClass(a);
-							}
-						}
-						this.page_batch += 1;
-						this.send_search("");
-					}
-				}
-				return false;
-			},
-			//傳送 查詢
-			send_search : function(select) {
-				var content = new Object();
-				var search_list = [];
-				
-				//如果select = checked (登記生產) 檢查是否有勾選 
-				if(select == "checked"){
-					if(!$('#a_u_production input').prop('checked')){
-						this.current_report="生產注意事項";
-						this.printDiv();
-						return ;
-					}else {
-						this.current_report="生產注意事項";
-						//登記 單據
-						content.production_id = $("#a_u_id").text();
-						content.order_id = $("#a_u_o_id").text();
-						content.client_name = $("#a_u_c").text();
-						
-						var quantity = 0;
-						if($("#a_u_nb").text()!="" && $.isNumeric($("#a_u_nb").text())){
-							quantity =$("#a_u_nb").text();
-						}
-						
-						content.production_quantity = quantity;
-						content.product_model= $("#a_u_model").text();
-						content.bom_product_id= $("#a_u_bom_number").text();
-						content.bom_id= $("#a_u_bom_id").text();
-						content.version_motherboard= $("#a_u_version_bios").text();
-						content.note= "";
-						content.come_from="生產注意事項";
-						content.product_progress = 2;
-						//如果有任何空值
-						if(content.production_id=="" || content.order_id=="" || content.client_name=="" || quantity ==""){
-							 main.alertshow(true, " 尚未填寫完整,請再次檢查清楚!!");
-							 return;
-						}
-					}
-				}
-
-				for (var i = 1; i < $("#s_l_list div").length; i++) {
-					search_list.push($("#s_l_list div")[i].innerText);
-				}
-				
-				content.page_nb = this.page_batch* this.page_batch_total;//批次(起始數)
-				content.page_total = this.page_batch_total;//(每次要的最大數量)
-				content.search_list = search_list;
-				//更新 單據類型(技轉/量產)
-				content.product_id = templateBody.s_4;
-				content.product_kind = $('#a_u_kind').val();
-				
-				
-				content.user = $("#nav_account").text();
-				var order = "search_update"; //指令
-				var url = "./bom_print.do";
-				switch (select) {
-				case "checked":
-					order = "search_update_print";
-					url = "./production_records_add.do";
-					break;
-				case "kind":
-					url = "./bom_product_kind.do";
-					break;
-				}
-				
-				var data = JSON.stringify({
-					data : {
-						datetime : "",
-						action : "R",
-						whoami : main.loginData.account,
-						cellBackName : "bodyAfter",
-						cellBackOrder : order,
-						content : content,
 					},
-				});
-				main.ajaxSend(url, data);
-			},
-			printDiv : function() {
-				var divToPrint = document
-						.getElementById("collapseAddedPrint");
-				var style = document.getElementById("table2Style");
-				var newWin = window.open("", "Print-Window");
-				newWin.document.open();
-				newWin.document
-						.write("<html>"
-								+ "<head>"
-								+ '<link rel="stylesheet" href="./thirdparty/css/bootstrap-4.4.1.min.css" />'
-								+ style.outerHTML
-								+ "</head>"
-								+ '<body onload="window.print()" class="container" id="main">'
-								+ "<div>" + divToPrint.innerHTML
-								+ "</div>" + "</body>" + "</html>");
-				newWin.document.close();
-				setTimeout(function() {
-					newWin.close();
-				}, 500);
-			},
-			
-			//Rsp-回傳值-指令
-			bodyAfter : function(event) {
-				console.log("to index success");
-				switch (event.r_cellBackOrder) {
-				case "search_update":
-					//刷新資料
-					if (event.r_content.templateInfo.body["list"] != null
-							&& event.r_content.templateInfo.body["list"] != "") {
-						this.group_list = main.contentData.templateInfo.body["group_list"];
-						this.item_list = main.contentData.templateInfo.body["item_list"];
-						this.search_list = main.contentData.templateInfo.body["list"];
-						this.search_update();		
-					}
-					
-					break;
-				case "search_update_print":
-					
-					if (event.r_content.templateInfo.body["list"] != null
-							&& event.r_content.templateInfo.body["list"] != "") {
-						this.group_list = main.contentData.templateInfo.body["group_list"];
-						this.item_list = main.contentData.templateInfo.body["item_list"];
-						this.search_list = main.contentData.templateInfo.body["list"];
-						this.search_update();
-						//如果是登記生產
-						this.printDiv();						
-					}
-					break;
-				}
-			},
-		},
-		//移除監聽事件
-		beforeDestroy : function() {
-			console.log("to beforeDestroy event");
-			$(document).off("click", "#a_u_group_name select");
-			$(document).off("click", "#search_choose input");
-			$(document).off("click", "#s_submit");
-			$(document).off("click", "#a_c_submit");
-			$(document).off("click", "#p_submit");
+					//選擇群組-並建立監聽
+					group_choose : function() {
+						var group = "";
+						$("#a_u_group_name select").empty();
+						group += '<option value="">請選擇</option>';
+						$.each(this.search_group, function(index, val) {
+							group += "<option value=" + val + ">" + index + "</option>";
+						});
+						$("#a_u_group_name select").append(group);
 
-			$(document).off("click", ".a_submit");
-			$(document).off("click", "#s_l_submit");
-			$(document).off("click", "#s_c_submit");
-			$(document).off("change", "#s_g_item");
-			$(document).off("click", "#a_item");
-			$(document).off("click", ".a_i_item");
-			$(document).off("click", ".from_move");
-		},
-	});
-	
+						$(document).on("change", "#a_u_group_name select", function(event) {
+							$("#a_u_group_id").text(event.target.value);
+						});
+					},
+					//移動電梯
+					from_move : function(event) {
+						console.log(event.currentTarget.id);
+						if ($("#collapse_btn a").attr("aria-expanded") == "false") {
+							$("#collapse_btn a").trigger("click");
+						}
+						if ($("#collapse2_btn a").attr("aria-expanded") == "false") {
+							$("#collapse2_btn a").trigger("click");
+						}
+
+						switch (event.currentTarget.id) {
+						case "top":
+							setTimeout(function() {
+								$("html,body").animate({
+									scrollTop : 80
+								}, 'slow');
+							}, 500);
+							break;
+						case "collapseAdded_1":
+							setTimeout(function() {
+								$("html,body").animate({
+									scrollTop : 1020
+								}, 'slow');
+							}, 500);
+							break;
+						case "collapseAdded_2":
+							setTimeout(function() {
+								$("html,body").animate({
+									scrollTop : 2020
+								}, 'slow');
+							}, 500);
+							break;
+						default:
+							break;
+						}
+					},
+					//選擇項目
+					item_choose : function(event, who) {
+						var s_i_item = "";
+						for (var i = 0; i < templateBody.item_list.length; i++) {
+							if (templateBody.item_list[i][0] == event.target.value) {
+								var value_i = "";
+								//項目
+								if (templateBody.item_list[i][2] == 1) {
+									value_i += "--| ";
+									for (var j = 4; j < templateBody.item_list[i].length - 1; j++) {
+										value_i += templateBody.item_list[i][j] + " | ";
+									}
+									value_i += "--";
+									s_i_item += "<option value=''>" + value_i + "</option>";
+								} else {
+									//內容
+									value_i += "| ";
+									for (var j = 4; j < templateBody.item_list[i].length - 1; j++) {
+										value_i += templateBody.item_list[i][j] + " | ";
+									}
+									s_i_item += "<option value='" + templateBody.item_list[i][2] + "'>" + value_i + "</option>";
+								}
+							}
+						}
+						//沒選擇的話
+						if (s_i_item == "") {
+							s_i_item = "<option value=''>請選擇</option>";
+						}
+						//如果是 "新增選擇" 的話 a_i_item_
+						if (who > -1) {
+							$("#item_id_" + who).text("");
+							$("#item_group_id_" + who).text(event.target.value);
+							$("#a_i_item_" + who).empty();
+							$("#a_i_item_" + who).append(s_i_item);
+						} else {
+							//如果是 "查詢選擇" 的話 s_i_item
+							$("#s_i_item").empty();
+							$("#s_i_item").append(s_i_item);
+						}
+					},
+					//選擇 群組-項目
+					group_item_choose : function(id, def) {
+						//s_choose s_g_item
+						var s_g_item = "<option value=''>請選擇</option>";
+						var group_name = "";
+						for (var i = 0; i < this.item_list.length; i++) {
+							if (group_name != this.item_list[i][1]) {
+								s_g_item += "<option value='" + this.item_list[i][0] + "'>" + this.item_list[i][1] + "</option>"; //群組
+								group_name = this.item_list[i][1];
+							}
+						}
+						$("#" + id).empty();
+						$("#" + id).append(s_g_item);
+					},
+					//更新 項目ID
+					item_one_choose : function(event) {
+						$("#item_id_" + event.target.attributes.item_id.value).text(event.target.value);
+					},
+					//清除新增/修該內容
+					rm_added : function() {
+						$('.can_rm').text("");
+						$('.itemSample label input').prop('checked', false);
+						$("#group_number_0").val(1);
+						$("#collapseAdded .itemList .item").remove();
+
+					},
+					//清除選擇
+					rm_select : function() {
+						$("#s_l_list").empty();
+						$("#s_l_list").append('<div class="text-left mb-2 mt-2">條件清單:</div>');
+						$("#s_model").val("");
+						$("#s_bom_number").val("");
+						$("#s_g_item").val("").trigger("change");
+					},
+					//鎖定~
+					lk_select : function() {
+						var lk = "{";
+						lk += "'g_item':'" + $("#s_g_item").val() + "',";
+						lk += "'i_item':'" + $("#s_i_item").val() + "',";
+						lk += "'p_model':'" + $("#s_model").val() + "',";
+						lk += "'p_bom_number':'" + $("#s_bom_number").val() + "'}";
+
+						$("#s_l_list").append('<div class="text-left mb-2 mt-2">' + lk + "</div>");
+					},
+					//選擇  預覽
+					choose_show : function(a_u_type, event) {
+						this.rm_added();
+						var id = event.target.attributes.user_id.value;
+						var fullDate = new Date();
+						//convert month to 2 digits
+						var twoDigitMonth = fullDate.getMonth() + 1 >= 10 ? fullDate.getMonth() + 1 : "0" + (fullDate.getMonth() + 1);
+						var currentDate = fullDate.getFullYear() + "-" + twoDigitMonth + "-" + fullDate.getDate();
+						this.s_4 = $(".t_row" + id + " .s_4")[0].innerText;
+						$("#a_u_model").text($(".t_row" + id + " .s_5")[0].innerText);
+						$("#a_u_version_bios").text($(".t_row" + id + " .s_6")[0].innerText);
+						$("#a_u_bom_number").text($(".t_row" + id + " .s_7")[0].innerText);
+						$("#a_u_bom_id").text($(".t_row" + id + " .s_4")[0].innerText);
+						$("#a_u_version_motherboard").text($(".t_row" + id + " .s_8")[0].innerText);
+
+						$("#a_u_note").text($(".t_row" + id + " .s_9")[0].innerText);
+						$("#a_u_kind").val($(".t_row" + id + " .s_11")[0].innerText).change();
+
+						if ($(".t_row" + id + " .s_11")[0].innerText == 1) {
+							$("#kind1").text("量產單");
+						} else {
+							$("#kind1").text("技轉單");
+						}
+
+						var group_tbody = "";
+						var $listLeft = $("#collapseAdded .listLeft");
+						var $listRight = $("#collapseAdded .listRight");
+						var $sample = $listLeft.find(".itemSample");
+						$listLeft.add($listRight).find(".item").remove();
+						var indexItemId = 5;
+						var indexId = 6;
+						var indexAmount = 8;
+						var indexOrder = 9;
+						var indexName = 11;
+						var indexContent = 12;
+						var $target = $listLeft;
+						var counting = 0;
+						var columnItemNumber = 25;
+						this.group_list.sort(function(a, b) {
+							return b[indexOrder] - a[indexOrder];
+						});
+						for (var i = 0; i < this.group_list.length; i++) {
+							if (id == this.group_list[i][indexItemId] && this.group_list[i][indexId] != 1) {
+								if (this.group_list[i][indexAmount] == 0)
+									continue;
+								var $new = $sample.clone().show().removeClass("itemSample").addClass("item");
+								$new.find(".name").html(this.group_list[i][indexName] + ":");
+								var tmp = [];
+								for (var n = indexContent; n < this.group_list[i].length; n++) {
+									tmp.push(this.group_list[i][n]);
+								}
+								$new.find(".content").html(tmp.join(" "));
+								if (this.group_list[i][indexAmount] > 1) {
+									$new.find(".amount").html("(x" + this.group_list[i][indexAmount] + ")");
+								}
+								if (++counting > columnItemNumber)
+									$target = $listRight;
+								$target.append($new);
+							}
+						}
+
+						$('#collapseAdded input[type="checkbox"]').change(function() {
+							var checked = $(this).prop("checked");
+							if (checked) {
+								$(this).after('<input type="checkbox" checked="checked">');
+							} else {
+								$(this).after('<input type="checkbox">');
+							}
+							$(this).remove();
+						});
+
+						$("#c1_note").text(
+								"表單編號:QR-701-06 / 規格負責人 : " + $(".t_row" + id + " .s_3")[0].innerText + " / 建單日期 : " + currentDate + " / 建單人 : " + $("#nav_account").text() + " / 單據來源:"
+										+ this.current_report);
+
+					},
+					//頁數-初始化(新增 or 修改 or 刪除 or 條件 要重製)
+					change_page_init : function() {
+						//active 更換為第一格
+						var a = "active";
+						var d = "disabled";
+						$(".page-item").removeClass(a);
+						$(".page-item").removeClass(d);
+						for (var re_page = 1; re_page <= 10; re_page++) {
+							var now_page = re_page + (this.page_batch * 10);
+							//如果就在第一頁 不需更換
+							if (!$(".p" + now_page).hasClass("p" + re_page)) {
+								$(".p" + now_page).addClass("p" + re_page);
+								$(".p" + re_page).removeClass("p" + now_page);
+								$(".p" + re_page + " a").text(re_page);
+								$(".p" + re_page + " a").attr("id", "p" + re_page);
+							}
+							if (re_page == 1) {
+								$(".p" + now_page).addClass(a);
+							}
+						}
+						//分頁功能
+						this.page_max = 100;//當前本批 筆數
+						this.page_max_total = 100;//最大總數
+						this.page_batch = 0;//第幾批
+						this.page_batch_total = 100;//每批間格值
+						this.page_every = 10;//當前每頁筆數
+						this.page_stay = 1;//當前頁數
+
+					},
+					//頁數-刷新
+					change_page_update : function() {
+						//頁數-取得當前最大筆數 && 頁數
+						this.page_max = this.search_list.length;
+						$(".p_n").removeClass("disabled");
+						if (this.page_max < this.page_max_total) {
+							$(".p_n").addClass("disabled");
+						}
+						$(".p_p").removeClass("disabled");
+						if (this.page_batch < 1) {
+							$(".p_p").addClass("disabled");
+						}
+						//頁數-隱藏多於頁數
+						$(".p_nb").addClass("disabled");
+
+					},
+					//頁數-換頁按鈕建置(頁數-每頁顯示)
+					change_page_btn : function(i) {
+						var d_none = "";
+						if (i > (this.page_every * this.page_stay)) {
+							d_none = "d-none";
+						}
+						//頁數-(個位數)+(十位數)
+						var page_group = "pg_" + (Math.floor((i - 1) / this.page_every) + 1 + (this.page_batch * 10));
+						var page_nb = "p" + (Math.floor((i - 1) / this.page_every) + 1 + (this.page_batch * 10));
+						$("." + page_nb).removeClass("disabled");
+						return page_group + " " + d_none;
+					},
+					//頁數-換頁查詢
+					change_page : function(event) {
+						var d = "disabled";
+						var d_n = "d-none";
+						var a = "active";
+						var pg = "pg_";
+						console.log("page btn is:" + event.text);
+						//選定頁數
+						if (event.id != "p_p" && event.id != "p_n") {
+							$(".page-item").removeClass(a);
+							$("." + event.id).addClass(a);
+
+							$(".page_all").addClass(d_n);
+							$("." + pg + event.text).removeClass(d_n);
+
+						} else if (event.id == "p_p") {//上10頁(批數 要大於1)
+							if (this.page_batch > 0) {
+								//換上一批次 頁數
+								$(".page-item").removeClass(a);
+
+								for (var i = 1; i <= 10; i++) {
+									var now_page = i + (this.page_batch * 10);
+									var previous_page = i + ((this.page_batch) * 10) - 10;
+									$(".p" + now_page).addClass("p" + previous_page);
+									$(".p" + previous_page).removeClass("p" + now_page);
+									$(".p" + previous_page + " a").text(previous_page);
+									$(".p" + previous_page + " a").attr("id", "p" + previous_page);
+									if (i == 1) {
+										$(".p" + previous_page).addClass(a);
+									}
+								}
+								this.page_batch -= 1;
+								this.send_search("");
+							}
+						} else if (event.id == "p_n") {//下10頁(必須滿100筆最大量 )
+							if (this.page_max >= this.page_max_total) {
+								//換下一批次 頁數
+								$(".page-item").removeClass(a);
+								for (var i = 1; i <= 10; i++) {
+									var now_page = i + (this.page_batch * 10);
+									var next_page = i + ((this.page_batch + 1) * 10);
+									$(".p" + now_page).addClass("p" + next_page);
+									$(".p" + next_page).removeClass("p" + now_page);
+									$(".p" + next_page + " a").text(next_page);
+									$(".p" + next_page + " a").attr("id", "p" + next_page);
+									if (i == 1) {
+										$(".p" + next_page).addClass(a);
+									}
+								}
+								this.page_batch += 1;
+								this.send_search("");
+							}
+						}
+						return false;
+					},
+					//傳送 查詢
+					send_search : function(select) {
+						var content = new Object();
+						var search_list = [];
+
+						//如果select = checked (登記生產) 檢查是否有勾選 
+						if (select == "checked") {
+							if (!$('#a_u_production input').prop('checked')) {
+								this.current_report = "生產注意事項";
+								this.printDiv();
+								return;
+							} else {
+								this.current_report = "生產注意事項";
+								//登記 單據
+								content.production_id = $("#a_u_id").text();
+								content.order_id = $("#a_u_o_id").text();
+								content.client_name = $("#a_u_c").text();
+
+								var quantity = 0;
+								if ($("#a_u_nb").text() != "" && $.isNumeric($("#a_u_nb").text())) {
+									quantity = $("#a_u_nb").text();
+								}
+
+								content.production_quantity = quantity;
+								content.product_model = $("#a_u_model").text();
+								content.bom_product_id = $("#a_u_bom_number").text();
+								content.bom_id = $("#a_u_bom_id").text();
+								content.version_motherboard = $("#a_u_version_bios").text();
+								content.note = "";
+								content.come_from = "生產注意事項";
+								content.product_progress = 2;
+								//如果有任何空值
+								if (content.production_id == "" || content.order_id == "" || content.client_name == "" || quantity == "") {
+									main.alertshow(true, " 尚未填寫完整,請再次檢查清楚!!");
+									return;
+								}
+							}
+						}
+
+						for (var i = 1; i < $("#s_l_list div").length; i++) {
+							search_list.push($("#s_l_list div")[i].innerText);
+						}
+
+						content.page_nb = this.page_batch * this.page_batch_total;//批次(起始數)
+						content.page_total = this.page_batch_total;//(每次要的最大數量)
+						content.search_list = search_list;
+						//更新 單據類型(技轉/量產)
+						content.product_id = templateBody.s_4;
+						content.product_kind = $('#a_u_kind').val();
+
+						content.user = $("#nav_account").text();
+						var order = "search_update"; //指令
+						var url = "./bom_print.do";
+						switch (select) {
+						case "checked":
+							order = "search_update_print";
+							url = "./production_records_add.do";
+							break;
+						case "kind":
+							url = "./bom_product_kind.do";
+							break;
+						}
+
+						var data = JSON.stringify({
+							data : {
+								datetime : "",
+								action : "R",
+								whoami : main.loginData.account,
+								cellBackName : "bodyAfter",
+								cellBackOrder : order,
+								content : content,
+							},
+						});
+						main.ajaxSend(url, data);
+					},
+					printDiv : function() {
+						var divToPrint = document.getElementById("collapseAddedPrint");
+						var style = document.getElementById("table2Style");
+						var newWin = window.open("", "Print-Window");
+						newWin.document.open();
+						newWin.document.write("<html>" + "<head>" + '<link rel="stylesheet" href="./thirdparty/css/bootstrap-4.4.1.min.css" />' + style.outerHTML + "</head>"
+								+ '<body onload="window.print()" class="container" id="main">' + "<div>" + divToPrint.innerHTML + "</div>" + "</body>" + "</html>");
+						newWin.document.close();
+						setTimeout(function() {
+							newWin.close();
+						}, 500);
+					},
+
+					//Rsp-回傳值-指令
+					bodyAfter : function(event) {
+						console.log("to index success");
+						switch (event.r_cellBackOrder) {
+						case "search_update":
+							//刷新資料
+							if (event.r_content.templateInfo.body["list"] != null && event.r_content.templateInfo.body["list"] != "") {
+								this.group_list = main.contentData.templateInfo.body["group_list"];
+								this.item_list = main.contentData.templateInfo.body["item_list"];
+								this.search_list = main.contentData.templateInfo.body["list"];
+								this.search_update();
+							}
+
+							break;
+						case "search_update_print":
+
+							if (event.r_content.templateInfo.body["list"] != null && event.r_content.templateInfo.body["list"] != "") {
+								this.group_list = main.contentData.templateInfo.body["group_list"];
+								this.item_list = main.contentData.templateInfo.body["item_list"];
+								this.search_list = main.contentData.templateInfo.body["list"];
+								this.search_update();
+								//如果是登記生產
+								this.printDiv();
+							}
+							break;
+						}
+					},
+				},
+				//移除監聽事件
+				beforeDestroy : function() {
+					console.log("to beforeDestroy event");
+					$(document).off("click", "#a_u_group_name select");
+					$(document).off("click", "#search_choose input");
+					$(document).off("click", "#s_submit");
+					$(document).off("click", "#a_c_submit");
+					$(document).off("click", "#p_submit");
+
+					$(document).off("click", ".a_submit");
+					$(document).off("click", "#s_l_submit");
+					$(document).off("click", "#s_c_submit");
+					$(document).off("change", "#s_g_item");
+					$(document).off("click", "#a_item");
+					$(document).off("click", ".a_i_item");
+					$(document).off("click", ".from_move");
+				},
+			});
 </script>

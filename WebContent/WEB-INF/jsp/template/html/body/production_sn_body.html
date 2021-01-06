@@ -1,0 +1,476 @@
+<style>
+
+/**
+預設顯示
+**/
+[contenteditable="true"]:empty:not(:focus):before {
+	content: attr(data-text);
+}
+</style>
+<div class="row border" id="production_sn_body">
+	<div class="col-md-12 border">
+		<div class="mt-3 mb-3 border">
+			<!-- 功能: 查詢 /新增 /修改 -->
+			<div class="mb-3">
+				<h3>
+					<b>產品SN 身分序號 產生器</b>
+				</h3>
+			</div>
+			<!-- 項目:目前SN序號 -->
+			<div class="border border-primary mb-3 shadow">
+				<div class="mb-2">
+					<div class="mt-1">
+						<a class="btn btn-success btn-sm" aria-controls="showArea" href="#showArea" data-toggle="collapse" role="button" aria-expanded="true">目前-SN序號</a>
+					</div>
+				</div>
+				<div id="showArea" class="collapse show col-md-12">
+					<div class="row">
+						<div class="p-1">
+							<b>SN為 : </b>
+						</div>
+						<div class="p-1" id="now_length"></div>
+						<div class="p-1">碼/編碼規則:</div>
+						<div class="bg-white p-1" contenteditable="false" id="now_content"></div>
+					</div>
+				</div>
+
+			</div>
+			<!-- 項目:規則SN設定 -->
+			<div class="border border-primary mb-1 shadow">
+				<div class=" mb-2">
+					<div class=" mt-1">
+						<a class="btn btn-success btn-sm" aria-controls="ruleArea" href="#ruleArea" data-toggle="collapse" role="button" aria-expanded="true">設定-SN規則</a>
+					</div>
+				</div>
+				<div id="ruleArea" class="m-1 border border-primary collapse show mb-1 shadow" style="height: 500px; overflow: scroll;">
+					<table>
+						<thead>
+							<tr class="text-center m-0 bg-white" style="font-weight: bold;">
+								<td class="border border-secondary p-2" style="min-width: 85px;">說明</td>
+								<td class="border border-secondary p-2">添加規則</td>
+								<td colspan="50" class="border border-secondary p-2">規則清單</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="body_c" class="text-center m-0 ">
+								<!-- 標題規則 -->
+								<td valign="top" style="font-weight: bold;">
+									<div class="bg-white border border-secondary p-2" style="line-height: 31px;">功能</div>
+									<div class="bg-white border border-secondary p-2">順序</div>
+									<div class="bg-white border border-secondary p-2">項目組</div>
+									<div class="bg-white border border-secondary p-2" style="line-height: 31px;">↓項目↓</div>
+								</td>
+								<!-- 新增規則 -->
+								<td valign="top" id="g_0" class="pl-3 pb-2" style="min-width: 200px;">
+									<div class="bg-white">
+										<div class="border border-secondary text-center p-2 fn">
+											<button id="new_a_rule" type="button" class="btn btn-success btn-sm ">增加規則+</button>
+										</div>
+										<div class="p-2 border border-secondary g_sort" contenteditable="true" data-text="順序(數字)"></div>
+										<div class="p-2 border border-secondary g_name" contenteditable="true" data-text="規則名稱(文字)"></div>
+										<div class="border border-secondary">
+											<div class="m-0 text-center p-2">
+												<button name="a_i_g_0" type="button" class="btn btn-success btn-sm a_i">增加項目+</button>
+											</div>
+											<div class="m-0 ">
+												<table style="width: 100%;">
+													<!--(個項目) i_g_id_i_id = i_群組ID_項目ID -->
+													<thead>
+														<tr id="i_name">
+															<td class=" p-0 border border-secondary "><b>項目</b></td>
+															<td class=" p-0 border border-secondary "><b>值</b></td>
+															<td class=" p-0 border border-secondary "><b>功能</b></td>
+														</tr>
+													</thead>
+													<tbody class="items">
+														<tr id="i_g_0_i_0">
+															<td class="border border-secondary d-none i_id">0</td>
+															<td class="p-2 border border-secondary i_name" style="white-space: nowrap;" contenteditable="true"></td>
+															<td class="p-2 border border-secondary i_value" style="white-space: nowrap;" contenteditable="true"></td>
+															<td class="p-2 border-bottom border-secondary">
+																<button name="d_g_0_i_0" type="button" class="btn btn-danger pt-0  btn-sm i_delete" style="height: 22px;">刪</button>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</td>
+								<!-- 規則清單 -->
+								<td class="pl-3 pb-2 d-none" valign="top" id="g_id" style="min-width: 200px;">
+									<!-- 範例 編輯規則 g_id=g_群組ID -->
+									<div class="bg-white">
+										<div class="border border-secondary text-center p-2 fn">
+											<!--m_g_id/d_g_id/lk_g_id = 群組ID -->
+											<button name="m_g_id" type="button" class="mr-1 btn btn-warning  btn-sm m_rule">修改</button>
+											<button name="lk_g_id" type="button" class="mr-1 btn btn-primary btn-sm lk_rule">鎖定</button>
+											<button name="d_g_id" type="button" class="mr-1 btn btn-danger   btn-sm d_rule">刪除</button>
+										</div>
+										<div class="p-2 border border-secondary g_sort" contenteditable="true">順序</div>
+										<div class="p-2 border border-secondary g_name" contenteditable="true">項目組名稱</div>
+										<div class="border border-secondary ">
+											<div class="m-0 text-center p-2">
+												<!--a_i_g_id = a_i_群組ID -->
+												<button name="a_i_g_id" type="button" class="btn btn-success btn-sm a_i">增加項目+</button>
+											</div>
+											<div class="m-0">
+												<table style="width: 100%;">
+													<!--(個項目) i_g_id_i_id = i_群組ID_項目ID -->
+													<thead>
+														<tr id="i_name">
+															<td class=" p-0 border border-secondary "><b>項目</b></td>
+															<td class=" p-0 border border-secondary "><b>值</b></td>
+															<td class=" p-0 border border-secondary "><b>功能</b></td>
+														</tr>
+													</thead>
+													<tbody class="items">
+														<tr id="i_g_id_i_id">
+															<td class="border border-secondary d-none i_id">ID</td>
+															<td class="p-2 border border-secondary i_name" style="white-space: nowrap;" contenteditable="true"></td>
+															<td class="p-2 border border-secondary i_value" style="white-space: nowrap;" contenteditable="true"></td>
+															<td class="p-2 border-bottom border-secondary">
+																<button name="d_g_id_i_id" type="button" class="btn btn-danger pt-0  btn-sm i_delete" style="height: 22px;">刪</button>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div></div>
+				</div>
+				<div class=" row m-4">
+					<div class="col-md-4"></div>
+					<div class="col-md-2">
+						<button id="p_submit_save" class="btn btn-primary btn-block" type="button">儲存內容</button>
+					</div>
+					<div class="col-md-2">
+						<button id="p_submit_def" class="btn btn-warning btn-block" type="button">還原設定</button>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	console.log("production_sn_body");
+	templateBody = new Vue({
+		el : "#production_sn_body",
+		data : {
+			search_list : "",
+			//新添加的項目
+			item_n_id : 0,
+			//新項目組
+			group_n_id : 0,
+		},
+		created : function() {
+			//初始化
+			console.log(main.contentData.templateInfo.body["all_list"]);
+			this.search_list = main.contentData.templateInfo.body["all_list"];
+
+			//建立監聽
+			//增加規則+ 監聽
+			$(document).on("click", "#new_a_rule", function(event) {
+				templateBody.rule_added();
+
+			});
+			//修改  鎖定 刪除 規則監聽
+			$(document).on("click", ".m_rule", function(event) {
+				templateBody.rule_modify(event.target.name.replace('m_g_', ''));
+			});
+
+			$(document).on("click", ".lk_rule", function(event) {
+				templateBody.rule_locked(event.target.name.replace('lk_g_', ''));
+			});
+
+			$(document).on("click", ".d_rule", function(event) {
+				templateBody.rule_delete(event.target.name.replace('d_g_', ''));
+			});
+			//增加項目+ 監聽
+			$(document).on("click", ".a_i", function(event) {
+				templateBody.item_add(event.target.name.replace('a_i_g_', ''));
+			});
+			//刪除項目- 監聽
+			$(document).on("click", ".i_delete", function(event) {
+				var g_i = event.target.name.replace('d_g_', '').split('_i_');
+				templateBody.item_delete(g_i);
+
+			});
+			//儲存內容 
+			$(document).on("click", "#p_submit_save", function(event) {
+				templateBody.send_order_save("./production_sn_update.do");
+			});
+			//還原設定
+			$(document).on("click", "#p_submit_def", function(event) {
+				templateBody.send_order_save("./production_sn.do");
+			});
+			//t_body
+			this.update_body();
+		},
+		methods : {
+			//檢查-內容
+			rule_check : function(g_id) {
+				var i_name = $('#' + g_id + ' .items .i_name');
+				var i_value = $('#' + g_id + ' .items .i_value');
+				var i_value_length = i_value[0].innerText.length;
+				if (i_name.length == 0) {
+					return false
+				}
+				for (var i = 0; i < i_name.length; i++) {
+					if (i_name[i].innerText == "") {
+						return false;
+					}
+				}
+				for (var i = 0; i < i_value.length; i++) {
+					if (i_value[i].innerText == "" || i_value_length != i_value[i].innerText.length) {
+						return false;
+					}
+				}
+				if ($('#' + g_id + ' .g_sort').text() == "" || $('#' + g_id + ' .g_name').text() == "") {
+					return false;
+				}
+				return true;
+			},
+
+			//添加規則
+			rule_added : function() {
+				if (!this.rule_check('g_0')) {
+					return false;
+				}
+				//進行複製(新增)
+				this.group_n_id += 1;
+
+				var g_rule = $('#g_0').clone();
+				var button = $('#g_id .fn button ').clone();
+				g_rule.find('#new_a_rule').remove();
+				button.appendTo(g_rule.find('.fn'));
+
+				g_rule.attr('id', 'g_n' + this.group_n_id)
+				g_rule.find(".m_rule").attr("name", "m_g_n" + this.group_n_id);
+				g_rule.find(".d_rule").attr("name", "d_g_n" + this.group_n_id);
+				g_rule.find(".lk_rule").attr("name", "lk_g_n" + this.group_n_id);
+				g_rule.find(".a_i").attr("name", "a_i_g_n" + this.group_n_id);
+				g_rule.addClass('sn_tag');
+				g_rule.insertAfter($('#g_id'));
+				//清空規則
+				$('#g_0 .g_sort').text('');
+				$('#g_0 .g_name').text('');
+				$('#g_0 .items tr').remove();
+				//鎖定
+				this.rule_locked('n' + this.group_n_id);
+
+			},
+			//修改規則
+			rule_modify : function(g_id) {
+				console.log(g_id);
+				$('#g_' + g_id + " .g_sort").attr("contenteditable", "true");
+				$('#g_' + g_id + " .g_name").attr("contenteditable", "true");
+				$('#g_' + g_id + " .i_name").attr("contenteditable", "true");
+				$('#g_' + g_id + " .i_value").attr("contenteditable", "true");
+				$('#g_' + g_id + " .a_i").removeAttr("disabled");
+				$('#g_' + g_id + " .i_delete").removeAttr("disabled");
+
+			},
+			//鎖定規則
+			rule_locked : function(g_id) {
+				console.log(g_id);
+				if (!this.rule_check('g_' + g_id)) {
+					return false;
+				}
+				$('#g_' + g_id + " .g_sort").attr("contenteditable", "false");
+				$('#g_' + g_id + " .g_name").attr("contenteditable", "false");
+				$('#g_' + g_id + " .i_name").attr("contenteditable", "false");
+				$('#g_' + g_id + " .i_value").attr("contenteditable", "false");
+				$('#g_' + g_id + " .a_i").attr("disabled", "disabled");
+				$('#g_' + g_id + " .i_delete").attr("disabled", "disabled");
+			},
+			//刪除規則
+			rule_delete : function(g_id) {
+				console.log(g_id);
+				$('#g_' + g_id).remove();
+
+			},
+			//添加項目
+			item_add : function(g_id) {
+				console.log(g_id);
+				var item = $('#i_g_id_i_id').clone();
+				this.item_n_id += 1;
+				item.attr('id', 'i_g_' + g_id + '_i_n' + this.item_n_id);
+				item.find('.i_id').text('n' + this.item_n_id);
+				item.find('.i_delete').attr('name', 'd_g_' + g_id + '_i_n' + this.item_n_id);
+				item.prependTo($('#g_' + g_id + ' .items'));
+			},
+			//移除項目
+			item_delete : function(g_i) {
+				console.log(g_i);
+				$('#i_g_' + g_i[0] + '_i_' + g_i[1]).remove();
+
+			},
+			//更新介面
+			update_body : function() {
+				var group_id = 'g_';
+				var sn_rule = "";
+				var sn_length = 0;
+				var sn_item = "";
+				var g_c = "";
+				//重製(清除舊資料)
+				$('.sn_tag').remove();
+
+				for (var i = 0; i < this.search_list.length; i++) {
+					g_c = this.search_list[i];
+					sn_item = $("#i_g_id_i_id").clone();
+					//SN 目前內容 碼數
+					if (g_c['sn_group'] == 0 && g_c['sn_id'] == 1) {
+						sn_length = g_c['sn_value'];
+						continue;
+					}
+					//SN 目前內容 文字
+					if (g_c['sn_group'] == 0 && g_c['sn_id'] == 2) {
+						sn_rule = g_c['sn_value'];
+						continue;
+					}
+					//SN 規則
+					if (group_id != "g_" + g_c['sn_group'] && g_c['sn_group'] > 0) {
+						var new_rule = $("#g_id").clone();
+
+						//修改物件
+						new_rule.attr("id", "g_" + g_c['sn_group']);
+						//群組標記
+						new_rule.find(".g_sort").text(g_c['sn_group_sort']);
+						new_rule.find(".g_name").text(g_c['sn_group_name']);
+						new_rule.find(".g_sort").attr("contenteditable", "false");
+						new_rule.find(".g_name").attr("contenteditable", "false");
+						new_rule.find(".m_rule").attr("name", "m_g_" + g_c['sn_group']);
+						new_rule.find(".d_rule").attr("name", "d_g_" + g_c['sn_group']);
+						new_rule.find(".lk_rule").attr("name", "lk_g_" + g_c['sn_group']);
+						new_rule.find(".a_i").attr("name", "a_i_g_" + g_c['sn_group']);
+						new_rule.find(".a_i").attr("disabled", "disabled");
+
+						new_rule.find("#i_g_id_i_id").remove();
+						new_rule.addClass('sn_tag');
+						new_rule.removeClass('d-none');
+
+						new_rule.appendTo("#body_c");
+						group_id = "g_" + g_c['sn_group'];
+
+					}
+					//SN 項目
+					sn_item.attr("id", "i_g_" + g_c['sn_group'] + "_i_" + g_c['sn_id']);
+					sn_item.find('.i_delete').attr('name', "d_g_" + g_c['sn_group'] + "_i_" + g_c['sn_id']);
+					sn_item.find('.i_id').text(g_c['sn_id']);
+					sn_item.find('.i_name').text(g_c['sn_name']);
+					sn_item.find('.i_value').text(g_c['sn_value']);
+					sn_item.find(".i_name").attr("contenteditable", "false");
+					sn_item.find(".i_value").attr("contenteditable", "false");
+					sn_item.find(".i_delete").attr("disabled", "disabled");
+					sn_item.appendTo($("#" + group_id + " .items"));
+				}
+				//顯示SN 狀態
+				$('#now_length').text(sn_length);
+				$('#now_content').text(sn_rule);
+			},
+			//傳送 修改
+			send_order_save : function(url) {
+				var content = [];
+				var action = "U";
+				var x = 0;
+				if (url == "") {
+					url = "./production_sn.do";
+				}
+				//傳送封裝
+				if (url == "./production_sn_update.do") {
+					var one = new Object();
+					var sn_length = 0;
+					var now_content = "";
+					for (var i = 0; i < $(".sn_tag .g_sort").length; i++) {
+						//檢查內容
+
+						if (!this.rule_check($(".sn_tag")[i].id)) {
+							return false;
+						}
+						for (var j = 0; j < $(".sn_tag .items")[i].children.length; j++) {
+							one = new Object();
+							one.sn_id = x + 3;
+							one.sn_group_sort = $(".sn_tag .g_sort")[i].innerText;
+							one.sn_group_name = $(".sn_tag .g_name")[i].innerText;
+							one.sn_name = $(".sn_tag .items")[i].children[j].children[1].innerText;
+							one.sn_value = $(".sn_tag .items")[i].children[j].children[2].innerText;
+							content[x] = one;
+							x += 1;
+							if (j == 0) {
+								//取得長度
+								sn_length += (one.sn_value.replace('[', '').replace(']', '')).length;
+								now_content += one.sn_value;
+							}
+						}
+					}
+					//長度
+					one = new Object();
+					one.sn_id = 1
+					one.sn_group_sort = "0";
+					one.sn_group_name = "編碼總長度";
+					one.sn_name = "now_length";
+					one.sn_value = sn_length + '';
+					content[x] = one;
+					//編碼規則
+					one = new Object();
+					one.sn_id = 2
+					one.sn_group_sort = "0";
+					one.sn_group_name = "最後編碼規則";
+					one.sn_name = "now_content";
+					one.sn_value = now_content;
+					content[x + 1] = one;
+
+					console.log(content);
+				}
+				var order = "search_update"; //指令
+
+				var data = JSON.stringify({
+					data : {
+						datetime : "",
+						action : action,
+						whoami : main.loginData.account,
+						cellBackName : "bodyAfter",
+						cellBackOrder : order,
+						content : content,
+					},
+				});
+				main.ajaxSend(url, data);
+				return false; //防止真傳送
+			},
+			//Rsp-回傳值-指令
+			bodyAfter : function(event) {
+				console.log("to index success");
+				switch (event.r_cellBackOrder) {
+				case "search_update":
+					//刷新資料
+					if (event.r_content.templateInfo.body["all_list"] != null && event.r_content.templateInfo.body["all_list"] != "") {
+						this.search_list = event.r_content.templateInfo.body["all_list"];
+						this.update_body();
+					}
+					break;
+				case "update_body_nav":
+					break;
+				}
+			},
+		},
+		//移除監聽事件
+		beforeDestroy : function() {
+			console.log("to beforeDestroy event");
+			$(document).off("click", "#new_a_rule");
+			$(document).off("click", ".a_i");
+			$(document).off("click", ".m_rule");
+			$(document).off("click", ".lk_rule");
+			$(document).off("click", ".d_rule");
+			$(document).off("click", ".i_delete");
+			$(document).off("click", "#p_submit_save");
+			$(document).off("click", "#p_submit_def");
+		},
+	});
+</script>

@@ -35,7 +35,7 @@ public class BoxBarcodeController {
 	@ResponseBody
 	@RequestMapping(value = "/box_barcode", method = { RequestMethod.POST }, produces = "application/json;charset=UTF-8")
 	public String search_basic_user(@RequestBody String ajaxJSON) {
-		System.out.println("---controller - basic_user");
+		System.out.println("---controller - box_barcode");
 		// Step1.取出 session 訊息 & 檢查權限
 		List<GroupEntity> group = loginService.getSessionGroupBean();
 		boolean checkPermission = loginService.checkPermission(group, SYS_F, "01000001");

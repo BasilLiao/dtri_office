@@ -17,11 +17,13 @@ import dtri.com.bean.BomProductGroupBean;
 import dtri.com.db.entity.BomProductEntity;
 import dtri.com.db.entity.GroupEntity;
 import dtri.com.db.entity.ProductionRecordsEntity;
+import dtri.com.db.entity.ProductionSnEntity;
 import dtri.com.db.entity.SoftwareVersionEntity;
 import dtri.com.models.JsonDataModel;
 import dtri.com.service.LoginService;
 import dtri.com.service.ProductionPrintService;
 import dtri.com.service.ProductionRecordsService;
+import dtri.com.service.ProductionSnService;
 import dtri.com.service.SoftwareVersionService;
 
 @Controller
@@ -35,6 +37,9 @@ public class ProductionPrintController {
 	ProductionRecordsService recordsService;
 	@Autowired
 	SoftwareVersionService softwareVersionService;
+	@Autowired
+	ProductionSnService snService;
+
 	// 功能
 	final static String SYS_F = "production_print.do";
 	// log 訊息
@@ -72,6 +77,7 @@ public class ProductionPrintController {
 			BomProductGroupBean bpg = new BomProductGroupBean();
 			List<ProductionRecordsEntity> bpg2 = new ArrayList<ProductionRecordsEntity>();
 			List<SoftwareVersionEntity> bpg3 = new ArrayList<SoftwareVersionEntity>();
+			ArrayList<ProductionSnEntity> bpg4 = new ArrayList<ProductionSnEntity>();
 			entity2.setProduct_progress(2);// 要是生產流程的
 			entity2.setProduct_status(1);// 不是作廢的
 
@@ -87,7 +93,8 @@ public class ProductionPrintController {
 			bpg = printService.search(entity, page_nb, page_total);
 			bpg2 = printService.searchProduction(entity2, page_nb, page_total);
 			bpg3 = softwareVersionService.searchSoftwareVersion(new SoftwareVersionEntity());
-			JSONObject p_Obj = printService.entitiesToJson(bpg, bpg2,bpg3);
+			bpg4 = snService.searchAll();
+			JSONObject p_Obj = printService.entitiesToJson(bpg, bpg2, bpg3, bpg4, null);
 
 			// Step4-2 .包裝資料
 			r_allData = printService.ajaxRspJson(p_Obj, frontData, "訪問成功!!");
@@ -128,18 +135,35 @@ public class ProductionPrintController {
 		if (checkPermission) {
 			// Step4-1 .DB 取出 正確 資料
 			List<SoftwareVersionEntity> bpg3 = new ArrayList<SoftwareVersionEntity>();
+			ArrayList<ProductionSnEntity> bpg4 = new ArrayList<ProductionSnEntity>();
 			ProductionRecordsEntity entity = new ProductionRecordsEntity();
 			SoftwareVersionEntity entity_sv = new SoftwareVersionEntity();
+			ArrayList<ProductionSnEntity> entity_sn = new ArrayList<ProductionSnEntity>();
+
 			if (frontData.get("content") != null && !frontData.get("content").equals("")) {
 				entity = printService.jsonToEntities2(frontData.getJSONObject("content"));
+				entity_sn = printService.jsonToEntities3(frontData.getJSONObject("content"));
 				entity_sv = softwareVersionService.jsonToEntities(frontData.getJSONObject("content"));
+
 				page_nb = printService.jsonToPageNb(frontData.getJSONObject("content"));
 				page_total = printService.jsonToPageTotal(frontData.getJSONObject("content"));
 			}
+			boolean checked = false;// 如有流程失敗 則停止
+			// 生產登記序號清單 ()(數量)quantity
+			JSONObject sn_obj = snService.analyze_Sn(entity_sn, entity.getProduction_quantity());
+			entity.setProduct_start_sn(sn_obj.getJSONArray("sn_list").getString(0));
+			entity.setProduct_end_sn(
+					sn_obj.getJSONArray("sn_list").getString(sn_obj.getJSONArray("sn_list").length() - 1));
+			// 更新單一項目
+			checked = snService.updateSnById((ProductionSnEntity) sn_obj.get("sn_YYWW"));
+			checked = snService.updateSnById((ProductionSnEntity) sn_obj.get("sn_000"));
+
 			// 更新(如果更新不到該工單號 ->新的自動登記)
-			boolean checked = recordsService.updateProgress(entity);
-			if (!checked) {
-				checked = recordsService.addRecords(frontData.getJSONObject("content"), 1);
+			if (checked) {
+				checked = recordsService.updateProgress(entity);
+				if (!checked) {
+					checked = recordsService.addRecords(frontData.getJSONObject("content"), 1);
+				}
 			}
 
 			// 登記 Or 更新 軟體版本
@@ -162,7 +186,8 @@ public class ProductionPrintController {
 			entity.setProduct_progress(2);
 			List<ProductionRecordsEntity> p_Entities = printService.searchProduction(entity, page_nb, page_total);
 			bpg3 = softwareVersionService.searchSoftwareVersion(new SoftwareVersionEntity());
-			JSONObject p_Obj = printService.entitiesToJson(null, p_Entities,bpg3 );
+			bpg4 = snService.searchAll();
+			JSONObject p_Obj = printService.entitiesToJson(null, p_Entities, bpg3, bpg4, sn_obj);
 
 			// Step4-2 .包裝資料(如果有登記過了)
 			if (checked) {

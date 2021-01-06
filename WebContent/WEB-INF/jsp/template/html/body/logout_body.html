@@ -1,54 +1,55 @@
 <div class="row" id="logout_body">
-    <div class="col-md-4"></div>
-    <div class="col-md-4 mt-2 mb-3">
-        <div class="row mb-3">
-            <h1 class="h3">Logout ERP</h1>
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-5">Check</div>
-            <div class="col-md-7" id="logout_check"></div>
-        </div>
+	<div class="col-md-4"></div>
+	<div class="col-md-4 mt-2 mb-3">
+		<div class="row mb-3">
+			<h1 class="h3">Logout ERP</h1>
+		</div>
+		<div class="row mb-3">
+			<div class="col-md-5">Check</div>
+			<div class="col-md-7" id="logout_check"></div>
+		</div>
 
-        <div class="row mb-3">
-            <div class="col-md-5">Account is</div>
-            <div class="col-md-7" id="logout_account"></div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-5">
-                <a href="login.jsp" title="點我跳過">跳過 回登入</a>
-            </div>
-            <div class="col-md-7" id="time">5</div>
-        </div>
-    </div>
-    <div class="col-md-4"></div>
+		<div class="row mb-3">
+			<div class="col-md-5">Account is</div>
+			<div class="col-md-7" id="logout_account"></div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-md-5">
+				<a href="login.jsp" title="點我跳過">跳過 回登入</a>
+			</div>
+			<div class="col-md-7" id="time">5</div>
+		</div>
+	</div>
+	<div class="col-md-4"></div>
 </div>
 <script type="text/javascript">
-    console.log("logout_body");
-    templateBody = new Vue({
-        el: "#logout_body",
-        data: {},
-        created: function () {
-            //初始化
-            $("#logout_account").text(main.loginData.account);
-            $("#logout_check").text(main.allData.check);
-            this.delayURL();
-        },
-        methods: {
-            delayURL: function () {
-                //倒數轉跳登入面
-                var delay = document.getElementById("time").innerHTML;
-                var t = setTimeout("templateBody.delayURL()", 1000);
-                if (delay > 0) {
-                    delay--;
-                    document.getElementById("time").innerHTML = delay;
-                } else {
-                    clearTimeout(t);
-                    templateNav.$destroy();
-                    templateBody.$destroy();
-                    window.location.href = "login.jsp";
-                }
-            },
-        },
-        beforeDestroy: function () {},
-    });
+	console.log("logout_body");
+	templateBody = new Vue({
+		el : "#logout_body",
+		data : {},
+		created : function() {
+			//初始化
+			$("#logout_account").text(main.loginData.account);
+			$("#logout_check").text(main.allData.check);
+			this.delayURL();
+		},
+		methods : {
+			delayURL : function() {
+				//倒數轉跳登入面
+				var delay = document.getElementById("time").innerHTML;
+				var t = setTimeout("templateBody.delayURL()", 1000);
+				if (delay > 0) {
+					delay--;
+					document.getElementById("time").innerHTML = delay;
+				} else {
+					clearTimeout(t);
+					templateNav.$destroy();
+					templateBody.$destroy();
+					window.location.href = "login.jsp";
+				}
+			},
+		},
+		beforeDestroy : function() {
+		},
+	});
 </script>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Login DTR ERP Expansion system(延展系統)</title>
+<title>Login Barcode Work</title>
 </head>
 <link rel="stylesheet" href="./thirdparty/css/bootstrap-4.4.1.min.css">
 <script src="./thirdparty/js/jquery-3.4.1.min.js"></script>
@@ -22,7 +22,7 @@ body {
 <body id="login" class="container">
 	<div id="header" class="mt-5 mb-3">
 		<div class="text-center">
-			<h3>DTR ERP</h3>
+			<h3>DTR ERP Barcode Work</h3>
 		</div>
 	</div>
 	<div id="nav" class="mt-3 mb-3">
@@ -70,7 +70,7 @@ body {
 			<br>最佳解析度為 1366*768 以上.
 			<br>任何問題 需求 請洽詢 系統管理員 分機:321 </p>
 			<p>&copy; 2020 DT Research, Inc. All Rights Reserved.<br>
-			版本: Beta v0.69.3</p>
+			版本: Beta v0.68.2</p>
 		</div>
 	</div>
 <!-- 必要訊息${allData}--> 

@@ -1,471 +1,479 @@
 <div class="row border" id="software_version_body">
-    <div class="col-md-12 border">
-        <!-- 功能: 查詢 /新增 /修改 -->
-        <div class="mt-3 mb-3 border">
-            <div class="mb-3">
-                <h3>
-                    <b>軟體版本控管</b>
-                </h3>
-            </div>
-            <!-- 查詢功能 -->
-            <div class="mb-3 border border-primary">
-                <div class="row mb-2">
-                    <div class="col-md-5">
-                        <a class="btn btn-success" data-toggle="collapse" href="#collapseSearch" role="button" aria-expanded="true" aria-controls="collapseSearch"> 查詢功能 : </a>
-                    </div>
-                </div>
-                <div class="mb-3 collapse show" id="collapseSearch">
-                    <div class="col-md-12 mb-5">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="col-md-12 text-left">客戶名稱:
-                                <input class="col-md-8" type="text" id="s_c_n" name="s_c_n" placeholder="Ex:Radarteam Sweden AB" required autofocus />
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="row">
-                                    <div class="col-md-12 text-left">BOM料號: 
-                                    <input class="col-md-8" type="text" id="s_b" name="s_b" placeholder="Ex:90-311-Y10KJ07" required />
-                                    </div>
-                                </div>
-                            </div>
-                             <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12 text-left">產品型號(場內): 
-                                    <input class="col-md-7" type="text" id="s_p" name="s_p" placeholder="Ex:311KY" required />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-2">
-                            <button id="s_submit" class="col-md-12 btn btn-primary btn-block" type="submit">查詢</button>
-                        </div>
-                        <div class="col-md-2">
-                            <button id="c_submit" class="col-md-12 btn btn-warning btn-block" type="submit">清除</button>
-                        </div>
-                        <div class="col-md-4"></div>
-                    </div>
-                </div>
-            </div>
-            <!-- 功能:查詢結果  /修改 -->
-            <div class="mb-3 border border-primary">
-                <div class="border">
-                    <div class="row mb-2">
-                        <div class="col-md-5">
-                            <a class="btn btn-success" data-toggle="collapse" href="#collapseFinish" role="button" aria-expanded="true" aria-controls="collapseFinish"> 查詢結果 : </a>
-                        </div>
-                    </div>
-                    <div class="collapse show" id="collapseFinish">
-                        <div class="col-md-12">
-                            <div id="search_choose" class="row mb-2">
-                                <div class="text-left">
-                                    <b>顯示名稱-></b>
-                                </div>
-                            </div>
-                            <!-- 顯示內容 -->
-                            <div class="row">
-                                <table  style="min-height: 480px;" class="table table-sm table-hover table-striped table-bordered table-responsive">
-                                    <thead>
-                                        <tr id="search_thead" class="bg-primary">
-                                            <th scope="col" style="min-width: 80px;">功能</th>
-                                            <th scope="col" style="min-width: 40px;">筆</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="search_tbody"></tbody>
-                                </table>
-                            </div>
-                            							<div aria-label="Page">
+	<div class="col-md-12 border">
+		<!-- 功能: 查詢 /新增 /修改 -->
+		<div class="mt-3 mb-3 border">
+			<div class="mb-3">
+				<h3>
+					<b>軟體版本控管</b>
+				</h3>
+			</div>
+			<!-- 查詢功能 -->
+			<div class="mb-3 border border-primary">
+				<div class="row mb-2">
+					<div class="col-md-5">
+						<a class="btn btn-success" data-toggle="collapse" href="#collapseSearch" role="button" aria-expanded="true" aria-controls="collapseSearch"> 查詢功能 : </a>
+					</div>
+				</div>
+				<div class="mb-3 collapse show" id="collapseSearch">
+					<div class="col-md-12 mb-5">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="col-md-12 text-left">
+									客戶名稱: <input class="col-md-8" type="text" id="s_c_n" name="s_c_n" placeholder="Ex:Radarteam Sweden AB" required autofocus />
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										BOM料號: <input class="col-md-8" type="text" id="s_b" name="s_b" placeholder="Ex:90-311-Y10KJ07" required />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										產品型號(場內): <input class="col-md-7" type="text" id="s_p" name="s_p" placeholder="Ex:311KY" required />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="col-md-4"></div>
+						<div class="col-md-2">
+							<button id="s_submit" class="col-md-12 btn btn-primary btn-block" type="submit">查詢</button>
+						</div>
+						<div class="col-md-2">
+							<button id="c_submit" class="col-md-12 btn btn-warning btn-block" type="submit">清除</button>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+				</div>
+			</div>
+			<!-- 功能:查詢結果  /修改 -->
+			<div class="mb-3 border border-primary">
+				<div class="border">
+					<div class="row mb-2">
+						<div class="col-md-5">
+							<a class="btn btn-success" data-toggle="collapse" href="#collapseFinish" role="button" aria-expanded="true" aria-controls="collapseFinish"> 查詢結果 : </a>
+						</div>
+					</div>
+					<div class="collapse show" id="collapseFinish">
+						<div class="col-md-12">
+							<div id="search_choose" class="row mb-2">
+								<div class="text-left">
+									<b>顯示名稱-></b>
+								</div>
+							</div>
+							<!-- 顯示內容 -->
+							<div class="row">
+								<table style="min-height: 480px;" class="table table-sm table-hover table-striped table-bordered table-responsive">
+									<thead>
+										<tr id="search_thead" class="bg-primary">
+											<th scope="col" style="min-width: 80px;">功能</th>
+											<th scope="col" style="min-width: 40px;">筆</th>
+										</tr>
+									</thead>
+									<tbody id="search_tbody"></tbody>
+								</table>
+							</div>
+							<div aria-label="Page">
 								<ul class="pagination justify-content-center">
-									<li class="page-item p_p disabled"><a id="p_p"
-										class="page-link" href="#"
-										onclick="return templateBody.change_page(this);">Previous
-											10 </a></li>
-									<li class="page-item p_nb p1 active"><a id="p1"
-										class="page-link" href="#"
-										onclick="return templateBody.change_page(this);">1</a></li>
-									<li class="page-item p_nb p2"><a id="p2" class="page-link"
-										href="#" onclick="return templateBody.change_page(this);">2</a></li>
-									<li class="page-item p_nb p3"><a id="p3" class="page-link"
-										href="#" onclick="return templateBody.change_page(this);">3</a></li>
-									<li class="page-item p_nb p4"><a id="p4" class="page-link"
-										href="#" onclick="return templateBody.change_page(this);">4</a></li>
-									<li class="page-item p_nb p5"><a id="p5" class="page-link"
-										href="#" onclick="return templateBody.change_page(this);">5</a></li>
-									<li class="page-item p_nb p6"><a id="p6" class="page-link"
-										href="#" onclick="return templateBody.change_page(this);">6</a></li>
-									<li class="page-item p_nb p7"><a id="p7" class="page-link"
-										href="#" onclick="return templateBody.change_page(this);">7</a></li>
-									<li class="page-item p_nb p8"><a id="p8" class="page-link"
-										href="#" onclick="return templateBody.change_page(this);">8</a></li>
-									<li class="page-item p_nb p9"><a id="p9" class="page-link"
-										href="#" onclick="return templateBody.change_page(this);">9</a></li>
-									<li class="page-item p_nb p10"><a id="p10"
-										class="page-link" href="#"
-										onclick="return templateBody.change_page(this);">10</a></li>
-									<li class="page-item p_n disabled"><a id="p_n"
-										class="page-link" href="#"
-										onclick="return templateBody.change_page(this);">Next 10 </a></li>
+									<li class="page-item p_p disabled"><a id="p_p" class="page-link" href="#" onclick="return templateBody.change_page(this);">Previous 10 </a></li>
+									<li class="page-item p_nb p1 active"><a id="p1" class="page-link" href="#" onclick="return templateBody.change_page(this);">1</a></li>
+									<li class="page-item p_nb p2"><a id="p2" class="page-link" href="#" onclick="return templateBody.change_page(this);">2</a></li>
+									<li class="page-item p_nb p3"><a id="p3" class="page-link" href="#" onclick="return templateBody.change_page(this);">3</a></li>
+									<li class="page-item p_nb p4"><a id="p4" class="page-link" href="#" onclick="return templateBody.change_page(this);">4</a></li>
+									<li class="page-item p_nb p5"><a id="p5" class="page-link" href="#" onclick="return templateBody.change_page(this);">5</a></li>
+									<li class="page-item p_nb p6"><a id="p6" class="page-link" href="#" onclick="return templateBody.change_page(this);">6</a></li>
+									<li class="page-item p_nb p7"><a id="p7" class="page-link" href="#" onclick="return templateBody.change_page(this);">7</a></li>
+									<li class="page-item p_nb p8"><a id="p8" class="page-link" href="#" onclick="return templateBody.change_page(this);">8</a></li>
+									<li class="page-item p_nb p9"><a id="p9" class="page-link" href="#" onclick="return templateBody.change_page(this);">9</a></li>
+									<li class="page-item p_nb p10"><a id="p10" class="page-link" href="#" onclick="return templateBody.change_page(this);">10</a></li>
+									<li class="page-item p_n disabled"><a id="p_n" class="page-link" href="#" onclick="return templateBody.change_page(this);">Next 10 </a></li>
 								</ul>
 							</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 新增/修改功能 -->
-            <div class="border border-primary">
-                <div class="row mb-2">
-                    <div class="col-md-5">
-                        <a class="btn btn-success" data-toggle="collapse" href="#collapseAdded" role="button" aria-expanded="true" aria-controls="collapseAdded"> 新增/修改/刪除 功能 : </a>
-                    </div>
-                </div>
-                <form onsubmit="return templateBody.send_added_or_update_save();">
-                    <div class="collapse show" id="collapseAdded">
-                        <!-- 新增 或 修改(分辨) -->
-                        <div class="row mb-1">
-                            <div class="col-md-2">
-                                <div class="text-left">
-                                    <div class="col-md-12">狀態 :</div>
-                                    <div class="col-md-12" id="a_u_type" style="font-size: 25px; color: red;">新增資料</div>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="row text-left">
-                                    <div class="col-md-6 pr-0">ID:</div>
-                                    <div class="col-md-6 pl-0" id="a_id">0</div>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="row text-left">
-                                    <div class="col-md-6 pr-0">B_ID:</div>
-                                    <div class="col-md-6 pl-0" id="a_bom_id">0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dropdown-divider" style="border-top: 1px solid green;"></div>
-                        <!-- 新增 或 修改 或 刪除(內容) -->
-                        <div class="row mb-3 mt-3">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-12 text-left">BOM料號 : <input class="col-md-9" type="text" id="a_bom_product_id"  placeholder="Ex:90-311-Y10KS28" required /></div>
-                                </div>
-                            </div>
-                             <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12 text-left">客 戶 名 稱 : <input class="col-md-8" type="text" id="a_c_name"  placeholder="Ex:Mickey Mouse" required /></div>
-                                </div>
-                            </div>
-                         </div>   
-                         <div class="row mb-3">
-                            <div class="col-md-3">
-                                <div class="row">
-                                    <div class="col-md-12 text-left">M/B 版本 : <input class="col-md-7" type="text" id="a_mb_ver"  placeholder="Ex:R1.0" required /></div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="row">
-                                    <div class="col-md-12 text-left">M/B ECN 版 : <input class="col-md-5" type="text" id="a_mb_ver_ecn" placeholder="Ex:A20" required /></div>
-                                </div>
-                            </div>  
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12 text-left">NVRAM版本: <input class="col-md-8" type="text" id="a_nveram"  placeholder="Ex:NVRAM" /></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row mb-3"> 
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-12 text-left">BIOS版本 : <input class="col-md-9" type="text" id="a_bios"  placeholder="301KY_0.00.16" required /></div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12 text-left">MODEL版本: <input class="col-md-8" type="text" id="a_model"  placeholder="DT301Y-10B5-495" required /></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row mb-3">
-                        	<div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-12 text-left"> E C 版 本 : <input class="col-md-9" type="text" id="a_ec"  placeholder="301KY_0.1.4" required /></div>
-                                </div>
-                            </div>
-                         	<div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12 text-left">OS : <input class="col-md-10" type="text" id="a_os"  placeholder="" required /></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row mb-3">
-                        	<div class="col-md-10">
-                                <div class="row">
-                                    <div class="col-md-12 text-left"> 項目備註 : <input class="col-md-9" type="text" id="a_note"  placeholder="項目解釋" required /></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                        	<div class="col-md-10">
-                                <div class="row">
-                                    <div class="col-md-12 text-left"> 備 註 1 : <input class="col-md-9" type="text" id="a_note1"  placeholder="說明" required /></div>
-                                </div>
-                            </div>
-                        </div>
-                         <div class="row mb-5">
-                        	<div class="col-md-10">
-                                <div class="row">
-                                    <div class="col-md-12 text-left"> 備 註 2 : <input class="col-md-9" type="text" id="a_note2"  placeholder="說明" required /></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row mb-3">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-2">
-                                <div class="">
-                                    <button id="a_u_submit" class="btn btn-primary btn-block" type="submit">存入資料</button>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="">
-                                    <button id="a_c_submit" class="btn btn-warning btn-block" type="button">清除內容</button>
-                                </div>
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 新增/修改功能 -->
+			<div class="border border-primary">
+				<div class="row mb-2">
+					<div class="col-md-5">
+						<a class="btn btn-success" data-toggle="collapse" href="#collapseAdded" role="button" aria-expanded="true" aria-controls="collapseAdded"> 新增/修改/刪除 功能 : </a>
+					</div>
+				</div>
+				<form onsubmit="return templateBody.send_added_or_update_save();">
+					<div class="collapse show" id="collapseAdded">
+						<!-- 新增 或 修改(分辨) -->
+						<div class="row mb-1">
+							<div class="col-md-2">
+								<div class="text-left">
+									<div class="col-md-12">狀態 :</div>
+									<div class="col-md-12" id="a_u_type" style="font-size: 25px; color: red;">新增資料</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="row text-left">
+									<div class="col-md-6 pr-0">ID:</div>
+									<div class="col-md-6 pl-0" id="a_id">0</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="row text-left">
+									<div class="col-md-6 pr-0">B_ID:</div>
+									<div class="col-md-6 pl-0" id="a_bom_id">0</div>
+								</div>
+							</div>
+						</div>
+						<div class="dropdown-divider" style="border-top: 1px solid green;"></div>
+						<!-- 新增 或 修改 或 刪除(內容) -->
+						<div class="row mb-3 mt-3">
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										BOM料號 : <input class="col-md-9" type="text" id="a_bom_product_id" placeholder="Ex:90-311-Y10KS28" required />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										客 戶 名 稱 : <input class="col-md-8" type="text" id="a_c_name" placeholder="Ex:Mickey Mouse" required />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col-md-3">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										M/B 版本 : <input class="col-md-7" type="text" id="a_mb_ver" placeholder="Ex:R1.0" required />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										M/B ECN 版 : <input class="col-md-5" type="text" id="a_mb_ver_ecn" placeholder="Ex:A20" required />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										NVRAM版本: <input class="col-md-8" type="text" id="a_nveram" placeholder="Ex:NVRAM" />
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row mb-3">
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										BIOS版本 : <input class="col-md-9" type="text" id="a_bios" placeholder="301KY_0.00.16" required />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										MODEL版本: <input class="col-md-8" type="text" id="a_model" placeholder="DT301Y-10B5-495" required />
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row mb-3">
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										E C 版 本 : <input class="col-md-9" type="text" id="a_ec" placeholder="301KY_0.1.4" required />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										OS : <input class="col-md-10" type="text" id="a_os" placeholder="" required />
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row mb-3">
+							<div class="col-md-10">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										項目備註 : <input class="col-md-9" type="text" id="a_note" placeholder="項目解釋" required />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col-md-10">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										備 註 1 : <input class="col-md-9" type="text" id="a_note1" placeholder="說明" required />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-md-10">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										備 註 2 : <input class="col-md-9" type="text" id="a_note2" placeholder="說明" required />
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row mb-3">
+							<div class="col-md-4"></div>
+							<div class="col-md-2">
+								<div class="">
+									<button id="a_u_submit" class="btn btn-primary btn-block" type="submit">存入資料</button>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="">
+									<button id="a_c_submit" class="btn btn-warning btn-block" type="button">清除內容</button>
+								</div>
+							</div>
+							<div class="col-md-4"></div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
 <script type="text/javascript">
-    console.log("software_version_body");
-    templateBody = new Vue({
-        el: "#software_version_body",
-        data: {
-            l_search_thead: "",
-            search_list: "",
-            search_group: "",
-          	//分頁功能
+	console.log("software_version_body");
+	templateBody = new Vue({
+		el : "#software_version_body",
+		data : {
+			l_search_thead : "",
+			search_list : "",
+			search_group : "",
+			//分頁功能
 			page_max : 100,//當前本批 筆數
 			page_max_total : 100,//最大總數
 			page_batch : 0,//第幾批
 			page_batch_total : 100,//每批間格值
 			page_every : 10,//當前每頁筆數
 			page_stay : 1,//當前頁數
-        },
-        created: function () {
-            //初始化
-            console.log(main.contentData.templateInfo.body["list"]);
-            this.search_group = main.contentData.templateInfo.body["grouplist"];
-            this.search_list = main.contentData.templateInfo.body["list"];
-            //t_choose
-            var min_width = 100;
-            for (var i = 0; i < this.search_list[0].length; i++) {
-                var choose_check = '[<div class="text-left form-check">';
-                choose_check += '<input class="form-check-input" type="checkbox" value="" id="s_' + i + '" checked>';
-                choose_check += '<label class="form-check-label" for="s_' + i + '">' + this.search_list[0][i] + "</label>";
-                choose_check += "</div>]";
-                $("#search_choose").append(choose_check);
-            }
-            //t_header
-            for (var i = 0; i < this.search_list[0].length; i++) {
-                if (i == 0 || i == 2 || i == 4 || i == 11) {
-                    min_width = 180;
-                }
-                $("#search_thead").append('<th style="min-width: ' + min_width + 'px;" class="s_' + i + '" scope="col">' + this.search_list[0][i] + "</th>");
-                min_width = 100;
-            }
-            //t_body
-            this.search_update();
-            //t_body_group
-            this.group_choose();
+		},
+		created : function() {
+			//初始化
+			console.log(main.contentData.templateInfo.body["list"]);
+			this.search_group = main.contentData.templateInfo.body["grouplist"];
+			this.search_list = main.contentData.templateInfo.body["list"];
+			//t_choose
+			var min_width = 100;
+			for (var i = 0; i < this.search_list[0].length; i++) {
+				var choose_check = '[<div class="text-left form-check">';
+				choose_check += '<input class="form-check-input" type="checkbox" value="" id="s_' + i + '" checked>';
+				choose_check += '<label class="form-check-label" for="s_' + i + '">' + this.search_list[0][i] + "</label>";
+				choose_check += "</div>]";
+				$("#search_choose").append(choose_check);
+			}
+			//t_header
+			for (var i = 0; i < this.search_list[0].length; i++) {
+				if (i == 0 || i == 2 || i == 4 || i == 11) {
+					min_width = 180;
+				}
+				$("#search_thead").append('<th style="min-width: ' + min_width + 'px;" class="s_' + i + '" scope="col">' + this.search_list[0][i] + "</th>");
+				min_width = 100;
+			}
+			//t_body
+			this.search_update();
+			//t_body_group
+			this.group_choose();
 
-            //動態監聽顯示Table 物件 查看開關
-            $(document).on("click", "#search_choose input", function (event) {
-                templateBody.search_choose(event);
-            });
-            //查詢監聽
-            $(document).on("click", "#s_submit", function (event) {
-                templateBody.send_search();
-            });
-            //清除修改
-            $(document).on("click", "#a_c_submit", function (event) {
-                templateBody.rm_added();
-            });
-            //清除查詢
-            $(document).on("click", "#c_submit", function (event) {
-                templateBody.rm_search();
-            });
-        },
-        methods: {
-            search_choose: function (event) {
-                console.log(event.target.checked);
-                if (!event.target.checked) {
-                    $("#search_thead ." + event.target.id).hide();
-                    $("#search_tbody ." + event.target.id).hide();
-                } else {
-                    $("#search_thead ." + event.target.id).show();
-                    $("#search_tbody ." + event.target.id).show();
-                }
-            },
-            //查詢更新
-            search_update: function () {
-                $("#search_tbody").empty();
-              //頁數-刷新
+			//動態監聽顯示Table 物件 查看開關
+			$(document).on("click", "#search_choose input", function(event) {
+				templateBody.search_choose(event);
+			});
+			//查詢監聽
+			$(document).on("click", "#s_submit", function(event) {
+				templateBody.send_search();
+			});
+			//清除修改
+			$(document).on("click", "#a_c_submit", function(event) {
+				templateBody.rm_added();
+			});
+			//清除查詢
+			$(document).on("click", "#c_submit", function(event) {
+				templateBody.rm_search();
+			});
+		},
+		methods : {
+			search_choose : function(event) {
+				console.log(event.target.checked);
+				if (!event.target.checked) {
+					$("#search_thead ." + event.target.id).hide();
+					$("#search_tbody ." + event.target.id).hide();
+				} else {
+					$("#search_thead ." + event.target.id).show();
+					$("#search_tbody ." + event.target.id).show();
+				}
+			},
+			//查詢更新
+			search_update : function() {
+				$("#search_tbody").empty();
+				//頁數-刷新
 				this.change_page_update();
-                //t_body
-                var id_key = 13;
-                for (var i = 1; i < this.search_list.length; i++) {
-                	//頁數-每頁顯示(不再顯示範圍內則隱藏)
+				//t_body
+				var id_key = 13;
+				for (var i = 1; i < this.search_list.length; i++) {
+					//頁數-每頁顯示(不再顯示範圍內則隱藏)
 					var page_group = this.change_page_btn(i);
-                    //功能
-                    var s_list = this.search_list[i][id_key];
+					//功能
+					var s_list = this.search_list[i][id_key];
 
-                    var a_submit = '<div class="md-6">';
-                    a_submit += '<button user_id="' + s_list + '" class="btn btn-warning btn-sm btn-block a_submit">';
-                    a_submit += "改</button></div>";
+					var a_submit = '<div class="md-6">';
+					a_submit += '<button user_id="' + s_list + '" class="btn btn-warning btn-sm btn-block a_submit">';
+					a_submit += "改</button></div>";
 
-                    var d_submit = '<div class="md-6 ml-1">';
-                    d_submit += '<button user_id="' + s_list + '" class="btn btn-danger btn-sm btn-block d_submit">';
-                    d_submit += "刪</button></div>";
+					var d_submit = '<div class="md-6 ml-1">';
+					d_submit += '<button user_id="' + s_list + '" class="btn btn-danger btn-sm btn-block d_submit">';
+					d_submit += "刪</button></div>";
 
-                    $("#search_tbody").append('<tr class="page_all t_row' + s_list + ' '+page_group+'" style="white-space: nowrap;"><th class="ml-0 col-md-12 row">' + a_submit + d_submit + "</th></tr>");
-                    //計數量
-                    $("#search_tbody .t_row" + this.search_list[i][id_key]).append("<td >" + i + "</td>");
-				
-                    for (var j = 0; j < this.search_list[i].length; j++) {
-                        $("#search_tbody .t_row" + s_list).append("<td class=s_" + j + ">" + this.search_list[i][j] + "</td>");
-                    }
-                }
-                //修改監聽
-                $(document).on("click", ".a_submit", function (event) {
-                    templateBody.choose_update("修改資料", event);
-                });
-                //刪除監聽
-                $(document).on("click", ".d_submit", function (event) {
-                    templateBody.choose_delete(event);
-                });
-            },
-            //選擇群組-並建立監聽
-            group_choose: function () {
-                var group = "";
-                $("#a_u_group_name select").empty();
-                group += '<option value="">請選擇</option>';
-                $.each(this.search_group, function (index, val) {
-                    group += "<option value=" + val + ">" + index + "</option>";
-                });
-                $("#a_u_group_name select").append(group);
+					$("#search_tbody").append(
+							'<tr class="page_all t_row' + s_list + ' '+page_group+'" style="white-space: nowrap;"><th class="ml-0 col-md-12 row">' + a_submit + d_submit + "</th></tr>");
+					//計數量
+					$("#search_tbody .t_row" + this.search_list[i][id_key]).append("<td >" + i + "</td>");
 
-                $(document).on("change", "#a_u_group_name select", function (event) {
-                    $("#a_u_group_id").text(event.target.value);
-                });
-            },
-            //清除新增/修該內容
-            rm_added: function () {
-                $("#a_u_type").text("新增資料");
-                $("#a_id").text(0);
-                $("#a_bom_id").text(0);
-                
-                $("#a_bom_product_id").val("");
-                $("#a_c_name").val("");
-                
-                $("#a_mb_ver").val("");
-                $("#a_mb_ver_ecn").val("");
-                $("#a_nveram").val("");
-                
-                $("#a_bios").val("");
-                $("#a_model").val("");
-                
-                $("#a_ec").val("");
-                $("#a_os").val("");
-                
-                $("#a_note").val("");
-                $("#a_note1").val("");
-                $("#a_note2").val("");
+					for (var j = 0; j < this.search_list[i].length; j++) {
+						$("#search_tbody .t_row" + s_list).append("<td class=s_" + j + ">" + this.search_list[i][j] + "</td>");
+					}
+				}
+				//修改監聽
+				$(document).on("click", ".a_submit", function(event) {
+					templateBody.choose_update("修改資料", event);
+				});
+				//刪除監聽
+				$(document).on("click", ".d_submit", function(event) {
+					templateBody.choose_delete(event);
+				});
+			},
+			//選擇群組-並建立監聽
+			group_choose : function() {
+				var group = "";
+				$("#a_u_group_name select").empty();
+				group += '<option value="">請選擇</option>';
+				$.each(this.search_group, function(index, val) {
+					group += "<option value=" + val + ">" + index + "</option>";
+				});
+				$("#a_u_group_name select").append(group);
 
-                this.choose_disabled(false);
-            },
-            //查詢清除
-            rm_search: function () {
-                $("#s_c_n").val("");
-                $("#s_b").val("");
-                $("#s_p").val("");
-            },
-            //選擇  修改
-            choose_update: function (a_u_type, event) {
-            	  $("#a_u_type").text(a_u_type);
-                var id = event.target.attributes.user_id.value;
-                $("#a_id").text($(".t_row" + id + " .s_13")[0].innerText);
-                $("#a_bom_id").text($(".t_row" + id + " .s_14")[0].innerText);
-                
-                $("#a_bom_product_id").val($(".t_row" + id + " .s_4")[0].innerText);
-                $("#a_c_name").val($(".t_row" + id + " .s_5")[0].innerText);
-                
-                $("#a_mb_ver").val($(".t_row" + id + " .s_6")[0].innerText);
-                $("#a_mb_ver_ecn").val($(".t_row" + id + " .s_7")[0].innerText);
-                $("#a_nveram").val($(".t_row" + id + " .s_10")[0].innerText);
-                
-                $("#a_bios").val($(".t_row" + id + " .s_8")[0].innerText);
-                $("#a_model").val($(".t_row" + id + " .s_11")[0].innerText);
-                
-                $("#a_ec").val($(".t_row" + id + " .s_9")[0].innerText);
-                $("#a_os").val($(".t_row" + id + " .s_12")[0].innerText);
-                
-                $("#a_note").val($(".t_row" + id + " .s_15")[0].innerText);
-                $("#a_note1").val($(".t_row" + id + " .s_16")[0].innerText);
-                $("#a_note2").val($(".t_row" + id + " .s_17")[0].innerText);
+				$(document).on("change", "#a_u_group_name select", function(event) {
+					$("#a_u_group_id").text(event.target.value);
+				});
+			},
+			//清除新增/修該內容
+			rm_added : function() {
+				$("#a_u_type").text("新增資料");
+				$("#a_id").text(0);
+				$("#a_bom_id").text(0);
 
-                // a_u_group_name
-                this.choose_disabled(false);
-                //移動
-                setTimeout(function() {
+				$("#a_bom_product_id").val("");
+				$("#a_c_name").val("");
+
+				$("#a_mb_ver").val("");
+				$("#a_mb_ver_ecn").val("");
+				$("#a_nveram").val("");
+
+				$("#a_bios").val("");
+				$("#a_model").val("");
+
+				$("#a_ec").val("");
+				$("#a_os").val("");
+
+				$("#a_note").val("");
+				$("#a_note1").val("");
+				$("#a_note2").val("");
+
+				this.choose_disabled(false);
+			},
+			//查詢清除
+			rm_search : function() {
+				$("#s_c_n").val("");
+				$("#s_b").val("");
+				$("#s_p").val("");
+			},
+			//選擇  修改
+			choose_update : function(a_u_type, event) {
+				$("#a_u_type").text(a_u_type);
+				var id = event.target.attributes.user_id.value;
+				$("#a_id").text($(".t_row" + id + " .s_13")[0].innerText);
+				$("#a_bom_id").text($(".t_row" + id + " .s_14")[0].innerText);
+
+				$("#a_bom_product_id").val($(".t_row" + id + " .s_4")[0].innerText);
+				$("#a_c_name").val($(".t_row" + id + " .s_5")[0].innerText);
+
+				$("#a_mb_ver").val($(".t_row" + id + " .s_6")[0].innerText);
+				$("#a_mb_ver_ecn").val($(".t_row" + id + " .s_7")[0].innerText);
+				$("#a_nveram").val($(".t_row" + id + " .s_10")[0].innerText);
+
+				$("#a_bios").val($(".t_row" + id + " .s_8")[0].innerText);
+				$("#a_model").val($(".t_row" + id + " .s_11")[0].innerText);
+
+				$("#a_ec").val($(".t_row" + id + " .s_9")[0].innerText);
+				$("#a_os").val($(".t_row" + id + " .s_12")[0].innerText);
+
+				$("#a_note").val($(".t_row" + id + " .s_15")[0].innerText);
+				$("#a_note1").val($(".t_row" + id + " .s_16")[0].innerText);
+				$("#a_note2").val($(".t_row" + id + " .s_17")[0].innerText);
+
+				// a_u_group_name
+				this.choose_disabled(false);
+				//移動
+				setTimeout(function() {
 					$("html,body").animate({
 						scrollTop : 950
 					}, 'slow');
 				}, 500);
-            },
-            //選擇 刪除
-            choose_delete: function (event) {
-                var id = event.target.attributes.user_id.value;
-                var a_u_type = "移除資料";
-                $("#a_u_type").text(a_u_type);
-                $("#a_u_id").text($(".t_row" + id + " .s_4")[0].innerText);
-                $("#a_u_group").text($(".t_row" + id + " .s_6")[0].innerText);
+			},
+			//選擇 刪除
+			choose_delete : function(event) {
+				var id = event.target.attributes.user_id.value;
+				var a_u_type = "移除資料";
+				$("#a_u_type").text(a_u_type);
+				$("#a_u_id").text($(".t_row" + id + " .s_4")[0].innerText);
+				$("#a_u_group").text($(".t_row" + id + " .s_6")[0].innerText);
 
-                this.choose_update(a_u_type, event);
-                this.choose_disabled("disabled");
-                //移動
-                setTimeout(function() {
+				this.choose_update(a_u_type, event);
+				this.choose_disabled("disabled");
+				//移動
+				setTimeout(function() {
 					$("html,body").animate({
 						scrollTop : 950
 					}, 'slow');
 				}, 500);
-            },
-            //鎖定資料
-            choose_disabled: function (disabled) {
+			},
+			//鎖定資料
+			choose_disabled : function(disabled) {
 
-                $("#a_bom_product_id").attr("disabled", disabled);
-                $("#a_c_name").attr("disabled", disabled);
-                $("#a_mb_ver").attr("disabled", disabled);
-                $("#a_mb_ver_ecn").attr("disabled", disabled);
-                $("#a_nveram").attr("disabled", disabled);
-                $("#a_bios").attr("disabled", disabled);
-                $("#a_model").attr("disabled", disabled);
-                $("#a_ec").attr("disabled", disabled);
-                $("#a_os").attr("disabled", disabled);
-                $("#a_note").attr("disabled", disabled);
-                $("#a_note1").attr("disabled", disabled);
-                $("#a_note2").attr("disabled", disabled);
-                
-            },
-          //頁數-初始化(新增 or 修改 or 刪除 or 條件 要重製)
+				$("#a_bom_product_id").attr("disabled", disabled);
+				$("#a_c_name").attr("disabled", disabled);
+				$("#a_mb_ver").attr("disabled", disabled);
+				$("#a_mb_ver_ecn").attr("disabled", disabled);
+				$("#a_nveram").attr("disabled", disabled);
+				$("#a_bios").attr("disabled", disabled);
+				$("#a_model").attr("disabled", disabled);
+				$("#a_ec").attr("disabled", disabled);
+				$("#a_os").attr("disabled", disabled);
+				$("#a_note").attr("disabled", disabled);
+				$("#a_note1").attr("disabled", disabled);
+				$("#a_note2").attr("disabled", disabled);
+
+			},
+			//頁數-初始化(新增 or 修改 or 刪除 or 條件 要重製)
 			change_page_init : function() {
 				//active 更換為第一格
 				var a = "active";
@@ -479,8 +487,7 @@
 						$(".p" + now_page).addClass("p" + re_page);
 						$(".p" + re_page).removeClass("p" + now_page);
 						$(".p" + re_page + " a").text(re_page);
-						$(".p" + re_page + " a").attr("id",
-								"p" + re_page);
+						$(".p" + re_page + " a").attr("id", "p" + re_page);
 					}
 					if (re_page == 1) {
 						$(".p" + now_page).addClass(a);
@@ -518,10 +525,8 @@
 					d_none = "d-none";
 				}
 				//頁數-(個位數)+(十位數)
-				var page_group = "pg_"
-						+ (Math.floor((i - 1) / this.page_every) + 1 + (this.page_batch * 10));
-				var page_nb = "p"
-						+ (Math.floor((i - 1) / this.page_every) + 1 + (this.page_batch * 10));
+				var page_group = "pg_" + (Math.floor((i - 1) / this.page_every) + 1 + (this.page_batch * 10));
+				var page_nb = "p" + (Math.floor((i - 1) / this.page_every) + 1 + (this.page_batch * 10));
 				$("." + page_nb).removeClass("disabled");
 				return page_group + " " + d_none;
 			},
@@ -547,16 +552,11 @@
 
 						for (var i = 1; i <= 10; i++) {
 							var now_page = i + (this.page_batch * 10);
-							var previous_page = i
-									+ ((this.page_batch) * 10) - 10;
-							$(".p" + now_page).addClass(
-									"p" + previous_page);
-							$(".p" + previous_page).removeClass(
-									"p" + now_page);
-							$(".p" + previous_page + " a").text(
-									previous_page);
-							$(".p" + previous_page + " a").attr("id",
-									"p" + previous_page);
+							var previous_page = i + ((this.page_batch) * 10) - 10;
+							$(".p" + now_page).addClass("p" + previous_page);
+							$(".p" + previous_page).removeClass("p" + now_page);
+							$(".p" + previous_page + " a").text(previous_page);
+							$(".p" + previous_page + " a").attr("id", "p" + previous_page);
 							if (i == 1) {
 								$(".p" + previous_page).addClass(a);
 							}
@@ -570,15 +570,11 @@
 						$(".page-item").removeClass(a);
 						for (var i = 1; i <= 10; i++) {
 							var now_page = i + (this.page_batch * 10);
-							var next_page = i
-									+ ((this.page_batch + 1) * 10);
-							$(".p" + now_page)
-									.addClass("p" + next_page);
-							$(".p" + next_page).removeClass(
-									"p" + now_page);
+							var next_page = i + ((this.page_batch + 1) * 10);
+							$(".p" + now_page).addClass("p" + next_page);
+							$(".p" + next_page).removeClass("p" + now_page);
 							$(".p" + next_page + " a").text(next_page);
-							$(".p" + next_page + " a").attr("id",
-									"p" + next_page);
+							$(".p" + next_page + " a").attr("id", "p" + next_page);
 							if (i == 1) {
 								$(".p" + next_page).addClass(a);
 							}
@@ -589,101 +585,101 @@
 				}
 				return false;
 			},
-            //傳送 新增 or 修改 or 刪除
-            send_added_or_update_save: function () {
-                var content = new Object();
-                content.id =    		$("#a_id").text();
-                content.bom_id =  		$("#a_bom_id").text();
-                content.bom_product_id =$("#a_bom_product_id").val();
-                
-                content.client_name = 	$("#a_c_name").val();
-                content.mb_ver= 		$("#a_mb_ver").val();
-                content.mb_ver_ecn=    	$("#a_mb_ver_ecn").val();
-                content.nvram=   		$("#a_nveram").val();
-                content.bios = 	  		$("#a_bios").val();
-                
-                content.product_model_in = 	$("#a_model").val();
-                content.ec = 				$("#a_ec").val();
-                content.os=    				$("#a_os").val();
-                content.note=   			$("#a_note").val();
-                content.note1 =  			$("#a_note1").val();
-                content.note2 =  			$("#a_note2").val();
-                
-                var action = "C";
-                var url = "./added_software_version.do";
-                var order = "search_update"; //指令
-                if ($("#a_u_type").text() == "修改資料") {
-                    action = "U";
-                    url = "./update_software_version.do";
-                }
-                if ($("#a_u_type").text() == "移除資料") {
-                    action = "D";
-                    url = "./delete_software_version.do";
-                }
+			//傳送 新增 or 修改 or 刪除
+			send_added_or_update_save : function() {
+				var content = new Object();
+				content.id = $("#a_id").text();
+				content.bom_id = $("#a_bom_id").text();
+				content.bom_product_id = $("#a_bom_product_id").val();
 
-                var data = JSON.stringify({
-                    data: {
-                        datetime: "",
-                        action: action,
-                        whoami: main.loginData.account,
-                        cellBackName: "bodyAfter",
-                        cellBackOrder: order,
-                        content: content,
-                    },
-                });
-                main.ajaxSend(url, data);
-                return false; //防止真傳送
-            },
-            //傳送 查詢
-            send_search: function () {
-                var content = new Object();
-                content.client_name = $("#s_c_n").val();
-                content.bom_product_id = $("#s_b").val();
-                content.product_model_in = $("#s_p").val();
-               
-                //content.name = $("#s_name").val();
+				content.client_name = $("#a_c_name").val();
+				content.mb_ver = $("#a_mb_ver").val();
+				content.mb_ver_ecn = $("#a_mb_ver_ecn").val();
+				content.nvram = $("#a_nveram").val();
+				content.bios = $("#a_bios").val();
 
-                var url = "./software_version.do";
-                var order = "search_update"; //指令
+				content.product_model_in = $("#a_model").val();
+				content.ec = $("#a_ec").val();
+				content.os = $("#a_os").val();
+				content.note = $("#a_note").val();
+				content.note1 = $("#a_note1").val();
+				content.note2 = $("#a_note2").val();
 
-                var data = JSON.stringify({
-                    data: {
-                        datetime: "",
-                        action: "R",
-                        whoami: main.loginData.account,
-                        cellBackName: "bodyAfter",
-                        cellBackOrder: order,
-                        content: content,
-                    },
-                });
-                main.ajaxSend(url, data);
-            },
-            //Rsp-回傳值-指令
-            bodyAfter: function (event) {
-                console.log("to index success");
-                switch (event.r_cellBackOrder) {
-                    case "search_update":
-                        //刷新資料
-                        if (event.r_content.templateInfo.body["list"] != null && event.r_content.templateInfo.body["list"] != "") {
-                            this.search_list = event.r_content.templateInfo.body["list"];
-                            this.search_update();
-                            this.rm_added();
-                        }
-                        break;
-                    case "update_body_nav":
-                        break;
-                }
-            },
-        },
-        //移除監聽事件
-        beforeDestroy: function () {
-            console.log("to beforeDestroy event");
-            $(document).off("click","#a_u_group_name select");
-            $(document).off("click","#search_choose input");
-            $(document).off("click","#s_submit");
-            $(document).off("click","#a_c_submit");
-            $(document).off("click",".a_submit");
-            $(document).off("click",".d_submit");
-        },
-    });
+				var action = "C";
+				var url = "./added_software_version.do";
+				var order = "search_update"; //指令
+				if ($("#a_u_type").text() == "修改資料") {
+					action = "U";
+					url = "./update_software_version.do";
+				}
+				if ($("#a_u_type").text() == "移除資料") {
+					action = "D";
+					url = "./delete_software_version.do";
+				}
+
+				var data = JSON.stringify({
+					data : {
+						datetime : "",
+						action : action,
+						whoami : main.loginData.account,
+						cellBackName : "bodyAfter",
+						cellBackOrder : order,
+						content : content,
+					},
+				});
+				main.ajaxSend(url, data);
+				return false; //防止真傳送
+			},
+			//傳送 查詢
+			send_search : function() {
+				var content = new Object();
+				content.client_name = $("#s_c_n").val();
+				content.bom_product_id = $("#s_b").val();
+				content.product_model_in = $("#s_p").val();
+
+				//content.name = $("#s_name").val();
+
+				var url = "./software_version.do";
+				var order = "search_update"; //指令
+
+				var data = JSON.stringify({
+					data : {
+						datetime : "",
+						action : "R",
+						whoami : main.loginData.account,
+						cellBackName : "bodyAfter",
+						cellBackOrder : order,
+						content : content,
+					},
+				});
+				main.ajaxSend(url, data);
+			},
+			//Rsp-回傳值-指令
+			bodyAfter : function(event) {
+				console.log("to index success");
+				switch (event.r_cellBackOrder) {
+				case "search_update":
+					//刷新資料
+					if (event.r_content.templateInfo.body["list"] != null && event.r_content.templateInfo.body["list"] != "") {
+						this.search_list = event.r_content.templateInfo.body["list"];
+						this.search_update();
+						this.rm_added();
+					}
+					break;
+				case "update_body_nav":
+					break;
+				}
+			},
+		},
+		//移除監聽事件
+		beforeDestroy : function() {
+			console.log("to beforeDestroy event");
+			$(document).off("click", "#a_u_group_name select");
+			$(document).off("click", "#search_choose input");
+			$(document).off("click", "#s_submit");
+			$(document).off("click", "#a_c_submit");
+			$(document).off("click", ".a_submit");
+			$(document).off("click", ".d_submit");
+		},
+	});
 </script>

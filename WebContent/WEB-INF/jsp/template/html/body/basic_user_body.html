@@ -1,208 +1,222 @@
 <div class="row border" id="basic_user_body">
-    <div class="col-md-12 border">
-        <!-- 功能: 查詢 /新增 /修改 -->
-        <div class="mt-3 mb-3 border">
-            <div class="mb-3">
-                <h3>
-                    <b>個人資料</b>
-                </h3>
-            </div>
-            <!-- 個人修改功能 -->
-            <div class="border border-primary shadow">
-                <div class="row mb-2">
-                    <div class="col-md-5">
-                        <a class="btn btn-success" data-toggle="collapse" href="#collapseAdded" role="button" aria-expanded="true" aria-controls="collapseAdded"> 修改個人基本 功能 : </a>
-                    </div>
-                </div>
-                <form onsubmit="return templateBody.send_added_or_update_save();">
-                    <div class="collapse show" id="collapseAdded">
-                        <!-- 新增 或 修改(分辨) -->
-                        <div class="row mb-1">
-                            <div class="col-md-2">
-                                <div class="text-left">
-                                    <div class="col-md-12">狀態 :</div>
-                                    <div class="col-md-12" id="u_u_type" style="font-size: 25px; color: red;">修改資料</div>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="row text-left">
-                                    <div class="col-md-6 pr-0">UserID:</div>
-                                    <div class="col-md-6 pl-0" id="u_u_id">0</div>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="row text-left">
-                                    <div class="col-md-6 pr-0">GroupID:</div>
-                                    <div class="col-md-6 pl-0" id="u_u_group_id">0</div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="row text-left">
-                                    <div class="col-md-6 pr-0">GroupName:</div>
-                                     <div class="col-md-6 pl-0" id="u_u_group_name">0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dropdown-divider" style="border-top: 1px solid green;"></div>
-                        <!-- 新增 或 修改 或 刪除(內容) -->
-                        <div class="row mb-3 mt-3 pl-2">
-                            <div class="col-md-3">
-                                <div class="row">
-                                    <div class="col-md-12 text-left">個人名稱 : <input class="col-md-7" type="text" id="u_name"placeholder="Ex:小王" required /></div>
-                                </div>
-                            </div>
-                             <div class="col-md-3">
-                                <div class="row">
-                                    <div class="col-md-12 text-left">英文名稱 : <input class="col-md-7" type="text" id="u_e_name" placeholder="Ex:Mickey Mouse" required /></div>
-                                </div>
-                            </div>
-                            </div>
-                            <div class="row mb-3 mt-3 pl-2">
-                            <div class="col-md-3">
-                                <div class="row">
-                                    <div class="col-md-12 text-left">工作職位 : <input class="col-md-7" type="text" id="u_position" placeholder="Ex:董事長" required /></div>
-                                </div>
-                            </div>
-                              <div class="col-md-3">
-                                <div class="row">
-                                    <div class="col-md-5 text-left">使用狀態 : </div><div  class="col-md-7"  id="u_useful" ></div>
-                                </div>
-                            </div>
-                            </div>
-                             <div class="row mb-3 mt-3 pl-2">
-                            <div class="col-md-3">
-                                <div class="row">
-                                    <div class="col-md-5 text-left">個人帳號 : </div><div  class="col-md-7"  id="u_account" ></div>
-                                </div>
-                            </div>
-                             <div class="col-md-3">
-                                <div class="row">
-                                    <div class="col-md-12 text-left">個人密碼 : <input class="col-md-7" type="password" id="u_password" placeholder="Ex:0%^&sr" required /></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-5 pl-2">
-                            <div class="col-md-3">
-                                <div class="row">
-                                    <div class="col-md-12 text-left">Email : <input class="col-md-9" type="email" id="u_email"  placeholder="Ex:apple@dtri.com" required /></div>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-12 text-left">說明備註 : <input class="col-md-7" type="text" id="u_note"  placeholder="Ex:可不寫" /></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-2">
-                                <div class="">
-                                    <button id="a_u_submit" class="btn btn-primary btn-block" type="submit">存入資料</button>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="">
-                                    <button id="a_c_submit" class="btn btn-warning btn-block" type="button">還原內容</button>
-                                </div>
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+	<div class="col-md-12 border">
+		<!-- 功能: 查詢 /新增 /修改 -->
+		<div class="mt-3 mb-3 border">
+			<div class="mb-3">
+				<h3>
+					<b>個人資料</b>
+				</h3>
+			</div>
+			<!-- 個人修改功能 -->
+			<div class="border border-primary shadow">
+				<div class="row mb-2">
+					<div class="col-md-5">
+						<a class="btn btn-success" data-toggle="collapse" href="#collapseAdded" role="button" aria-expanded="true" aria-controls="collapseAdded"> 修改個人基本 功能 : </a>
+					</div>
+				</div>
+				<form onsubmit="return templateBody.send_added_or_update_save();">
+					<div class="collapse show" id="collapseAdded">
+						<!-- 新增 或 修改(分辨) -->
+						<div class="row mb-1">
+							<div class="col-md-2">
+								<div class="text-left">
+									<div class="col-md-12">狀態 :</div>
+									<div class="col-md-12" id="u_u_type" style="font-size: 25px; color: red;">修改資料</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="row text-left">
+									<div class="col-md-6 pr-0">UserID:</div>
+									<div class="col-md-6 pl-0" id="u_u_id">0</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="row text-left">
+									<div class="col-md-6 pr-0">GroupID:</div>
+									<div class="col-md-6 pl-0" id="u_u_group_id">0</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="row text-left">
+									<div class="col-md-6 pr-0">GroupName:</div>
+									<div class="col-md-6 pl-0" id="u_u_group_name">0</div>
+								</div>
+							</div>
+						</div>
+						<div class="dropdown-divider" style="border-top: 1px solid green;"></div>
+						<!-- 新增 或 修改 或 刪除(內容) -->
+						<div class="row mb-3 mt-3 pl-2">
+							<div class="col-md-3">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										個人名稱 : <input class="col-md-7" type="text" id="u_name" placeholder="Ex:小王" required />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										英文名稱 : <input class="col-md-7" type="text" id="u_e_name" placeholder="Ex:Mickey Mouse" required />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row mb-3 mt-3 pl-2">
+							<div class="col-md-3">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										工作職位 : <input class="col-md-7" type="text" id="u_position" placeholder="Ex:董事長" required />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="row">
+									<div class="col-md-5 text-left">使用狀態 :</div>
+									<div class="col-md-7" id="u_useful"></div>
+								</div>
+							</div>
+						</div>
+						<div class="row mb-3 mt-3 pl-2">
+							<div class="col-md-3">
+								<div class="row">
+									<div class="col-md-5 text-left">個人帳號 :</div>
+									<div class="col-md-7" id="u_account"></div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										個人密碼 : <input class="col-md-7" type="password" id="u_password" placeholder="Ex:0%^&sr" required />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row mb-5 pl-2">
+							<div class="col-md-3">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										Email : <input class="col-md-9" type="email" id="u_email" placeholder="Ex:apple@dtri.com" required />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										說明備註 : <input class="col-md-7" type="text" id="u_note" placeholder="Ex:可不寫" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col-md-4"></div>
+							<div class="col-md-2">
+								<div class="">
+									<button id="a_u_submit" class="btn btn-primary btn-block" type="submit">存入資料</button>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="">
+									<button id="a_c_submit" class="btn btn-warning btn-block" type="button">還原內容</button>
+								</div>
+							</div>
+							<div class="col-md-4"></div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
 <script type="text/javascript">
-    console.log("basic_user_body");
-    templateBody = new Vue({
-        el: "basic_user_body",
-        data: {     
-            search_list: "",
-        },
-        created: function () {
-            //初始化
-            console.log(main.contentData.templateInfo.body["only_user"]);
-            this.search_list = main.contentData.templateInfo.body["only_user"];
-           
-            //t_body
-           this.def_modify();
-           
-            //清除修改
-            $(document).on("click", "#a_c_submit", function (event) {
-                templateBody.def_modify();
-            });
-        },
-        methods: {
-            //還原預設
-            def_modify: function () {
-            	var only_u =  this.search_list;
-           		$("#u_u_id").text(only_u[4]);
-                $("#u_name").val(only_u[5]);
-                $("#u_e_name").val(only_u[6]);
-                $("#u_account").text(only_u[7]);
-                $("#u_position").val(only_u[8]);
-                $("#u_email").val(only_u[9]);
-                $("#u_u_group_id").text(only_u[10]);
-                
-                $("#u_u_group_name").text(only_u[11]);
-                $("#u_password").val("");
-                $("#u_useful").text(only_u[12]);
-                $("#u_note").val(only_u[13]);
-            },
-            //傳送 修改 
-            send_added_or_update_save: function () {
-                var content = new Object();
-                
-                content.name =    $("#u_name").val();
-                content.e_name =  $("#u_e_name").val();
-                content.position =$("#u_position").val();
-                content.account = $("#u_account").text();
-                content.password= $("#u_password").val();
-                content.email=    $("#u_email").val();
-                content.useful=   $("#u_useful").text();
-                content.note = 	  $("#u_note").val();
-                content.id =  $("#u_u_id").text();
-                content.group_id =$("#u_u_group_id").text();
-                content.group_name=$("#u_u_group_name").text();
+	console.log("basic_user_body");
+	templateBody = new Vue({
+		el : "basic_user_body",
+		data : {
+			search_list : "",
+		},
+		created : function() {
+			//初始化
+			console.log(main.contentData.templateInfo.body["only_user"]);
+			this.search_list = main.contentData.templateInfo.body["only_user"];
 
-                var action = "U";
-                var url = "./update_basic_user.do";
-                var order = "search_update"; //指令
-              
-                var data = JSON.stringify({
-                    data: {
-                        datetime: "",
-                        action: action,
-                        whoami: main.loginData.account,
-                        cellBackName: "bodyAfter",
-                        cellBackOrder: order,
-                        content: content,
-                    },
-                });
-                main.ajaxSend(url, data);
-                return false; //防止真傳送
-            },
-            //Rsp-回傳值-指令
-            bodyAfter: function (event) {
-                console.log("to index success");
-                switch (event.r_cellBackOrder) {
-                    case "search_update":
-                        //刷新資料
-                        if (event.r_content.templateInfo.body["list"] != null && event.r_content.templateInfo.body["list"] != "") {
-                            this.search_list = event.r_content.templateInfo.body["list"];
-                            this.search_update();
-                        }
-                        break;
-                    case "update_body_nav":
-                        break;
-                }
-            },
-        },
-        //移除監聽事件
-        beforeDestroy: function () {
-            console.log("to beforeDestroy event");  
-            $(document).off("click","#a_c_submit");
-        }
-    });
+			//t_body
+			this.def_modify();
+
+			//清除修改
+			$(document).on("click", "#a_c_submit", function(event) {
+				templateBody.def_modify();
+			});
+		},
+		methods : {
+			//還原預設
+			def_modify : function() {
+				var only_u = this.search_list;
+				$("#u_u_id").text(only_u[4]);
+				$("#u_name").val(only_u[5]);
+				$("#u_e_name").val(only_u[6]);
+				$("#u_account").text(only_u[7]);
+				$("#u_position").val(only_u[8]);
+				$("#u_email").val(only_u[9]);
+				$("#u_u_group_id").text(only_u[10]);
+
+				$("#u_u_group_name").text(only_u[11]);
+				$("#u_password").val("");
+				$("#u_useful").text(only_u[12]);
+				$("#u_note").val(only_u[13]);
+			},
+			//傳送 修改 
+			send_added_or_update_save : function() {
+				var content = new Object();
+
+				content.name = $("#u_name").val();
+				content.e_name = $("#u_e_name").val();
+				content.position = $("#u_position").val();
+				content.account = $("#u_account").text();
+				content.password = $("#u_password").val();
+				content.email = $("#u_email").val();
+				content.useful = $("#u_useful").text();
+				content.note = $("#u_note").val();
+				content.id = $("#u_u_id").text();
+				content.group_id = $("#u_u_group_id").text();
+				content.group_name = $("#u_u_group_name").text();
+
+				var action = "U";
+				var url = "./update_basic_user.do";
+				var order = "search_update"; //指令
+
+				var data = JSON.stringify({
+					data : {
+						datetime : "",
+						action : action,
+						whoami : main.loginData.account,
+						cellBackName : "bodyAfter",
+						cellBackOrder : order,
+						content : content,
+					},
+				});
+				main.ajaxSend(url, data);
+				return false; //防止真傳送
+			},
+			//Rsp-回傳值-指令
+			bodyAfter : function(event) {
+				console.log("to index success");
+				switch (event.r_cellBackOrder) {
+				case "search_update":
+					//刷新資料
+					if (event.r_content.templateInfo.body["list"] != null && event.r_content.templateInfo.body["list"] != "") {
+						this.search_list = event.r_content.templateInfo.body["list"];
+						this.search_update();
+					}
+					break;
+				case "update_body_nav":
+					break;
+				}
+			},
+		},
+		//移除監聽事件
+		beforeDestroy : function() {
+			console.log("to beforeDestroy event");
+			$(document).off("click", "#a_c_submit");
+		}
+	});
 </script>

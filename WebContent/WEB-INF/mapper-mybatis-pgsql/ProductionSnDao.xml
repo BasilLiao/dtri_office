@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dtri.com.db.pgsql.dao.ProductionSnDao">
+
+	<!-- 查詢 資料 產品SN規則 -->
+	<select id="queryProductionSn" resultType="ProductionSnEntity">
+		select * from
+		production_sn order by sn_group,sn_name,sn_id
+	</select>
+	<!-- 查詢 資料 產品SN規則 only Content -->
+	<select id="queryProductionSnContent" resultType="ProductionSnEntity">
+		select * from production_sn 
+		WHERE sn_id = 2 
+		order by sn_group,sn_id
+	</select>
+
+	<!-- 產品SN規則 刷新 -->
+	<insert id="addedProductionSn" parameterType="ProductionSnEntity">
+		INSERT INTO public.production_sn(
+		sys_create_user,
+		sys_modify_user,
+		sn_id,
+		sn_group,
+		sn_name,
+		sn_value,
+		sn_group_name,
+		sn_group_sort
+		)VALUES (
+		#{sys_create_user},#{sys_modify_user},
+		#{sn_id},#{sn_group},#{sn_name},#{sn_value},#{sn_group_name},#{sn_group_sort});
+	</insert>
+
+	<!-- 移除 產品SN規則 -->
+	<delete id="deleteProductionSn">
+		DELETE FROM production_sn WHERE
+		sn_group >= 0;
+	</delete>
+
+	<!-- 更新 SN編碼(now_length) (now_content) -->
+	<update id="updateProductionSn" parameterType="ProductionSnEntity">
+		UPDATE
+		production_sn
+		SET sn_value= #{sn_value}
+		WHERE
+		sn_group = 0 AND sn_name = #{sn_name};
+	</update>
+	
+		<!-- 更新 SN編碼 特定規格編碼 -->
+	<update id="updateProductionSnById" parameterType="ProductionSnEntity">
+		UPDATE
+		production_sn
+		SET sn_name= #{sn_name}
+		WHERE
+		sn_id = #{sn_id};
+	</update>
+</mapper>

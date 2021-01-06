@@ -121,8 +121,9 @@ public class ProductionRecordsService {
 		// 類型? 單據類型 
 		if (!content.isNull("product_status") && content.getInt("product_status") >= 0)
 			entity.setProduct_status(content.getInt("product_status"));
-
-		
+		// 類型? 產品SN序號 
+		if (!content.isNull("product_start_sn") && !content.getString("product_start_sn").equals(""))
+			entity.setProduct_start_sn(content.getString("product_start_sn"));
 		return entity;
 	}
 
@@ -165,6 +166,8 @@ public class ProductionRecordsService {
 			jsonArray.put(entity.getNote());
 			jsonArray.put(entity.getCome_from());
 			jsonArray.put(entity.getProduct_status());
+			jsonArray.put(entity.getProduct_start_sn());
+			jsonArray.put(entity.getProduct_end_sn());
 			
 			jsonAll.put(jsonArray);
 		}

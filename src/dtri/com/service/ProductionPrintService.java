@@ -22,6 +22,7 @@ import dtri.com.db.entity.BomGroupEntity;
 import dtri.com.db.entity.BomProductEntity;
 import dtri.com.db.entity.BomTypeItemEntity;
 import dtri.com.db.entity.ProductionRecordsEntity;
+import dtri.com.db.entity.ProductionSnEntity;
 import dtri.com.db.entity.SoftwareVersionEntity;
 import dtri.com.db.pgsql.dao.BomProductDao;
 import dtri.com.db.pgsql.dao.BomTypeItemDao;
@@ -230,9 +231,12 @@ public class ProductionPrintService {
 		// 產品型號?
 		if (!content.isNull("product_model") && !content.get("product_model").equals(""))
 			entity.setProduct_model(content.getString("product_model"));
+		// 總數?
+		if (!content.isNull("production_quantity") && !content.get("production_quantity").equals(""))
+			entity.setProduction_quantity(content.getInt("production_quantity"));
 		// 工單號?
-		if (!content.isNull("id") && !content.get("id").equals(""))
-			entity.setId(content.getString("id"));
+		if (!content.isNull("production_id") && !content.get("production_id").equals(""))
+			entity.setId(content.getString("production_id"));
 		// 產品料號
 		if (!content.isNull("bom_product_id") && !content.get("bom_product_id").equals(""))
 			entity.setBom_product_id(content.getString("bom_product_id"));
@@ -242,7 +246,7 @@ public class ProductionPrintService {
 		// 類型? 單據類型
 		if (!content.isNull("product_status") && content.getInt("product_status") >= 0) {
 			entity.setProduct_status(content.getInt("product_status"));
-		}else {
+		} else {
 			entity.setProduct_status(1);
 		}
 
@@ -250,56 +254,26 @@ public class ProductionPrintService {
 
 	}
 
-	/** JSON to 清單(解析 軟體版本) **/
-	public SoftwareVersionEntity jsonToEntities3(JSONObject content) {
-		SoftwareVersionEntity entity = new SoftwareVersionEntity();
+	/** JSON to 清單(解析 SN 序號版本) **/
+	public ArrayList<ProductionSnEntity> jsonToEntities3(JSONObject content) {
+		ArrayList<ProductionSnEntity> p_s_e = new ArrayList<ProductionSnEntity>();
+		JSONArray sn_j_a = content.getJSONArray("sn");
 
-		if (!content.isNull("client_name") && !content.get("client_name").equals(""))
-			entity.setClient_name(content.getString("client_name"));
+		for (int i = 0; i < sn_j_a.length(); i++) {
+			ProductionSnEntity p_s_n = new ProductionSnEntity();
+			p_s_n.setSn_group(sn_j_a.getJSONObject(i).getInt("sn_group"));
+			p_s_n.setSn_name(sn_j_a.getJSONObject(i).getString("sn_name"));
+			p_s_n.setSn_value(sn_j_a.getJSONObject(i).getString("sn_value"));
+			p_s_n.setSn_id(sn_j_a.getJSONObject(i).getInt("sn_id"));
+			p_s_e.add(p_s_n);
+		}
 
-		if (!content.isNull("product_model_in") && !content.get("product_model_in").equals(""))
-			entity.setProduct_model_in(content.getString("product_model_in"));
-
-		if (!content.isNull("bom_id") && content.getInt("bom_id") >= 0)
-			entity.setBom_id(content.getInt("bom_id"));
-
-		if (!content.isNull("bom_product_id") && !content.get("bom_product_id").equals(""))
-			entity.setBom_product_id(content.getString("bom_product_id"));
-
-		if (!content.isNull("mb_ver") && !content.getString("mb_ver").equals(""))
-			entity.setMb_ver(content.getString("mb_ver"));
-
-		if (!content.isNull("mb_ver_ecn") && !content.getString("mb_ver_ecn").equals(""))
-			entity.setMb_ver_ecn(content.getString("mb_ver_ecn"));
-
-		if (!content.isNull("bios") && !content.getString("bios").equals(""))
-			entity.setBios(content.getString("bios"));
-
-		if (!content.isNull("ec") && !content.getString("ec").equals(""))
-			entity.setEc(content.getString("ec"));
-
-		if (!content.isNull("nvram") && !content.getString("nvram").equals(""))
-			entity.setNvram(content.getString("nvram"));
-
-		if (!content.isNull("os") && !content.getString("os").equals(""))
-			entity.setOs(content.getString("os"));
-
-		if (!content.isNull("note") && !content.getString("note").equals(""))
-			entity.setNote(content.getString("note"));
-
-		if (!content.isNull("note1") && !content.getString("note1").equals(""))
-			entity.setNote1(content.getString("note1"));
-
-		if (!content.isNull("note2") && !content.getString("note2").equals(""))
-			entity.setNote2(content.getString("note2"));
-
-		return entity;
-
+		return p_s_e;
 	}
 
 	/** 清單 to JSON **/
 	public JSONObject entitiesToJson(BomProductGroupBean bpg, List<ProductionRecordsEntity> bpg2,
-			List<SoftwareVersionEntity> bpg3) {
+			List<SoftwareVersionEntity> bpg3, ArrayList<ProductionSnEntity> bpg4,JSONObject sn_obj) {
 		JSONObject list = new JSONObject();
 		JSONObject item_All = new JSONObject();
 		JSONArray jsonAll = new JSONArray();
@@ -475,7 +449,7 @@ public class ProductionPrintService {
 		}
 
 		list.put("production_list", jsonAll);
-		//軟體定義
+		// 軟體定義
 		if (bpg3 != null) {
 			jsonArray = new JSONArray();
 			// 內容 軟體清單
@@ -483,27 +457,45 @@ public class ProductionPrintService {
 				jsonArray = new JSONArray();
 				jsonArray.put(entity.getId());
 				jsonArray.put(entity.getBom_id());
-				
+
 				jsonArray.put(entity.getBom_product_id());
 				jsonArray.put(entity.getClient_name());
-				
+
 				jsonArray.put(entity.getMb_ver());
 				jsonArray.put(entity.getMb_ver_ecn());
 				jsonArray.put(entity.getNvram());
-				
+
 				jsonArray.put(entity.getBios());
 				jsonArray.put(entity.getProduct_model_in());
 				jsonArray.put(entity.getEc());
 				jsonArray.put(entity.getOs());
-				
+
 				jsonArray.put(entity.getNote());
 				jsonArray.put(entity.getNote1());
 				jsonArray.put(entity.getNote2());
-				item_All.put(entity.getClient_name()+'-'+entity.getBom_product_id(), jsonArray);
+				item_All.put(entity.getClient_name() + '-' + entity.getBom_product_id(), jsonArray);
 			}
 			list.put("softwareVer_list", item_All);
 
 		}
+		// 產品規則SN條碼-標題 目前SN序列
+		JSONArray r_list = new JSONArray();
+
+		// 內容 產品清單
+		bpg4.stream().forEach(i -> {
+			// 單個
+			JSONObject one = new JSONObject();
+			one.put("sn_group", i.getSn_group());
+			one.put("sn_group_name", i.getSn_group_name());
+			one.put("sn_group_sort", i.getSn_group_sort());
+			one.put("sn_id", i.getSn_id());
+			one.put("sn_name", i.getSn_name());
+			one.put("sn_value", i.getSn_value());
+			r_list.put(one);
+		});
+		list.put("sn_all_list", r_list);
+		list.put("sn_all_nb", sn_obj);
+		
 		return list;
 	}
 
