@@ -154,7 +154,7 @@ public class ProductionSnService {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		// 如果發現 舊的大於 新的 年週期 ,則保持舊的周期數 ,反之在使用新的周期數
-		String week = String.format("%02d", cal.get(Calendar.WEEK_OF_YEAR));
+		String week = String.format("%02d", (cal.get(Calendar.WEEK_OF_YEAR)-1));
 		String year = (cal.get(Calendar.YEAR) + "").substring(2, 4);
 		int new_YYWW = Integer.parseInt(year + week);
 		if (new_YYWW < Integer.parseInt(old_YYWW)) {

@@ -1576,6 +1576,7 @@
 				$("#barcodeOutputSn").barcode(code, "code39", {
 					barWidth : 1,
 					barHeight : 50,
+					fontSize: 22,
 				});
 			},
 			printDiv : function() {
@@ -1601,7 +1602,7 @@
 				$("#datepicker2 div").text(this.d_2);
 				//設置數量
 				var number_total = $('#p_number').text();
-				$('#p_number').text(1);
+				
 
 				this.createBarcodeForPrint(this.sn_all_nb[0]);
 				var style = document.getElementById("table2Style");
@@ -1630,8 +1631,6 @@
 					$("#datepicker2 input").removeClass("d-none");
 					$("#datepicker1 div").addClass("d-none");
 					$("#datepicker2 div").addClass("d-none");
-					$('#p_number').text(number_total);
-
 					newWin.close();
 				}, 9000);
 			},
