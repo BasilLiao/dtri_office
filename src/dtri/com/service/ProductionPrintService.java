@@ -273,7 +273,7 @@ public class ProductionPrintService {
 
 	/** 清單 to JSON **/
 	public JSONObject entitiesToJson(BomProductGroupBean bpg, List<ProductionRecordsEntity> bpg2,
-			List<SoftwareVersionEntity> bpg3, ArrayList<ProductionSnEntity> bpg4,JSONObject sn_obj) {
+			List<SoftwareVersionEntity> bpg3, ArrayList<ProductionSnEntity> bpg4, JSONObject sn_obj) {
 		JSONObject list = new JSONObject();
 		JSONObject item_All = new JSONObject();
 		JSONArray jsonAll = new JSONArray();
@@ -495,7 +495,7 @@ public class ProductionPrintService {
 		});
 		list.put("sn_all_list", r_list);
 		list.put("sn_all_nb", sn_obj);
-		
+
 		return list;
 	}
 

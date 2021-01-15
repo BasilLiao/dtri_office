@@ -264,7 +264,7 @@
 			page_max_total : 100,//最大總數
 			page_batch : 0,//第幾批
 			page_batch_total : 100,//每批間格值
-			page_every : 10,//當前每頁筆數
+			page_every : 10, //當前每頁筆數
 			page_stay : 1,//當前頁數
 		},
 		created : function() {
@@ -616,7 +616,8 @@
 					action = "D";
 					url = "./delete_software_version.do";
 				}
-
+				content.page_nb = this.page_batch * this.page_batch_total;//批次(起始數)
+				content.page_total = this.page_batch_total;//(每次要的最大數量)
 				var data = JSON.stringify({
 					data : {
 						datetime : "",
@@ -637,6 +638,8 @@
 				content.bom_product_id = $("#s_b").val();
 				content.product_model_in = $("#s_p").val();
 
+				content.page_nb = this.page_batch * this.page_batch_total;//批次(起始數)
+				content.page_total = this.page_batch_total;//(每次要的最大數量)
 				//content.name = $("#s_name").val();
 
 				var url = "./software_version.do";

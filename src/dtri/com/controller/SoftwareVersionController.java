@@ -49,16 +49,17 @@ public class SoftwareVersionController {
 
 		// Step3.建立回傳元素
 		JSONObject r_allData = new JSONObject();
-
+		int page_nb = 0, page_total = 100;
 		// Step4.檢查許可權 & 輸入物件
 		if (checkPermission) {
 			// Step4-1 .DB 取出 正確 資料
 			SoftwareVersionEntity entity = new SoftwareVersionEntity();
 			if (frontData.get("content") != null && !frontData.get("content").equals("")) {
 				entity = softwareVersionService.jsonToEntities(frontData.getJSONObject("content"));
-
+				page_nb = softwareVersionService.jsonToPageNb(frontData.getJSONObject("content"));
+				page_total = softwareVersionService.jsonToPageTotal(frontData.getJSONObject("content"));
 			}
-			List<SoftwareVersionEntity> p_Entities = softwareVersionService.searchSoftwareVersion(entity);
+			List<SoftwareVersionEntity> p_Entities = softwareVersionService.searchSoftwareVersion(entity,page_nb,page_total);
 			JSONObject p_Obj = softwareVersionService.entitiesToJson(p_Entities);
 
 			// Step4-2 .包裝資料
@@ -94,19 +95,22 @@ public class SoftwareVersionController {
 
 		// Step3.建立回傳元素
 		JSONObject r_allData = new JSONObject();
-
+		int page_nb = 0, page_total = 100;
+		
 		// Step4.檢查許可權 & 輸入物件
 		if (checkPermission) {
 			// Step4-1 .DB 取出 正確 資料
 			SoftwareVersionEntity entity = new SoftwareVersionEntity();
 			SoftwareVersionEntity entitycheck = new SoftwareVersionEntity();
+			page_nb = softwareVersionService.jsonToPageNb(frontData.getJSONObject("content"));
+			page_total = softwareVersionService.jsonToPageTotal(frontData.getJSONObject("content"));
 			if (frontData.get("content") != null && !frontData.get("content").equals("")) {
 				entity = softwareVersionService.jsonToEntities(frontData.getJSONObject("content"));
 
 				// 檢查 客戶名稱/BOM 料號 是否有重複
 				entitycheck = softwareVersionService.jsonToEntities(frontData.getJSONObject("content"));
 
-				List<SoftwareVersionEntity> p_Entities = softwareVersionService.searchSoftwareVersion(entitycheck);
+				List<SoftwareVersionEntity> p_Entities = softwareVersionService.searchSoftwareVersion(entitycheck,page_nb,page_total);
 				// 有重複(錯誤回傳)?
 				if (p_Entities.size() > 0) {
 					r_allData = softwareVersionService.fail_ajaxRspJson(frontData, "(BOM料號 && 客戶名稱)重複!!");
@@ -116,7 +120,7 @@ public class SoftwareVersionController {
 					softwareVersionService.addedSoftwareVers(entity);
 					// Step4-2 .DB 查詢 正確 資料
 					entity = new SoftwareVersionEntity();
-					p_Entities = softwareVersionService.searchSoftwareVersion(entity);
+					p_Entities = softwareVersionService.searchSoftwareVersion(entity,page_nb,page_total);
 					JSONObject p_Obj = softwareVersionService.entitiesToJson(p_Entities);
 
 					// Step4-2 .包裝資料
@@ -155,7 +159,8 @@ public class SoftwareVersionController {
 
 		// Step3.建立回傳元素
 		JSONObject r_allData = new JSONObject();
-
+		int page_nb = 0, page_total = 100;
+		
 		// Step4.檢查許可權 & 輸入物件
 		if (checkPermission) {
 
@@ -163,7 +168,8 @@ public class SoftwareVersionController {
 			SoftwareVersionEntity entity = new SoftwareVersionEntity();
 			if (frontData.get("content") != null && !frontData.get("content").equals("")) {
 				entity = softwareVersionService.jsonToEntities(frontData.getJSONObject("content"));
-
+				page_nb = softwareVersionService.jsonToPageNb(frontData.getJSONObject("content"));
+				page_total = softwareVersionService.jsonToPageTotal(frontData.getJSONObject("content"));
 				// Step4-1 .DB 更新->(沒有->新增) 正確 資料
 				boolean check = softwareVersionService.updateSoftwareVers(entity);
 				if (!check && frontData.getJSONObject("content").getBoolean("added")) {
@@ -173,7 +179,7 @@ public class SoftwareVersionController {
 
 			// Step4-2 .DB 查詢 正確 資料
 			entity = new SoftwareVersionEntity();
-			List<SoftwareVersionEntity> p_Entities = softwareVersionService.searchSoftwareVersion(entity);
+			List<SoftwareVersionEntity> p_Entities = softwareVersionService.searchSoftwareVersion(entity,page_nb,page_total);
 			JSONObject p_Obj = softwareVersionService.entitiesToJson(p_Entities);
 
 			// Step4-3 .包裝資料
@@ -211,6 +217,7 @@ public class SoftwareVersionController {
 
 		// Step3.建立回傳元素
 		JSONObject r_allData = new JSONObject();
+		int page_nb = 0, page_total = 100;
 
 		// Step4.檢查許可權 & 輸入物件 & 是否為同一人
 		if (checkPermission && frontData.getJSONObject("content").getInt("id") != u.getId()) {
@@ -219,14 +226,15 @@ public class SoftwareVersionController {
 			SoftwareVersionEntity entity = new SoftwareVersionEntity();
 			if (frontData.get("content") != null && !frontData.get("content").equals("")) {
 				entity = softwareVersionService.jsonToEntities(frontData.getJSONObject("content"));
-
+				page_nb = softwareVersionService.jsonToPageNb(frontData.getJSONObject("content"));
+				page_total = softwareVersionService.jsonToPageTotal(frontData.getJSONObject("content"));
 				// Step4-1 .DB 移除 正確 資料
 				softwareVersionService.deleteSoftwareVers(entity);
 			}
 
 			// Step4-2 .DB 查詢 正確 資料
 			entity = new SoftwareVersionEntity();
-			List<SoftwareVersionEntity> p_Entities = softwareVersionService.searchSoftwareVersion(entity);
+			List<SoftwareVersionEntity> p_Entities = softwareVersionService.searchSoftwareVersion(entity,page_nb,page_total);
 			JSONObject p_Obj = softwareVersionService.entitiesToJson(p_Entities);
 
 			// Step4-3 .包裝資料

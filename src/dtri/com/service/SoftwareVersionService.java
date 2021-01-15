@@ -29,15 +29,16 @@ public class SoftwareVersionService {
 	 * @return 查詢後清單
 	 * 
 	 **/
-	public List<SoftwareVersionEntity> searchSoftwareVersion(SoftwareVersionEntity entity) {
-		List<SoftwareVersionEntity> list = svDao.queryAll(entity);
+	public List<SoftwareVersionEntity> searchSoftwareVersion(SoftwareVersionEntity entity,int offset,int page_total) {
+		String all_limit = " OFFSET " + offset + " LIMIT " + page_total;
+		List<SoftwareVersionEntity> list = svDao.queryAll(entity,all_limit);
 		return list;
 	}
 
 	/** 新增 **/
 	public Boolean addedSoftwareVers(SoftwareVersionEntity entity) {
 		Boolean check = false;
-		if(svDao.addedOne(entity)>0)
+		if (svDao.addedOne(entity) > 0)
 			check = true;
 		return check;
 	}
@@ -219,4 +220,19 @@ public class SoftwareVersionService {
 		return r_allData;
 	}
 
+	/** 檢查換頁碼 如果沒有固定為從0開始 **/
+	public int jsonToPageNb(JSONObject content) {
+		if (!content.isNull("page_nb") && !content.get("page_nb").equals("")) {
+			return content.getInt("page_nb");
+		}
+		return 0;
+	}
+
+	/** 檢查換頁碼 如果沒有固定為100筆資料 **/
+	public int jsonToPageTotal(JSONObject content) {
+		if (!content.isNull("page_total") && !content.get("page_total").equals("")) {
+			return content.getInt("page_total");
+		}
+		return 100;
+	}
 }

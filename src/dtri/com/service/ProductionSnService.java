@@ -84,6 +84,9 @@ public class ProductionSnService {
 	 **/
 	public JSONObject analyze_Sn(ArrayList<ProductionSnEntity> entity, int total) {
 		JSONObject obj = new JSONObject();
+		if(entity.size()<1) {
+			return obj;
+		}
 		String sn_item = "";
 		ArrayList<String> sn_list = new ArrayList<String>();
 		// 可辨識規則
@@ -133,7 +136,7 @@ public class ProductionSnService {
 		}
 		obj.put("sn_list", sn_list);
 		obj.put("sn_YYWW", sn_YYWW);
-		obj.put("sn_000", sn_000);
+		obj.put("sn_000" , sn_000);
 		return obj;
 	}
 

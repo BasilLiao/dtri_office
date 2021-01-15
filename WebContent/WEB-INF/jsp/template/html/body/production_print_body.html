@@ -227,6 +227,12 @@
 									<div class="text-left mb-2 mt-2">
 										BOM料號: <input class="col-md-8" type="text" id="s_bom_number2" name="s_bom_number2" placeholder="Ex:90-301-Y11QJ08" required autofocus />
 									</div>
+									<div class="text-left mb-2 mt-2">
+										歷史單據(狀態): <select class="md-12 a_row2" id="s_history_production" name="s_history_production">
+											<option value="2">準備生產中</option>
+											<option value="3">已登記生產</option>
+										</select>
+									</div>
 								</div>
 								<div class="mb-2 mt-2 row">
 									<div class="col-md-4"></div>
@@ -324,7 +330,7 @@
 					</div>
 				</div>
 
-				<div class="collapse show container" id="collapseAdded2" style="background: white;">
+				<div class="collapse show container" id="collapseAdded2" style="background: white;min-height: 1570px;min-width: 1110px;">
 					<div id="table2" class="border border-dark">
 						<table class="table table-bordered table-sm mb-0">
 							<thead>
@@ -571,16 +577,16 @@
 		<!-- 浮動電梯 -->
 		<div class="text-center fixed-bottom m-3 " style="width: 140px; font-family: Microsoft JhengHei; font-size: 16px; left: auto;">
 			<div id="top" class="shadow from_move row p-2 m-2 bg-light border border-primary rounded" style="cursor: pointer;">
-				<img class="col-md-3 pl-0 pr-0" alt="top" src="./thirdparty/images/move_arrow.gif" style="transform: rotate(-135deg);" />
-				<div class="col-md-9 pr-0">Top</div>
+				<img class="col-md-3 pl-0 pr-0" alt="top" src="./thirdparty/images/move_arrow.gif" style="transform: rotate(-135deg);max-width: 25px;" />
+				<div class="col-md-9 pr-0" style="max-width: 80px;">Top</div>
 			</div>
 			<div id="collapseAdded_1" class="shadow from_move row p-2 m-2 bg-light border border-primary rounded" style="cursor: pointer;">
-				<img class="col-md-3 pl-0 pr-0" alt="流程卡" src="./thirdparty/images/move_arrow.gif" style="transform: rotate(88deg);" />
-				<div class="col-md-9 pr-0">流程卡</div>
+				<img class="col-md-3 pl-0 pr-0" alt="流程卡" src="./thirdparty/images/move_arrow.gif" style="transform: rotate(88deg);max-width: 25px;" />
+				<div class="col-md-9 pr-0" style="max-width: 80px;">流程卡</div>
 			</div>
 			<div id="collapseAdded_2" class="shadow from_move row p-2 m-2 bg-light border border-primary rounded" style="cursor: pointer;">
-				<img class="col-md-3 pl-0 pr-0" alt="列印內容" src="./thirdparty/images/move_arrow.gif" style="transform: rotate(88deg);" />
-				<div class="col-md-9 pr-0">列印內容</div>
+				<img class="col-md-3 pl-0 pr-0" alt="列印內容" src="./thirdparty/images/move_arrow.gif" style="transform: rotate(88deg);max-width: 25px;" />
+				<div class="col-md-9 pr-0" style="max-width: 80px;">列印內容</div>
 			</div>
 		</div>
 	</div>
@@ -1046,7 +1052,7 @@
 				$(".coll2").text("");
 				$(".othersEdit").text("");
 				$("#barcodeOutputSn").text("");
-				
+
 				$("#collapseAdded2 .itemList .item").remove();
 			},
 			//清除選擇
@@ -1085,7 +1091,7 @@
 					id = $(".t_row2" + id_p + " .s_5").text();
 					//先檢查是否有效
 					if ($(".t_row" + id + " .s_4").length == 0) {
-						main.alertshow(true, "尚未比對到[產品規格]資料,Step1.請在[產品規格]的[BOM料號]查詢: " + id + " 後,Step1.再[製令生產]進行[預覽]!!");
+						main.alertshow(true, "尚未比對到[產品規格]資料,Step1.請在[產品規格]的[BOM料號]查詢 後,Step2.再[製令生產]進行[預覽]!!");
 						return;
 					}
 					//項目帶入
@@ -1097,7 +1103,7 @@
 					$("#barcodeInput").attr("contenteditable", false);
 					$("#order_id").attr("contenteditable", false);
 					$("#client_name").attr("contenteditable", false);
-					$("#p_number").attr("contenteditable", false);
+					$("#p_number").attr("contenteditable", true);
 
 					come_from = $(".t_row2" + id_p + " .s_12").text();
 				} else {
@@ -1500,8 +1506,8 @@
 						content.note2 = $("#note2").text();
 						content.software_id = 0;
 						//SN 登記演算
+						var sn_array = [];
 						if ($('#production_sn_ok').prop('checked')) {
-							var sn_array = [];
 							var select_sn = $('.select_sn');
 							for (var i = 1; i < select_sn.length; i++) {
 								var sn_obg = new Object();
@@ -1520,8 +1526,8 @@
 								sn_obg.sn_id = sn_i;
 								sn_array[i - 1] = sn_obg;
 							}
-							content.sn = sn_array;
 						}
+						content.sn = sn_array;
 
 						order = "production_search_update";
 						//檢查內容是否正確
@@ -1545,10 +1551,10 @@
 					break;
 				case "production"://查詢 製令單
 					order = "production_search";
-					content.id = $('#s_id').val();
+					content.production_id = $('#s_id').val();
 					content.product_model = $('#s_model2').val();
 					content.bom_product_id = $('#s_bom_number2').val();
-					content.product_progress = 2;
+					content.product_progress = $("#s_history_production").val();
 					url = "./production_print.do";
 					break;
 
@@ -1575,9 +1581,11 @@
 			createBarcodeForPrint : function(code) {
 				$("#barcodeOutputSn").barcode(code, "code39", {
 					barWidth : 1,
-					barHeight : 50,
-					fontSize: 22,
+					barHeight : 23,
+					fontSize : 22,
 				});
+				$("#barcodeOutputSn").css("transform","scale(1.35)");
+				$("#barcodeOutputSn").css("margin-top","10px");
 			},
 			printDiv : function() {
 				var divToPrint = document.getElementById("collapseAddedPrint");
@@ -1586,9 +1594,9 @@
 				newWin.document.open();
 				newWin.document.write("<html>" + "<head>" + '<link rel="stylesheet" href="./thirdparty/css/bootstrap-4.4.1.min.css" />' + style.outerHTML + "</head>"
 						+ '<body onload="window.print()" class="container" id="main">' + "<div>" + divToPrint.innerHTML + "</div>" + "</body>" + "</html>");
-				newWin.document.close();
+				//newWin.document.close();
 				setTimeout(function() {
-					newWin.close();
+					//newWin.close();
 				}, 500);
 			},
 			printDiv2 : function() {
@@ -1602,9 +1610,8 @@
 				$("#datepicker2 div").text(this.d_2);
 				//設置數量
 				var number_total = $('#p_number').text();
-				
-
-				this.createBarcodeForPrint(this.sn_all_nb[0]);
+				if (this.sn_all_nb != null)
+					this.createBarcodeForPrint(this.sn_all_nb[0]);
 				var style = document.getElementById("table2Style");
 				var newWin = window.open("", "Print-Window");
 				var divToPrint = "";
@@ -1612,7 +1619,8 @@
 
 				number_total = parseInt(number_total);
 				for (var i = 0; i < number_total; i++) {
-					this.createBarcodeForPrint(this.sn_all_nb[i]);
+					if (this.sn_all_nb != null)
+						this.createBarcodeForPrint(this.sn_all_nb[i]);
 					divToPrint = document.getElementById("collapseAdded2");
 					if (i > 0) {
 						print_production += '<div style="page-break-before:always">' + divToPrint.innerHTML + '</div>';
