@@ -126,7 +126,7 @@
 					<div class="collapse show" id="collapseAdded">
 						<!-- 新增 或 修改(分辨) -->
 						<div class="text-left row mb-2 m-0 ">
-							<div class="col-md-3" id="a_u_type" style="font-size: 25px; color: red;">查看細節</div>
+							<div class="col-md-3" id="a_u_type" style="font-size: 25px; color: red;">查看細節(改)</div>
 						</div>
 						<div class="  border border-dark" style="background: white;">
 							<!-- 細節表單 -->
@@ -237,11 +237,11 @@
 							<div class="row  m-0">
 								<div class="col-md-4 p-0">
 									<div class="col-md-12 ">
-										<div class="row">
-											<div class="col-md-5 p-2 pr-0 border border-secondary">
+										<div class="row bg-light">
+											<div class=" col-md-5 p-2 pr-0 border border-secondary">
 												<b>工單號(製令單)</b>
 											</div>
-											<div class="col-md-7 p-2 pr-0 border border-secondary" id="a_id"></div>
+											<div class="col-md-7 p-2 pr-0 border border-secondary" id="a_id" contenteditable="true"></div>
 										</div>
 									</div>
 								</div>
@@ -291,11 +291,11 @@
 								</div>
 								<div class="col-md-3 p-0">
 									<div class="col-md-12 ">
-										<div class="row">
+										<div class="row bg-light">
 											<div class="col-md-5 p-2 pr-0 border border-secondary">
 												<b>客戶名稱</b>
 											</div>
-											<div class="col-md-7 p-2 pr-0 border border-secondary" id="a_c_n"></div>
+											<div class="col-md-7 p-2 pr-0 border border-secondary" id="a_c_n" contenteditable="true"></div>
 										</div>
 									</div>
 								</div>
@@ -311,11 +311,11 @@
 								</div>
 								<div class="col-md-2 p-0">
 									<div class="col-md-12 ">
-										<div class="row">
+										<div class="row bg-light">
 											<div class="col-md-4 p-2 pr-0 border border-secondary">
 												<b>數量</b>
 											</div>
-											<div class="col-md-8 p-2 pr-0 border border-secondary" id="a_p_q"></div>
+											<div class="col-md-8 p-2 pr-0 border border-secondary" id="a_p_q" contenteditable="true"></div>
 										</div>
 									</div>
 								</div>
@@ -373,6 +373,7 @@
 		el : "#production_records_body",
 		data : {
 			item_list : "",
+			old_id:"",
 			//分頁功能
 			page_max : 100,//當前本批 筆數
 			page_max_total : 100,//最大總數
@@ -517,7 +518,8 @@
 
 				//修改監聽
 				$(document).on("click", ".a_submit", function(event) {
-					templateBody.choose_update("查看細節", event);
+					templateBody.choose_update("查看細節(改)", event);
+					templateBody.old_id = $('#a_id').text();
 				});
 				//廢止監聽
 				$(document).on("click", ".d_submit", function(event) {
@@ -538,7 +540,7 @@
 
 			//清除新增/修該內容
 			rm_added : function() {
-				$("#a_u_type").text("查看細節");
+				$("#a_u_type").text("查看細節(改)");
 				//基本欄位
 			},
 
@@ -713,7 +715,7 @@
 				}
 				return false;
 			},
-			//傳送  廢止
+			//傳送  廢止 或 更新
 			send_update_save : function() {
 				var content = new Object();
 
@@ -723,11 +725,20 @@
 				console.log(content);
 
 				var action = "D";
-				var url = "./update_production_records.do";
+				var url = "./stop_production_records.do";
 				var order = "search_update"; //指令
-				if ($("#a_u_type").text() == "查看細節") {
-					//不執行任何動作
-					return false; //防止真傳送
+				if ($("#a_u_type").text() == "查看細節(改)") {
+
+					if ($('#a_p_s').text() == '預約生產' && $('#a_p_u').text() != '無效單') {
+						content.id = this.old_id;
+						content.new_id = $('#a_id').text();
+						content.production_quantity = $('#a_p_q').text();
+						content.client_name = $('#a_c_n').text();
+						action = "U";
+						url = "./update_production_records.do";
+					} else {
+						return false;
+					}
 				}
 
 				var data = JSON.stringify({

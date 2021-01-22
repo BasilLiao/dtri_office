@@ -23,7 +23,7 @@ import dtri.com.models.JsonDataModel;
  **/
 @Transactional
 @Service
-public class ProductionRecordsService {
+public class ProductionSnListService {
 
 	@Autowired
 	private LoginService loginService;
@@ -35,9 +35,9 @@ public class ProductionRecordsService {
 	 * @return 查詢後清單
 	 * 
 	 **/
-	public List<ProductionRecordsEntity> searchAll(ProductionRecordsEntity entity, int offset, int page_total) {
-		String all_limit = " OFFSET " + offset + " LIMIT " + page_total;
-		List<ProductionRecordsEntity> list = dao.queryProductionRecords(entity, all_limit);
+	public List<ProductionRecordsEntity> searchAll(ProductionRecordsEntity entity ,int offset, int page_total) {
+		String all_limit = " OFFSET "+offset+" LIMIT "+page_total;		
+		List<ProductionRecordsEntity> list = dao.queryProductionRecords(entity,all_limit);
 		return list;
 	}
 
@@ -63,7 +63,7 @@ public class ProductionRecordsService {
 		recordsEntity.setCome_from(json.getString("come_from"));
 		recordsEntity.setProduct_status(p_status);
 		recordsEntity.setProduct_progress(json.getInt("product_progress"));
-
+		
 		if (dao.beforeCheckAddOne(json.getString("production_id")) == null) {
 			dao.addOne(recordsEntity);
 			check = true;
@@ -71,24 +71,22 @@ public class ProductionRecordsService {
 
 		return check;
 	}
-
-	/** 更新單據進度 **/
+	/**更新單據進度**/
 	public boolean updateProgress(ProductionRecordsEntity entity) {
 		boolean check = false;
 		entity.setSys_modify_date(new Date());
 		entity.setSys_modify_user(loginService.getSessionUserBean().getAccount());
-		if (dao.updateOneProgress(entity) == 1) {
+		if (dao.updateOneProgress(entity)==1) {
 			check = true;
 		}
 		return check;
 	}
-
-	/** 更新單據狀態 **/
+	/**更新單據狀態**/
 	public boolean updateEntity(ProductionRecordsEntity entity) {
 		boolean check = false;
 		entity.setSys_modify_date(new Date());
 		entity.setSys_modify_user(loginService.getSessionUserBean().getAccount());
-		if (dao.updateOneContent(entity) == 1) {
+		if (dao.updateOneStatus(entity)==1) {
 			check = true;
 		}
 		return check;
@@ -120,22 +118,12 @@ public class ProductionRecordsService {
 		// 工單號?
 		if (!content.isNull("id") && !content.getString("id").equals(""))
 			entity.setId(content.getString("id"));
-		// 工單號 New ?
-		if (!content.isNull("new_id") && !content.getString("new_id").equals(""))
-			entity.setNew_id(content.getString("new_id"));
-		// 類型? 單據類型
+		// 類型? 單據類型 
 		if (!content.isNull("product_status") && content.getInt("product_status") >= 0)
 			entity.setProduct_status(content.getInt("product_status"));
-		// 類型? 產品SN序號
+		// 類型? 產品SN序號 
 		if (!content.isNull("product_start_sn") && !content.getString("product_start_sn").equals(""))
 			entity.setProduct_start_sn(content.getString("product_start_sn"));
-		
-		// 類型? 數量
-		if (!content.isNull("production_quantity") && content.getInt("production_quantity")>=0)
-			entity.setProduction_quantity(content.getInt("production_quantity"));
-		// 類型? 客戶名稱
-		if (!content.isNull("client_name") && !content.getString("client_name").equals(""))
-			entity.setClient_name(content.getString("client_name"));
 		return entity;
 	}
 
@@ -180,7 +168,7 @@ public class ProductionRecordsService {
 			jsonArray.put(entity.getProduct_status());
 			jsonArray.put(entity.getProduct_start_sn());
 			jsonArray.put(entity.getProduct_end_sn());
-
+			
 			jsonAll.put(jsonArray);
 		}
 
@@ -200,7 +188,7 @@ public class ProductionRecordsService {
 		JsonObjBean objBean = new JsonObjBean();
 		JsonTemplateBean templateBean = new JsonTemplateBean();
 
-		templateBean.setWebPageBody("html/body/production_records_body.html");
+		templateBean.setWebPageBody("html/body/production_sn_list_body.html");
 		templateBean.setBodyData(p_Obj);
 
 		objBean.setR_cellBackName(frontData.getString("cellBackName"));
