@@ -1,5 +1,6 @@
 package dtri.com.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,9 +36,9 @@ public class ProductionSnListService {
 	 * @return 查詢後清單
 	 * 
 	 **/
-	public List<ProductionRecordsEntity> searchAll(ProductionRecordsEntity entity ,int offset, int page_total) {
-		String all_limit = " OFFSET "+offset+" LIMIT "+page_total;		
-		List<ProductionRecordsEntity> list = dao.queryProductionRecords(entity,all_limit);
+	public List<ProductionRecordsEntity> searchAll(ProductionRecordsEntity entity, int offset, int page_total) {
+		String all_limit = " OFFSET " + offset + " LIMIT " + page_total;
+		List<ProductionRecordsEntity> list = dao.queryProductionRecords(entity, all_limit);
 		return list;
 	}
 
@@ -63,7 +64,7 @@ public class ProductionSnListService {
 		recordsEntity.setCome_from(json.getString("come_from"));
 		recordsEntity.setProduct_status(p_status);
 		recordsEntity.setProduct_progress(json.getInt("product_progress"));
-		
+
 		if (dao.beforeCheckAddOne(json.getString("production_id")) == null) {
 			dao.addOne(recordsEntity);
 			check = true;
@@ -71,60 +72,122 @@ public class ProductionSnListService {
 
 		return check;
 	}
-	/**更新單據進度**/
+
+	/** 寫入 登入生產紀錄(自訂義) **/
+	public boolean addRecords(ArrayList<ProductionRecordsEntity> entitys) {
+		boolean check = false;
+		// 寫入紀錄
+		for (ProductionRecordsEntity productionRecordsEntity : entitys) {
+			dao.addOne(productionRecordsEntity);
+			check = true;
+		}
+		// 更新SN
+		for (ProductionRecordsEntity productionRecordsEntity : entitys) {
+			dao.updateOneProgress(productionRecordsEntity);
+		}
+		return check;
+	}
+
+	/** 更新單據進度 **/
 	public boolean updateProgress(ProductionRecordsEntity entity) {
 		boolean check = false;
 		entity.setSys_modify_date(new Date());
 		entity.setSys_modify_user(loginService.getSessionUserBean().getAccount());
-		if (dao.updateOneProgress(entity)==1) {
+		if (dao.updateOneProgress(entity) == 1) {
 			check = true;
 		}
 		return check;
 	}
-	/**更新單據狀態**/
+
+	/** 更新單據狀態 **/
 	public boolean updateEntity(ProductionRecordsEntity entity) {
 		boolean check = false;
 		entity.setSys_modify_date(new Date());
 		entity.setSys_modify_user(loginService.getSessionUserBean().getAccount());
-		if (dao.updateOneStatus(entity)==1) {
+		if (dao.updateOneStatus(entity) == 1) {
 			check = true;
 		}
 		return check;
 	}
 
-	/** 檢查換頁碼 如果沒有固定為從0開始 **/
-	public int jsonToPageNb(JSONObject content) {
-		if (!content.isNull("page_nb") && !content.get("page_nb").equals("")) {
-			return content.getInt("page_nb");
-		}
-		return 0;
-	}
+	/** 限定移除 **/
+	public boolean deleteEntitys(ArrayList<ProductionRecordsEntity> entitys) {
+		boolean check = false;
 
-	/** 檢查換頁碼 如果沒有固定為100筆資料 **/
-	public int jsonToPageTotal(JSONObject content) {
-		if (!content.isNull("page_total") && !content.get("page_total").equals("")) {
-			return content.getInt("page_total");
+		for (ProductionRecordsEntity entity : entitys) {
+			if (dao.deleteOneProgress(entity) == 1) {
+				check = true;
+			}
 		}
-		return 100;
+		return check;
 	}
 
 	/** JSON to 清單 **/
 	public ProductionRecordsEntity jsonToEntities(JSONObject content) {
 		ProductionRecordsEntity entity = new ProductionRecordsEntity();
 
-		// 進度? 狀態類型 完成ERP工單(準備物料)=1/完成注意事項(預約生產)=2/完成->流程卡(準備生產)=3/=4/ =5
-		if (!content.isNull("product_progress") && content.getInt("product_progress") >= 0)
-			entity.setProduct_progress(content.getInt("product_progress"));
+		// 時間區間(如果沒有 就抓取今年)
+		if (!content.isNull("s_s_d") && !content.getString("s_s_d").equals("")) {
+			entity.setSys_create_date(Fm_Time_Model.toDate(content.getString("s_s_d")));
+		}
+		// 時間區間(如果沒有 就抓取今年)
+		if (!content.isNull("s_e_d") && !content.getString("s_e_d").equals("")) {
+			entity.setSys_modify_date(Fm_Time_Model.to_count(1, Fm_Time_Model.toDate(content.getString("s_e_d"))));
+		}
 		// 工單號?
-		if (!content.isNull("id") && !content.getString("id").equals(""))
-			entity.setId(content.getString("id"));
-		// 類型? 單據類型 
-		if (!content.isNull("product_status") && content.getInt("product_status") >= 0)
-			entity.setProduct_status(content.getInt("product_status"));
-		// 類型? 產品SN序號 
-		if (!content.isNull("product_start_sn") && !content.getString("product_start_sn").equals(""))
-			entity.setProduct_start_sn(content.getString("product_start_sn"));
+		if (!content.isNull("s_p_id") && !content.getString("s_p_id").equals(""))
+			entity.setId(content.getString("s_p_id"));
+		// 類型? 產品SN序號
+		if (!content.isNull("s_sn") && !content.getString("s_sn").equals(""))
+			entity.setProduct_start_sn(content.getString("s_sn"));
+
 		return entity;
+	}
+
+	/** JSON to 清單 內容(移除) **/
+	public ArrayList<ProductionRecordsEntity> jsonToEntities_delete(JSONArray content) {
+		ArrayList<ProductionRecordsEntity> entitys = new ArrayList<ProductionRecordsEntity>();
+		content.forEach(s -> {
+			String id = (String) s;
+			ProductionRecordsEntity entity = new ProductionRecordsEntity();
+			entity.setId(id);
+			entitys.add(entity);
+		});
+
+		return entitys;
+	}
+
+	/** JSON to 清單 內容(添加) **/
+	public ArrayList<ProductionRecordsEntity> jsonToEntities_added(JSONArray content) {
+		ArrayList<ProductionRecordsEntity> entitys = new ArrayList<ProductionRecordsEntity>();
+		content.forEach(s -> {
+			JSONObject one = new JSONObject();
+			ProductionRecordsEntity entity = new ProductionRecordsEntity();
+			one = (JSONObject) s;
+			entity.setSys_create_date(new Date());
+			entity.setSys_create_user(loginService.getSessionUserBean().getAccount());
+			entity.setSys_modify_date(Fm_Time_Model.toDate(one.getString("i_date")));
+			entity.setSys_modify_user(loginService.getSessionUserBean().getAccount());
+			entity.setId(one.getString("i_id"));
+			entity.setClient_name(one.getString("i_client"));
+
+			entity.setProduction_quantity(one.getInt("i_sn_number"));
+			entity.setProduct_model(one.getString("i_sn_model"));
+			entity.setProduct_start_sn(one.getString("i_sn_start"));
+			entity.setProduct_end_sn(one.getString("i_sn_end"));
+			entity.setCome_from("自訂紀錄");
+			entity.setOrder_id("自訂紀錄");
+			entity.setBom_id(0);
+			entity.setBom_product_id("自訂紀錄");
+			entity.setVersion_motherboard("自訂紀錄");
+			entity.setProduct_status(2);
+			entity.setProduct_progress(5);
+			entity.setNote("自訂紀錄");
+
+			entitys.add(entity);
+		});
+
+		return entitys;
 	}
 
 	/** 清單 to JSON **/
@@ -168,7 +231,7 @@ public class ProductionSnListService {
 			jsonArray.put(entity.getProduct_status());
 			jsonArray.put(entity.getProduct_start_sn());
 			jsonArray.put(entity.getProduct_end_sn());
-			
+
 			jsonAll.put(jsonArray);
 		}
 

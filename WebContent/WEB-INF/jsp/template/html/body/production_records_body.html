@@ -238,10 +238,10 @@
 								<div class="col-md-4 p-0">
 									<div class="col-md-12 ">
 										<div class="row bg-light">
-											<div class=" col-md-5 p-2 pr-0 border border-secondary">
+											<div class=" col-md-5 p-2 pr-0 border border-primary">
 												<b>工單號(製令單)</b>
 											</div>
-											<div class="col-md-7 p-2 pr-0 border border-secondary" id="a_id" contenteditable="true"></div>
+											<div class="col-md-7 p-2 pr-0 border border-primary" id="a_id" contenteditable="true"></div>
 										</div>
 									</div>
 								</div>
@@ -292,10 +292,10 @@
 								<div class="col-md-3 p-0">
 									<div class="col-md-12 ">
 										<div class="row bg-light">
-											<div class="col-md-5 p-2 pr-0 border border-secondary">
+											<div class="col-md-5 p-2 pr-0 border border-primary">
 												<b>客戶名稱</b>
 											</div>
-											<div class="col-md-7 p-2 pr-0 border border-secondary" id="a_c_n" contenteditable="true"></div>
+											<div class="col-md-7 p-2 pr-0 border border-primary" id="a_c_n" contenteditable="true"></div>
 										</div>
 									</div>
 								</div>
@@ -312,10 +312,10 @@
 								<div class="col-md-2 p-0">
 									<div class="col-md-12 ">
 										<div class="row bg-light">
-											<div class="col-md-4 p-2 pr-0 border border-secondary">
+											<div class="col-md-4 p-2 pr-0 border border-primary">
 												<b>數量</b>
 											</div>
-											<div class="col-md-8 p-2 pr-0 border border-secondary" id="a_p_q" contenteditable="true"></div>
+											<div class="col-md-8 p-2 pr-0 border border-primary" id="a_p_q" contenteditable="true"></div>
 										</div>
 									</div>
 								</div>
@@ -373,7 +373,7 @@
 		el : "#production_records_body",
 		data : {
 			item_list : "",
-			old_id:"",
+			old_id : "",
 			//分頁功能
 			page_max : 100,//當前本批 筆數
 			page_max_total : 100,//最大總數
@@ -493,9 +493,14 @@
 							case 3:
 								t_body += "<td class='s_" + j + "'>準備生產</td>";
 								break;
+							default:
+								t_body += "<td class='s_" + j + "'>自訂紀錄</td>";
+								break;
 							}
+
 							continue;
 						}
+
 						if (status == j) {
 							switch (this.item_list[i][j]) {
 							case 1:
@@ -503,6 +508,9 @@
 								break;
 							case 0:
 								t_body += "<td class='s_" + j + "'>無效單</td>";
+								break;
+							default:
+								t_body += "<td class='s_" + j + "'>自訂紀錄</td>";
 								break;
 							}
 							continue;
@@ -542,6 +550,25 @@
 			rm_added : function() {
 				$("#a_u_type").text("查看細節(改)");
 				//基本欄位
+				$("#a_id").text("");
+				$("#a_p_id").text("");
+				$("#a_p_q").text("");
+				$("#a_p_s").text("");
+
+				$("#a_c_d").text("");
+				$("#a_c_u").text("");
+				$("#a_m_d").text("");
+				$("#a_m_u").text("");
+				$("#a_p_u").text("");
+
+				$("#a_o_i").text("");
+				$("#a_c_n").text("");
+				$("#a_v_m").text("");
+				$("#a_p_m").text("");
+
+				$("#a_c_f").text("");
+				$("#a_s_sn").text("");
+				$("#a_e_sn").text("");
 			},
 
 			rm_search : function() {
@@ -717,18 +744,22 @@
 			},
 			//傳送  廢止 或 更新
 			send_update_save : function() {
-				var content = new Object();
-
+				//無法對自訂單做修正
+				if ($('#a_p_u').text() == '自訂紀錄') {
+					 main.alertshow(true, " 結果->無法修改[自訂紀錄]");
+					return false;
+				}
 				// 條件項目
+				var content = new Object();
 				content.id = $("#a_id").text();
 				content.product_status = 0;
 				console.log(content);
-
+				//廢止 預設				
 				var action = "D";
 				var url = "./stop_production_records.do";
 				var order = "search_update"; //指令
+				//修改 排除特定不可修改
 				if ($("#a_u_type").text() == "查看細節(改)") {
-
 					if ($('#a_p_s').text() == '預約生產' && $('#a_p_u').text() != '無效單') {
 						content.id = this.old_id;
 						content.new_id = $('#a_id').text();
@@ -737,6 +768,7 @@
 						action = "U";
 						url = "./update_production_records.do";
 					} else {
+						 main.alertshow(true, " 結果->無法修改[自訂紀錄] or [無效單] or [預約生產]");
 						return false;
 					}
 				}

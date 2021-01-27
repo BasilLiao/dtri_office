@@ -1,5 +1,6 @@
 package dtri.com.models;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -8,6 +9,7 @@ public class Fm_Time_Model {
 	
 	private static SimpleDateFormat format_yyyyMMdd_HHmmss = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static SimpleDateFormat format_yyyyMMdd = new SimpleDateFormat("yyyyMMdd");
+	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	/**格式:yyyy-MM-dd HH:mm:ss**/
 	public static String to_yMd_Hms(Date date) {
 		return format_yyyyMMdd_HHmmss.format(date);
@@ -23,5 +25,16 @@ public class Fm_Time_Model {
 		c.add(Calendar.DATE, n);
 		dt = c.getTime();
 		return dt;
+	}
+	/**yyyy-MM-dd to Date**/
+	public static Date toDate(String dt) {
+		
+		try {
+			return sdf.parse(dt);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 }

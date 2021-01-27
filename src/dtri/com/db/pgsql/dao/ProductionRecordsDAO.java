@@ -30,5 +30,9 @@ public interface ProductionRecordsDAO {
 
 	// 更新進度
 	Integer updateOneProgress(ProductionRecordsEntity entity);
+	
+	//限定移除
+	Integer deleteOneProgress(ProductionRecordsEntity entity);
+	
 
 }

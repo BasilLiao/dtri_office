@@ -7,6 +7,7 @@
 	content: attr(data-text);
 }
 </style>
+<script src="./thirdparty/js/jquery.table2excel.js"></script>
 <div class="row border" id="production_sn_list_body">
 	<div class="col-md-12 border">
 		<div class="mt-3 mb-3 border">
@@ -24,7 +25,7 @@
 					</div>
 				</div>
 				<div id="showArea" class="collapse show col-md-12">
-					<div class="row">
+					<div class="row mb-2">
 						<div class="text-left mb-2 mt-2">
 							產品SN身分: <input class="col-md-7" type="text" id="s_sn" placeholder="Ex:13BB12102A888" required autofocus />
 						</div>
@@ -32,11 +33,18 @@
 							製令單號: <input class="col-md-7" type="text" id="s_p_id" placeholder="Ex:A513-00123456789" required />
 						</div>
 						<div class="text-left mb-2 mt-2">
-							起始日期: <input class="col-md-7" type="text" id="s_s_d" placeholder="Ex:2021/01/13" />
+							起始日期: <input class="col-md-7" type="text" id="s_s_d" placeholder="Ex:2021-01-13" />
 						</div>
 						<div class="text-left mb-2 mt-2">
-							結束日期: <input class="col-md-7" type="text" id="s_e_d" placeholder="Ex:2021/01/13" />
+							結束日期: <input class="col-md-7" type="text" id="s_e_d" placeholder="Ex:2021-01-13" />
 						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="col-md-5"></div>
+						<div class="col-md-2">
+							<button id="s_submit" type="submit" class="col-md-12 btn btn-primary btn-block">查詢</button>
+						</div>
+						<div class="col-md-5"></div>
 					</div>
 				</div>
 			</div>
@@ -50,12 +58,12 @@
 				<div id="ruleArea" class="m-1 border border-primary collapse show mb-1 shadow">
 					<div style="height: 500px; overflow: scroll;">
 						<div class="m-0">
-							<table class="bg-white text-center" style="width: 100%;">
+							<table id="content_excel" class="bg-white text-center" style="width: 100%;">
 								<!--(個項目) i_g_id_i_id = i_群組ID_項目ID -->
 								<thead>
 									<tr id="i_name">
-										<td class=" p-0 border border-secondary " style="width: 60px;"><b>功能</b></td>
-										<td class=" p-0 border border-secondary " style="width: 120px;"><b>日期</b></td>
+										<td class=" p-0 border border-secondary no_show_excel" style="width: 60px;"><b>功能</b></td>
+										<td class=" p-0 border border-secondary " style="min-width: 170px;"><b>日期</b></td>
 										<td class=" p-0 border border-secondary "><b>客戶</b></td>
 										<td class=" p-0 border border-secondary "><b>製令</b></td>
 										<td class=" p-0 border border-secondary "><b>S/N起始</b></td>
@@ -65,21 +73,21 @@
 									</tr>
 								</thead>
 								<tbody class="items">
-									<tr id="i_new_sn">
+									<tr class="border border-primary no_show_excel" id="i_new_sn">
 										<td class="p-1 border border-secondary i_date">
 											<button id="i_added_new" type="button" class="mr-1 btn  btn-success btn-sm p-1">新增</button>
 										</td>
-										<td id="i_date_new" class="p-1 border border-secondary" style="white-space: nowrap;"><input class="col-md-12 p-1" type="text" placeholder="Ex:2021/01/13" /></td>
-										<td id="i_client_new" class="p-1 border border-secondary" style="white-space: nowrap;" contenteditable="true"></td>
-										<td id="i_id_new" class="p-1 border border-secondary" style="white-space: nowrap;" contenteditable="true"></td>
-										<td id="i_sn_start_new" class="p-1 border border-secondary" style="white-space: nowrap;" contenteditable="true"></td>
-										<td id="i_sn_end_new" class="p-1 border border-secondary" style="white-space: nowrap;" contenteditable="true"></td>
-										<td id="i_sn_number_new" class="p-1 border border-secondary" style="white-space: nowrap;" contenteditable="true"></td>
-										<td id="i_sn_model_new" class="p-1 border border-secondary" style="white-space: nowrap;" contenteditable="true"></td>
+										<td class="p-1 border border-primary" style="white-space: nowrap;" id="i_date_new"><input class="col-md-12 p-1" type="text" placeholder="Ex:2021-01-13" /></td>
+										<td class="p-1 border border-primary" style="white-space: nowrap;" contenteditable="true" id="i_client_new"></td>
+										<td class="p-1 border border-primary" style="white-space: nowrap;" contenteditable="true" id="i_id_new"></td>
+										<td class="p-1 border border-primary" style="white-space: nowrap;" contenteditable="true" id="i_sn_start_new"></td>
+										<td class="p-1 border border-primary" style="white-space: nowrap;" contenteditable="true" id="i_sn_end_new"></td>
+										<td class="p-1 border border-primary" style="white-space: nowrap;" contenteditable="true" id="i_sn_number_new"></td>
+										<td class="p-1 border border-primary" style="white-space: nowrap;" contenteditable="true" id="i_sn_model_new"></td>
 									</tr>
 									<!-- 樣本 -->
-									<tr id="i_demo">
-										<td class="p-1 border border-secondary i_date">
+									<tr id="i_demo" class="d-none no_show_excel">
+										<td class="p-1 border border-secondary i_function no_show_excel">
 											<button name="i_delete_new" type="button" class="btn btn-danger pt-0 btn-sm i_delete" style="height: 22px;">(刪)</button>
 										</td>
 										<td class="p-1 border border-secondary i_date"></td>
@@ -96,11 +104,17 @@
 					</div>
 				</div>
 				<div class=" row m-4">
-					<div class="col-md-5"></div>
+					<div class="col-md-3"></div>
 					<div class="col-md-2">
-						<button id="p_submit_save" class="btn btn-primary btn-block" type="button">Excel 匯出</button>
+						<button id="p_submit_export" class="btn btn-primary btn-block" type="button">Excel 匯出</button>
 					</div>
-					<div class="col-md-5"></div>
+					<div class="col-md-2">
+						<button id="p_submit_def" class="btn btn-warning btn-block" type="button">取消還原</button>
+					</div>
+					<div class="col-md-2">
+						<button id="p_submit_save" class="btn btn-success btn-block" type="button">儲存資料</button>
+					</div>
+					<div class="col-md-3"></div>
 				</div>
 			</div>
 		</div>
@@ -117,25 +131,25 @@
 		},
 		created : function() {
 			//初始化
-			console.log(main.contentData.templateInfo.body["item_list"]);
+			//console.log(main.contentData.templateInfo.body["item_list"]);
 			this.search_list = main.contentData.templateInfo.body["item_list"];
 
 			//日期
 			$(document).ready(function(event) {
 				$("#s_s_d").datepicker({
-					dateFormat : "yy/mm/dd",
+					dateFormat : "yy-mm-dd",
 					maxDate : 0
 				});
 			});
 			$(document).ready(function(event) {
 				$("#s_e_d").datepicker({
-					dateFormat : "yy/mm/dd",
+					dateFormat : "yy-mm-dd",
 					maxDate : 0
 				});
 			});
 			$(document).ready(function(event) {
-				$("#i_date_new").datepicker({
-					dateFormat : "yy/mm/dd",
+				$("#i_date_new input").datepicker({
+					dateFormat : "yy-mm-dd",
 					maxDate : 0
 				});
 			});
@@ -144,45 +158,36 @@
 			//增加規則+ 監聽
 			$(document).on("click", "#i_added_new", function(event) {
 				templateBody.i_added_new();
-
-			});
-			//修改  鎖定 刪除 規則監聽
-			$(document).on("click", ".m_rule", function(event) {
-				templateBody.rule_modify(event.target.name.replace('m_g_', ''));
-			});
-
-			$(document).on("click", ".lk_rule", function(event) {
-				templateBody.rule_locked(event.target.name.replace('lk_g_', ''));
-			});
-
-			$(document).on("click", ".d_rule", function(event) {
-				templateBody.rule_delete(event.target.name.replace('d_g_', ''));
-			});
-			//增加項目+ 監聽
-			$(document).on("click", ".a_i", function(event) {
-				templateBody.item_add(event.target.name.replace('a_i_g_', ''));
 			});
 			//刪除項目- 監聽
 			$(document).on("click", ".i_delete", function(event) {
-				var g_i = event.target.name.replace('d_g_', '').split('_i_');
-				templateBody.item_delete(g_i);
-
+				templateBody.item_delete(event.target.name);
 			});
 			//儲存內容 
 			$(document).on("click", "#p_submit_save", function(event) {
-				templateBody.send_order_save("./production_sn_update.do");
+				templateBody.send_search_save("./production_sn_list_update.do");
 			});
-			//還原設定
+			//取消還原
 			$(document).on("click", "#p_submit_def", function(event) {
-				templateBody.send_order_save("./production_sn.do");
+				templateBody.send_search_save("./production_sn_list.do");
 			});
+			
+			//查詢
+			$(document).on("click", "#s_submit", function(event) {
+				templateBody.send_search_save("./production_sn_list.do");
+			});
+			//匯出Excel
+			$(document).on("click", "#p_submit_export", function(event) {
+				templateBody.export_excel();
+			});
+
 			//t_body
 			this.update_body();
 		},
 		methods : {
 			//檢查-內容
 			sn_check : function() {
-				if ($('#i_date_new input').value() == "" || $('#i_client_new').text() == "" || $('#i_id_new').text() == "" || $('#i_sn_start_new').text() == "" || $('#i_sn_end_new').text() == ""
+				if ($('#i_date_new input').val() == "" || $('#i_client_new').text() == "" || $('#i_id_new').text() == "" || $('#i_sn_start_new').text() == "" || $('#i_sn_end_new').text() == ""
 						|| $('#i_sn_number_new').text() == "" || $('#i_sn_model_new').text() == "") {
 					return false;
 				}
@@ -198,190 +203,128 @@
 				//進行複製(新增)
 				this.item_n_sn += 1;
 				var i_demo = $('#i_demo').clone();
-				
-				g_rule.find('#new_a_rule').remove();
-				button.appendTo(g_rule.find('.fn'));
+				i_demo.removeClass("d-none");
+				i_demo.removeClass("no_show_excel");
 
-				g_rule.attr('id', 'g_n' + this.group_n_id)
-				g_rule.find(".m_rule").attr("name", "m_g_n" + this.group_n_id);
-				g_rule.find(".d_rule").attr("name", "d_g_n" + this.group_n_id);
-				g_rule.find(".lk_rule").attr("name", "lk_g_n" + this.group_n_id);
-				g_rule.find(".a_i").attr("name", "a_i_g_n" + this.group_n_id);
-				g_rule.addClass('sn_tag');
-				g_rule.insertAfter($('#g_id'));
+				i_demo.attr('id', 'new_' + this.item_n_sn);
+				i_demo.attr('class', 'new_sn_list');
+				i_demo.find('.i_delete').attr('name', 'new_' + this.item_n_sn);
+
+				i_demo.find(".i_date").text($('#i_date_new input').val());
+				i_demo.find(".i_client").text($('#i_client_new').text());
+				i_demo.find(".i_id").text($('#i_id_new').text());
+				i_demo.find(".i_sn_start").text($('#i_sn_start_new').text());
+				i_demo.find(".i_sn_end").text($('#i_sn_end_new').text());
+				i_demo.find(".i_sn_number").text($('#i_sn_number_new').text());
+				i_demo.find(".i_sn_model").text($('#i_sn_model_new').text());
+				i_demo.insertAfter($('#i_demo'));
+
 				//清空規則
-				$('#g_0 .g_sort').text('');
-				$('#g_0 .g_name').text('');
-				$('#g_0 .items tr').remove();
-				//鎖定
-				this.rule_locked('n' + this.group_n_id);
+				$('#i_date_new input').val("");
+				$('#i_client_new').text("");
+				$('#i_id_new').text("");
+				$('#i_sn_start_new').text("");
+				$('#i_sn_end_new').text("");
+				$('#i_sn_number_new').text("");
+				$('#i_sn_model_new').text("");
 
-			},
-			//修改規則
-			rule_modify : function(g_id) {
-				console.log(g_id);
-				$('#g_' + g_id + " .g_sort").attr("contenteditable", "true");
-				$('#g_' + g_id + " .g_name").attr("contenteditable", "true");
-				$('#g_' + g_id + " .i_name").attr("contenteditable", "true");
-				$('#g_' + g_id + " .i_value").attr("contenteditable", "true");
-				$('#g_' + g_id + " .a_i").removeAttr("disabled");
-				$('#g_' + g_id + " .i_delete").removeAttr("disabled");
-
-			},
-			//鎖定規則
-			rule_locked : function(g_id) {
-				console.log(g_id);
-				if (!this.rule_check('g_' + g_id)) {
-					return false;
-				}
-				$('#g_' + g_id + " .g_sort").attr("contenteditable", "false");
-				$('#g_' + g_id + " .g_name").attr("contenteditable", "false");
-				$('#g_' + g_id + " .i_name").attr("contenteditable", "false");
-				$('#g_' + g_id + " .i_value").attr("contenteditable", "false");
-				$('#g_' + g_id + " .a_i").attr("disabled", "disabled");
-				$('#g_' + g_id + " .i_delete").attr("disabled", "disabled");
-			},
-			//刪除規則
-			rule_delete : function(g_id) {
-				console.log(g_id);
-				$('#g_' + g_id).remove();
-
-			},
-			//添加項目
-			item_add : function(g_id) {
-				console.log(g_id);
-				var item = $('#i_g_id_i_id').clone();
-				this.item_n_id += 1;
-				item.attr('id', 'i_g_' + g_id + '_i_n' + this.item_n_id);
-				item.find('.i_id').text('n' + this.item_n_id);
-				item.find('.i_delete').attr('name', 'd_g_' + g_id + '_i_n' + this.item_n_id);
-				item.prependTo($('#g_' + g_id + ' .items'));
 			},
 			//移除項目
 			item_delete : function(g_i) {
+				//臨時添加的(直接移除)--DB內有的(選取後移除)
+				if ($('#' + g_i).length > 0) {
+					$('#' + g_i).remove();
+				} else {
+					var id = g_i.replace("old_", "");
+					$('#' + id).addClass("bg-warning");
+				}
 				console.log(g_i);
-				$('#i_g_' + g_i[0] + '_i_' + g_i[1]).remove();
 
+				//old_55555ssa
 			},
 			//更新介面
 			update_body : function() {
-				var group_id = 'g_';
-				var sn_rule = "";
-				var sn_length = 0;
-				var sn_item = "";
-				var g_c = "";
+				var i_demo = "";
+				var i_c = "";
 				//重製(清除舊資料)
-				$('.sn_tag').remove();
-
-				for (var i = 0; i < this.search_list.length; i++) {
-					g_c = this.search_list[i];
-					sn_item = $("#i_g_id_i_id").clone();
-					//SN 目前內容 碼數
-					if (g_c['sn_group'] == 0 && g_c['sn_id'] == 1) {
-						sn_length = g_c['sn_value'];
-						continue;
+				$('.old_sn_list').remove();
+				$('.new_sn_list').remove();
+				
+				for (var i = (this.search_list.length - 1); i > 0; i--) {
+					i_c = this.search_list[i];
+					i_demo = $('#i_demo').clone();
+					i_demo.removeClass("d-none");
+					i_demo.removeClass("no_show_excel");
+					i_demo.attr('class', 'old_sn_list');
+					//添加顯示內容
+					i_demo.attr("id", "");
+					i_demo.find(".i_date").text(i_c[2]);
+					i_demo.find(".i_client").text(i_c[9]);
+					i_demo.find(".i_id").text(i_c[4]);
+					i_demo.find(".i_sn_start").text(i_c[15]);
+					i_demo.find(".i_sn_end").text(i_c[16]);
+					i_demo.find(".i_sn_number").text(i_c[6]);
+					i_demo.find(".i_sn_model").text(i_c[10]);
+					if (i_c[13] != "自訂紀錄") {
+						i_demo.find('.i_delete').remove();
+					} else {
+						i_demo.find('.i_delete').attr('name', 'old_' + i_c[4]);
+						i_demo.attr("id", i_c[4]);
 					}
-					//SN 目前內容 文字
-					if (g_c['sn_group'] == 0 && g_c['sn_id'] == 2) {
-						sn_rule = g_c['sn_value'];
-						continue;
-					}
-					//SN 規則
-					if (group_id != "g_" + g_c['sn_group'] && g_c['sn_group'] > 0) {
-						var new_rule = $("#g_id").clone();
-
-						//修改物件
-						new_rule.attr("id", "g_" + g_c['sn_group']);
-						//群組標記
-						new_rule.find(".g_sort").text(g_c['sn_group_sort']);
-						new_rule.find(".g_name").text(g_c['sn_group_name']);
-						new_rule.find(".g_sort").attr("contenteditable", "false");
-						new_rule.find(".g_name").attr("contenteditable", "false");
-						new_rule.find(".m_rule").attr("name", "m_g_" + g_c['sn_group']);
-						new_rule.find(".d_rule").attr("name", "d_g_" + g_c['sn_group']);
-						new_rule.find(".lk_rule").attr("name", "lk_g_" + g_c['sn_group']);
-						new_rule.find(".a_i").attr("name", "a_i_g_" + g_c['sn_group']);
-						new_rule.find(".a_i").attr("disabled", "disabled");
-
-						new_rule.find("#i_g_id_i_id").remove();
-						new_rule.addClass('sn_tag');
-						new_rule.removeClass('d-none');
-
-						new_rule.appendTo("#body_c");
-						group_id = "g_" + g_c['sn_group'];
-
-					}
-					//SN 項目
-					sn_item.attr("id", "i_g_" + g_c['sn_group'] + "_i_" + g_c['sn_id']);
-					sn_item.find('.i_delete').attr('name', "d_g_" + g_c['sn_group'] + "_i_" + g_c['sn_id']);
-					sn_item.find('.i_id').text(g_c['sn_id']);
-					sn_item.find('.i_name').text(g_c['sn_name']);
-					sn_item.find('.i_value').text(g_c['sn_value']);
-					sn_item.find(".i_name").attr("contenteditable", "false");
-					sn_item.find(".i_value").attr("contenteditable", "false");
-					sn_item.find(".i_delete").attr("disabled", "disabled");
-					sn_item.appendTo($("#" + group_id + " .items"));
+					i_demo.insertAfter($('#i_demo'));
 				}
-				//顯示SN 狀態
-				$('#now_length').text(sn_length);
-				$('#now_content').text(sn_rule);
 			},
-			//傳送 修改
-			send_order_save : function(url) {
-				var content = [];
+			//匯出 excel
+			export_excel : function() {
+				$("#content_excel").table2excel({
+					// exclude CSS class
+					exclude : ".no_show_excel",//忽略項目
+					name : "Worksheet Name",
+					filename : "SN_Export_" + $.datepicker.formatDate('yy-mm-dd', new Date()) + ".xls",//do not include extension
+					fileext : ".xls" // file extension
+				});
+			},
+			//傳送 修改/查詢
+			send_search_save : function(url) {
+				var content = new Object();
+				var detail = new Object();
+				var added = [];
+				var deletes = [];
 				var action = "U";
 				var x = 0;
-				if (url == "") {
-					url = "./production_sn.do";
+				if (url == null || url == "")
+					url = "./production_sn_list.do";
+				//要查詢的
+				content.s_sn = $('#s_sn').val();
+				content.s_p_id = $('#s_p_id').val();
+				content.s_s_d = $('#s_s_d').val();
+				content.s_e_d = $('#s_e_d').val();
+				//要刪除的
+				console.log( $('#content_excel .bg-warning'));
+
+				for (var i = 0; i < $('#content_excel .bg-warning').length; i++) {
+					deletes[i] = $('#content_excel .bg-warning')[i].id;
 				}
+				
+				//要新增的
+				for (var i = 0; i < $(".new_sn_list").length; i++) {
+
+					//console.log($(".new_sn_list")[i].id);
+					detail = new Object();
+					detail.i_date = $("#" + $(".new_sn_list")[i].id).find(".i_date").text();
+					detail.i_client = $("#" + $(".new_sn_list")[i].id).find(".i_client").text();
+					detail.i_id = $("#" + $(".new_sn_list")[i].id).find(".i_id").text();
+					detail.i_sn_start = $("#" + $(".new_sn_list")[i].id).find(".i_sn_start").text();
+					detail.i_sn_end = $("#" + $(".new_sn_list")[i].id).find(".i_sn_end").text();
+					detail.i_sn_number = $("#" + $(".new_sn_list")[i].id).find(".i_sn_number").text();
+					detail.i_sn_model = $("#" + $(".new_sn_list")[i].id).find(".i_sn_model").text();
+					added[i] = detail;
+				}
+				content.sn_add = added;
+				content.sn_delete = deletes;
 				//傳送封裝
-				if (url == "./production_sn_update.do") {
-					var one = new Object();
-					var sn_length = 0;
-					var now_content = "";
-					for (var i = 0; i < $(".sn_tag .g_sort").length; i++) {
-						//檢查內容
-
-						if (!this.rule_check($(".sn_tag")[i].id)) {
-							return false;
-						}
-						for (var j = 0; j < $(".sn_tag .items")[i].children.length; j++) {
-							one = new Object();
-							one.sn_id = x + 3;
-							one.sn_group_sort = $(".sn_tag .g_sort")[i].innerText;
-							one.sn_group_name = $(".sn_tag .g_name")[i].innerText;
-							one.sn_name = $(".sn_tag .items")[i].children[j].children[1].innerText;
-							one.sn_value = $(".sn_tag .items")[i].children[j].children[2].innerText;
-							content[x] = one;
-							x += 1;
-							if (j == 0) {
-								//取得長度
-								sn_length += (one.sn_value.replace('[', '').replace(']', '')).length;
-								now_content += one.sn_value;
-							}
-						}
-					}
-					//長度
-					one = new Object();
-					one.sn_id = 1
-					one.sn_group_sort = "0";
-					one.sn_group_name = "編碼總長度";
-					one.sn_name = "now_length";
-					one.sn_value = sn_length + '';
-					content[x] = one;
-					//編碼規則
-					one = new Object();
-					one.sn_id = 2
-					one.sn_group_sort = "0";
-					one.sn_group_name = "最後編碼規則";
-					one.sn_name = "now_content";
-					one.sn_value = now_content;
-					content[x + 1] = one;
-
-					console.log(content);
-				}
+				console.log(content);
 				var order = "search_update"; //指令
-
 				var data = JSON.stringify({
 					data : {
 						datetime : "",
@@ -401,8 +344,8 @@
 				switch (event.r_cellBackOrder) {
 				case "search_update":
 					//刷新資料
-					if (event.r_content.templateInfo.body["all_list"] != null && event.r_content.templateInfo.body["all_list"] != "") {
-						this.search_list = event.r_content.templateInfo.body["all_list"];
+					if (event.r_content.templateInfo.body["item_list"] != null && event.r_content.templateInfo.body["item_list"] != "") {
+						this.search_list = event.r_content.templateInfo.body["item_list"];
 						this.update_body();
 					}
 					break;
@@ -414,14 +357,13 @@
 		//移除監聽事件
 		beforeDestroy : function() {
 			console.log("to beforeDestroy event");
-			$(document).off("click", "#new_a_rule");
-			$(document).off("click", ".a_i");
-			$(document).off("click", ".m_rule");
-			$(document).off("click", ".lk_rule");
-			$(document).off("click", ".d_rule");
-			$(document).off("click", ".i_delete");
+			$(document).off("click", "#i_added_new");
 			$(document).off("click", "#p_submit_save");
+			$(document).off("click", "#p_submit_export");
 			$(document).off("click", "#p_submit_def");
+			$(document).off("click", ".i_delete");
+			$(document).off("click", "#s_submit");
+
 		},
 	});
 </script>

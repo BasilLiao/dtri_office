@@ -6,25 +6,29 @@
 	<!-- 查詢 資料 所有資料 -->
 	<select id="queryProductionRecords" resultType="ProductionRecordsEntity">
 		SELECT *
-		FROM production_records 
+		FROM production_records
 		<where>
 			<if test="where_product.id!=null">
-				id like '%' || #{where_product.id}  || '%' 
+				id like '%' || #{where_product.id} || '%'
 			</if>
 			<if test="where_product.product_status!=null and where_product.product_status>=0">
-				AND product_status = #{where_product.product_status} 
+				AND product_status = #{where_product.product_status}
 			</if>
 			<if test="where_product.product_progress!=null and where_product.product_progress>=0">
-				AND product_progress = #{where_product.product_progress} 
+				AND product_progress = #{where_product.product_progress}
 			</if>
 			<if test="where_product.bom_product_id!=null and where_product.bom_product_id!=''">
-				AND bom_product_id like '%' || #{where_product.bom_product_id} || '%' 
+				AND bom_product_id like '%' || #{where_product.bom_product_id} || '%'
 			</if>
 			<if test="where_product.product_model!=null and where_product.product_model!=''">
-				AND product_model like '%' || #{where_product.product_model}   || '%' 
+				AND product_model like '%' || #{where_product.product_model} || '%'
 			</if>
 			<if test="where_product.product_start_sn!=null and where_product.product_start_sn!=''">
-				AND #{where_product.product_start_sn} between product_start_sn  AND product_end_sn 
+				AND #{where_product.product_start_sn} between product_start_sn AND product_end_sn
+			</if>
+			<!-- 時間區間 -->
+			<if test="where_product.sys_create_date!=null and where_product.sys_modify_date!=null">
+				AND sys_modify_date between #{where_product.sys_create_date} AND #{where_product.sys_modify_date}
 			</if>
 		</where>
 		order by
@@ -50,44 +54,48 @@
 		#{id},#{order_id},#{client_name},#{production_quantity},#{product_model},#{bom_product_id},
 		#{version_motherboard},#{note},#{come_from},#{product_status},#{product_progress},#{bom_id});
 	</insert>
-	
+
 	<!-- 更新 狀態 內容 -->
 	<update id="updateOneStatus" parameterType="ProductionRecordsEntity">
-	UPDATE
-		production_records 
+		UPDATE
+		production_records
 		SET product_status = #{product_status} ,
 		sys_modify_date = #{sys_modify_date} ,
-		sys_modify_user = #{sys_modify_user} 
+		sys_modify_user = #{sys_modify_user}
 		<if test="#{new_id}!=null">
-			,id= #{new_id} 
+			,id= #{new_id}
 		</if>
 		WHERE id = #{id};
 	</update>
 	<!-- 更新 特定內容 內容 -->
 	<update id="updateOneContent" parameterType="ProductionRecordsEntity">
-	UPDATE 
-		production_records 
-		SET 
+		UPDATE
+		production_records
+		SET
 		sys_modify_date = #{sys_modify_date} ,
 		sys_modify_user = #{sys_modify_user} ,
 		client_name = #{client_name} ,
-		production_quantity =#{production_quantity} 
+		production_quantity =#{production_quantity}
 		<if test="#{new_id}!=null">
-			,id= #{new_id} 
+			,id= #{new_id}
 		</if>
 		WHERE id = #{id};
-	</update>	
-	
+	</update>
+
 	<!-- 更新 進度 -->
-	<update id="updateOneProgress" parameterType="ProductionRecordsEntity" >
-	UPDATE
+	<update id="updateOneProgress" parameterType="ProductionRecordsEntity">
+		UPDATE 
 		production_records 
 		SET product_progress= #{product_progress},
 		sys_modify_date = #{sys_modify_date} ,
 		sys_modify_user = #{sys_modify_user} ,
 		product_start_sn = #{product_start_sn} ,
-		product_end_sn = #{product_end_sn} 
-	WHERE id = #{id};
+		product_end_sn = #{product_end_sn}
+		WHERE id = #{id};
 	</update>
-	
+	<delete id="deleteOneProgress" parameterType="ProductionRecordsEntity">
+		DELETE FROM 
+		production_records WHERE product_status = 2 AND id = #{id};
+	</delete>
+
 </mapper>
