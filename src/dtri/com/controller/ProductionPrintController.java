@@ -119,6 +119,7 @@ public class ProductionPrintController {
 			RequestMethod.POST }, produces = "application/json;charset=UTF-8")
 	public String production_progress(@RequestBody String ajaxJSON) {
 		System.out.println("---controller - production_progress");
+		String e_code ="0"; 
 		// Step1.取出 session 訊息 & 檢查權限
 		List<GroupEntity> group = loginService.getSessionGroupBean();
 		boolean checkPermission = loginService.checkPermission(group, SYS_F, "01001101");
@@ -149,7 +150,7 @@ public class ProductionPrintController {
 				page_total = printService.jsonToPageTotal(frontData.getJSONObject("content"));
 			}
 			boolean checked = false;// 如有流程失敗 則停止
-
+			e_code += "_1";
 			// 生產登記序號清單 ()(數量)quantity
 			JSONObject sn_obj = new JSONObject();
 			if (entity_sn != null && entity_sn.size()>0) {
@@ -160,15 +161,19 @@ public class ProductionPrintController {
 				// 更新單一項目
 				checked = snService.updateSnById((ProductionSnEntity) sn_obj.get("sn_YYWW"));
 				checked = snService.updateSnById((ProductionSnEntity) sn_obj.get("sn_000"));
+				e_code += "_2";
 			}else {
 				checked = true;
+				e_code += "_3";
 			}
 			
 			// 更新(如果更新不到該工單號 ->新的自動登記)
 			if (checked) {
 				checked = recordsService.updateProgress(entity);
+				e_code += "_4";
 				if (!checked) {
 					checked = recordsService.addRecords(frontData.getJSONObject("content"), 1);
+					e_code += "_5";
 				}
 			}
 
@@ -178,9 +183,12 @@ public class ProductionPrintController {
 				check_entity_sv.setId(entity_sv.getId());
 				check_entity_sv.setClient_name(entity_sv.getClient_name());
 				check_entity_sv.setBom_product_id(entity_sv.getBom_product_id());
+				e_code  += "_6";
 				if (softwareVersionService.searchSoftwareVersion(check_entity_sv,0,999999).size() >= 1) {
 					checked = softwareVersionService.updateSoftwareVers(entity_sv);
+					e_code  += "_7";
 				} else {
+					e_code  += "_8";
 					checked = softwareVersionService.addedSoftwareVers(entity_sv);
 				}
 			}
@@ -199,7 +207,7 @@ public class ProductionPrintController {
 			if (checked) {
 				r_allData = printService.ajaxRspJson(p_Obj, frontData, "訪問成功!!");
 			} else {
-				r_allData = printService.fail_ajaxRspJson(frontData, "更新工單號失敗 異常!!");
+				r_allData = printService.fail_ajaxRspJson(frontData, "更新工單號失敗 異常!! error["+e_code+"]");
 			}
 		} else {
 			// Step4-1 .登出 && 包裝 錯誤 資料

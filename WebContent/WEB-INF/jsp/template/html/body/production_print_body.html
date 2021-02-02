@@ -914,7 +914,22 @@
 				//預覽監聽
 				$(document).off("click", ".a_submit2");
 				$(document).on("click", ".a_submit2", function(event) {
-					templateBody.choose_show("資料顯示", null, event);
+					
+					var id_p = event.target.attributes.user_id.value;
+					templateBody.event = event;
+					//自動_先檢查是否有效
+					$('#a_c_submit2').trigger("click");
+					$('#s_c_submit').trigger("click");
+					$('#s_bom_number').val($(".t_row2" + id_p + " .s_6").text());
+					$('#s_l_submit').trigger("click");
+					$('#s_submit').trigger("click");
+					
+					//進行預覽
+					setTimeout(function() {
+						templateBody.choose_show("資料顯示", null, event);
+						templateBody.event = "";
+					}, 4000);
+					
 					if ($("#collapse_report a").attr("aria-expanded") == "false") {
 						$("#collapse_report a").trigger("click");
 					}
