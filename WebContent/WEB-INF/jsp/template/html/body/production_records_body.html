@@ -745,8 +745,8 @@
 			//傳送  廢止 或 更新
 			send_update_save : function() {
 				//無法對自訂單做修正
-				if ($('#a_p_u').text() == '自訂紀錄') {
-					 main.alertshow(true, " 結果->無法修改[自訂紀錄]");
+				if ($('#a_p_u').text() == '自訂紀錄'|| $('#a_p_u').text() == '無效單' || $('#a_p_s').text() == '準備生產') {
+					 main.alertshow(true, " 結果->無法修改[自訂紀錄] or [無效單] or [準備生產]");
 					return false;
 				}
 				// 條件項目
@@ -754,13 +754,14 @@
 				content.id = $("#a_id").text();
 				content.product_status = 0;
 				console.log(content);
-				//廢止 預設				
+				//(廢止)預設				
 				var action = "D";
 				var url = "./stop_production_records.do";
 				var order = "search_update"; //指令
-				//修改 排除特定不可修改
+				
+				//如果是 (修改)參數
 				if ($("#a_u_type").text() == "查看細節(改)") {
-					if ($('#a_p_s').text() == '預約生產' && $('#a_p_u').text() != '無效單') {
+					if ($('#a_p_s').text() == '預約生產' ) {
 						content.id = this.old_id;
 						content.new_id = $('#a_id').text();
 						content.production_quantity = $('#a_p_q').text();
@@ -768,7 +769,7 @@
 						action = "U";
 						url = "./update_production_records.do";
 					} else {
-						 main.alertshow(true, " 結果->無法修改[自訂紀錄] or [無效單] or [預約生產]");
+						 main.alertshow(true, " 結果->無法修改[自訂紀錄] or [無效單] ");
 						return false;
 					}
 				}

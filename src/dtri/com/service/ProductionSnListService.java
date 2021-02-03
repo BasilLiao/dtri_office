@@ -88,28 +88,6 @@ public class ProductionSnListService {
 		return check;
 	}
 
-	/** 更新單據進度 **/
-	public boolean updateProgress(ProductionRecordsEntity entity) {
-		boolean check = false;
-		entity.setSys_modify_date(new Date());
-		entity.setSys_modify_user(loginService.getSessionUserBean().getAccount());
-		if (dao.updateOneProgress(entity) == 1) {
-			check = true;
-		}
-		return check;
-	}
-
-	/** 更新單據狀態 **/
-	public boolean updateEntity(ProductionRecordsEntity entity) {
-		boolean check = false;
-		entity.setSys_modify_date(new Date());
-		entity.setSys_modify_user(loginService.getSessionUserBean().getAccount());
-		if (dao.updateOneStatus(entity) == 1) {
-			check = true;
-		}
-		return check;
-	}
-
 	/** 限定移除 **/
 	public boolean deleteEntitys(ArrayList<ProductionRecordsEntity> entitys) {
 		boolean check = false;

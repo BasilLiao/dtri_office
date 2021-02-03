@@ -126,12 +126,13 @@ public class ProductionRecordsController {
 				page_total = recordsService.jsonToPageTotal(frontData.getJSONObject("content"));
 				// Step4-1 .DB 更新 正確 資料
 				int total_stop = recordsService.searchAll(entity, page_nb, page_total).size();
-				entity.setNew_id(entity.getId()+"_stop_"+total_stop);
-				recordsService.updateEntity(entity);
+				entity.setNew_id(entity.getId() + "_stop_" + total_stop);
+				recordsService.updateProgress_stop(entity);
 			}
 
 			// Step4-2 .DB 查詢 正確 資料
 			// 取得換頁碼 如果沒有 0
+			entity = new ProductionRecordsEntity();
 			List<ProductionRecordsEntity> p_Entities = recordsService.searchAll(entity, page_nb, page_total);
 			JSONObject p_Obj = recordsService.entitiesToJson(p_Entities);
 
@@ -146,7 +147,7 @@ public class ProductionRecordsController {
 		System.out.println(r_allData);
 		return r_allData.toString();
 	}
-	
+
 	/**
 	 * 更新()
 	 * 
@@ -184,7 +185,7 @@ public class ProductionRecordsController {
 
 			// Step4-2 .DB 查詢 正確 資料
 			// 取得換頁碼 如果沒有 0
-			entity= new ProductionRecordsEntity();
+			entity = new ProductionRecordsEntity();
 			List<ProductionRecordsEntity> p_Entities = recordsService.searchAll(entity, page_nb, page_total);
 			JSONObject p_Obj = recordsService.entitiesToJson(p_Entities);
 
