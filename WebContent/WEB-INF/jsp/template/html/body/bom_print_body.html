@@ -184,7 +184,7 @@ thead .textN2 {
 				</div>
 			</div>
 			<!-- 生產注意事項 -->
-			<div class="mb-3 border border-primary shadow" >
+			<div class="mb-3 border border-primary shadow">
 				<div class="row mb-2 mt-1 ">
 					<div class="col-md-9 ml-1 " id="collapse_btn">
 						<a class="btn btn-success" data-toggle="collapse" href="#collapseAdded" role="button" aria-expanded="false" aria-controls="collapseAdded">生產注意事項 列印預覽 : </a>
@@ -222,13 +222,14 @@ thead .textN2 {
 									</td>
 								</tr>
 								<tr>
-									<th class="p-1 border border-dark" style="font-size: 1.3em;">客戶名稱</th>
-									<td class="p-0 border border-dark">
-										<div id="a_u_c" contenteditable="true" class="can_rm p-2 textN2 border border-dark rounded" data-text=""></div>
+									<th class="p-1 border border-dark" style="font-size: 1.3em;">客戶名稱/國家</th>
+									<td class="p-0 border border-dark row p-0 m-0">
+										<div id="a_u_c" contenteditable="true" class="can_rm p-2 textN2 border border-dark rounded col-8" data-text=""></div>
+										<div id="a_u_country" contenteditable="true" class="can_rm p-2 textN2 border border-dark rounded col-4" data-text=""></div>
 									</td>
 									<th class="p-1 border border-dark" style="font-size: 1.3em;">數量</th>
-									<td width="15%" class="p-0 border border-dark">
-										<div id="a_u_nb" contenteditable="true" class="can_rm p-2 textN2 border border-dark rounded" data-text=""></div>
+									<td class="p-0 border border-dark row p-0 m-0">
+										<div id="a_u_nb" contenteditable="true" class="can_rm p-2 textN2 border border-dark rounded col-12" data-text=""></div>
 									</td>
 									<td id="kind1" width="20%" class="p-0 can_rm border border-dark" data-text="(量產|技轉)單" style="text-align: center; font-weight: bold; font-size: 26px;"></td>
 								</tr>
@@ -901,10 +902,16 @@ thead .textN2 {
 								return;
 							} else {
 								this.current_report = "生產注意事項";
-								//登記 單據
+								//登記 單據(檢核)
+								var regex = new RegExp("^[A-Z0-9]+\-[A-Z0-9]+$");
+								if (!regex.test($("#a_u_id").text())) {
+									main.alertshow(true, "[製令單號]格式錯誤!!");
+									return;
+								}
 								content.production_id = $("#a_u_id").text();
 								content.order_id = $("#a_u_o_id").text();
-								content.client_name = $("#a_u_c").text();
+								content.order_country = $("#a_u_country").text();
+								content.client_name = $("#a_u_c").text() + "(" + content.order_country + ")";
 
 								var quantity = 0;
 								if ($("#a_u_nb").text() != "" && $.isNumeric($("#a_u_nb").text())) {
@@ -920,7 +927,7 @@ thead .textN2 {
 								content.come_from = "生產注意事項";
 								content.product_progress = 2;
 								//如果有任何空值
-								if (content.production_id == "" || content.order_id == "" || content.client_name == "" || quantity == "") {
+								if (content.order_country==""||content.production_id == "" || content.order_id == "" || content.client_name == "" || quantity == "") {
 									main.alertshow(true, " 尚未填寫完整,請再次檢查清楚!!");
 									return;
 								}
