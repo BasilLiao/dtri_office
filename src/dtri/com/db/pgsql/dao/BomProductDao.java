@@ -11,8 +11,9 @@ import dtri.com.db.entity.BomTypeItemEntity;
 
 public interface BomProductDao {
 
-	/**依照ID查詢**/
-	BomProductEntity queryProductbyId(@Param("id")Integer id);
+	/** 依照ID查詢 **/
+	BomProductEntity queryProductbyId(@Param("id") Integer id);
+
 	/**
 	 * 
 	 * 一般查詢(清單查詢 )
@@ -26,11 +27,19 @@ public interface BomProductDao {
 			@Param("group_limit_in") List<Integer> limit);
 
 	List<BomTypeItemEntity> queryTypeItem(@Param("where_item") String where_item);
+
+	/**
+	 * 
+	 * 檢查 bom_number 名稱是否重複
+	 * */
+	BomProductEntity queryProduct_bom_number(BomProductEntity entity);
+
 	/**
 	 * 第一次檢查
 	 * 
-	 * **/
-	Integer checkedOne(@Param("id")Integer id, @Param("name")String name);
+	 **/
+	Integer checkedOne(@Param("id") Integer id, @Param("name") String name);
+
 	/**
 	 * 添加 產品 /項目群組
 	 * 
@@ -58,8 +67,8 @@ public interface BomProductDao {
 	/** 更新 product 與 group名稱 **/
 
 	Integer updateProduct(BomProductEntity entity);
-	
-	Integer updateProductKind(@Param("id")Integer id ,@Param("kind")Integer kind);
+
+	Integer updateProductKind(@Param("id") Integer id, @Param("kind") Integer kind);
 
 	Integer updateGroup(BomGroupEntity entity);
 

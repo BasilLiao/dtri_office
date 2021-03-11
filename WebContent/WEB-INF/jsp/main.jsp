@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>DTR ERP Expansion system(延展系統)</title>
+<title>DTR ERP(延展系統)</title>
 <link rel="stylesheet" href="./thirdparty/css/bootstrap-4.4.1.min.css" />
 <link rel="stylesheet" href="./thirdparty/css/jquery-ui.min.css" />
 <script src="./thirdparty/js/jquery-3.4.1.min.js"></script>

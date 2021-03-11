@@ -85,51 +85,49 @@ thead .textN2 {
 			<!-- 查詢功能 -->
 			<div class="mb-3 border border-primary shadow">
 				<div class="row mb-2">
-					<div class="col-md-5  mt-1 ml-1">
-						<a class="btn btn-success" data-toggle="collapse" href="#collapseSearch" role="button" aria-expanded="true" aria-controls="collapseSearch"> 查詢功能 : </a>
+					<div class="col-md-5">
+						<a class="btn btn-sm btn-success" data-toggle="collapse" href="#collapseSearch" role="button" aria-expanded="true" aria-controls="collapseSearch"> 查詢功能 : </a>
 					</div>
 				</div>
 				<div class="collapse show" id="collapseSearch">
 					<div class="col-md-12">
 						<div class="row">
 							<div class="col-md-6 border border-primary">
-								<div class="text-left mb-2 mt-2">
-									項目群組: <select class="md-12 a_row2" id="s_g_item" name="s_g_item">
+								<div class="text-left mb-2 mt-2 row m-0">
+									<div class="col-3 p-0">項目群組:</div>
+									<select class="col-3 a_row2" id="s_g_item" name="s_g_item">
 										<option value="">請選擇</option>
 									</select>
 								</div>
-								<div class="text-left mb-2 mt-2">
-									支項項目: <select class="md-12 a_row2" id="s_i_item" name="s_i_item">
+								<div class="text-left mb-2 mt-2 row m-0">
+									<div class="col-3 p-0">支項項目:</div>
+									<select class="col-3 a_row2" id="s_i_item" name="s_i_item">
 										<option value="">請選擇</option>
 									</select>
 								</div>
-								<div class="text-left mb-2 mt-2">
-									產品型號: <input class="col-md-7" type="text" id="s_model" name="s_model" placeholder="Ex:型號123456" required autofocus />
+								<div class="text-left mb-2 mt-2 row m-0">
+									<div class="col-3 p-0">產品型號:</div>
+									<input class="col-7" type="text" id="s_model" name="s_model" placeholder="Ex:型號123456" required autofocus />
 								</div>
-								<div class="text-left mb-2 mt-2">
-									BOM料號: <input class="col-md-7" type="text" id="s_bom_number" name="s_bom_number" placeholder="Ex:A513-8745940-123" required autofocus />
+								<div class="text-left mb-2 mt-2 row m-0">
+									<div class="col-3 p-0">BOM料號:</div>
+									<input class="col-7" type="text" id="s_bom_number" name="s_bom_number" placeholder="Ex:A513-8745940-123" required autofocus />
 								</div>
-								<div class="row mb-2 mt-2">
-									<div class="col-md-4"></div>
+								<div class="row m-0 p-1 mb-2 mt-2">
 									<div class="col-md-4">
-										<button id="s_l_submit" class="col-md-12 btn btn-primary btn-block mr-2" type="submit">條件選擇</button>
+										<button id="s_l_submit" class="col-md-12 btn btn-info btn-block m-1" type="submit">Step1.條件登記</button>
 									</div>
-									<div class="col-md-4"></div>
+									<div class="col-md-4">
+										<button id="s_submit" class="col-md-12 btn btn-primary btn-block m-1" type="submit">Step2.查詢條件</button>
+									</div>
+									<div class="col-md-4">
+										<button id="s_c_submit" class="col-md-12 btn btn-warning btn-block m-1" type="button">清除條件</button>
+									</div>
 								</div>
 							</div>
 							<div class="col-md-6 border border-primary">
 								<div class="" id="s_l_list">
 									<div class="text-left mb-2 mt-2">條件清單:</div>
-								</div>
-								<div class="mb-2 mt-2 row">
-									<div class="col-md-3"></div>
-									<div class="col-md-3">
-										<button id="s_submit" class="col-md-12 btn btn-primary btn-block mr-2" type="submit">條件查詢</button>
-									</div>
-									<div class="col-md-3">
-										<button id="s_c_submit" class="col-md-12 btn btn-warning btn-block" type="button">條件清除</button>
-									</div>
-									<div class="col-md-3"></div>
 								</div>
 							</div>
 						</div>
@@ -140,8 +138,8 @@ thead .textN2 {
 			<div class="mb-3 border border-primary shadow">
 				<div class="border">
 					<div class="row mb-2">
-						<div class="col-md-5  mt-1 ml-1">
-							<a class="btn btn-success" data-toggle="collapse" href="#collapseFinish" role="button" aria-expanded="true" aria-controls="collapseFinish"> 查詢結果 : </a>
+						<div class="col-md-5">
+							<a class="btn btn-sm btn-success" data-toggle="collapse" href="#collapseFinish" role="button" aria-expanded="true" aria-controls="collapseFinish"> 查詢結果 : </a>
 						</div>
 					</div>
 					<div class="collapse show" id="collapseFinish">
@@ -185,9 +183,9 @@ thead .textN2 {
 			</div>
 			<!-- 生產注意事項 -->
 			<div class="mb-3 border border-primary shadow">
-				<div class="row mb-2 mt-1 ">
-					<div class="col-md-9 ml-1 " id="collapse_btn">
-						<a class="btn btn-success" data-toggle="collapse" href="#collapseAdded" role="button" aria-expanded="false" aria-controls="collapseAdded">生產注意事項 列印預覽 : </a>
+				<div class="row mb-2">
+					<div class="col-md-9" id="collapse_btn">
+						<a class="btn btn-sm btn-success" data-toggle="collapse" href="#collapseAdded" role="button" aria-expanded="false" aria-controls="collapseAdded">生產注意事項 列印預覽 : </a>
 					</div>
 					<div class="pt-2">
 						<b>類型 : ></b>
@@ -224,8 +222,8 @@ thead .textN2 {
 								<tr>
 									<th class="p-1 border border-dark" style="font-size: 1.3em;">客戶名稱/國家</th>
 									<td class="p-0 border border-dark row p-0 m-0">
-										<div id="a_u_c" contenteditable="true" class="can_rm p-2 textN2 border border-dark rounded col-8" data-text=""></div>
-										<div id="a_u_country" contenteditable="true" class="can_rm p-2 textN2 border border-dark rounded col-4" data-text=""></div>
+										<div id="a_u_c" contenteditable="true" class="can_rm p-2 textN2 border border-dark rounded col-7" data-text=""></div>
+										<div id="a_u_country" contenteditable="true" class="can_rm p-2 textN2 border border-dark rounded col-5" data-text=""></div>
 									</td>
 									<th class="p-1 border border-dark" style="font-size: 1.3em;">數量</th>
 									<td class="p-0 border border-dark row p-0 m-0">
@@ -927,7 +925,7 @@ thead .textN2 {
 								content.come_from = "生產注意事項";
 								content.product_progress = 2;
 								//如果有任何空值
-								if (content.order_country==""||content.production_id == "" || content.order_id == "" || content.client_name == "" || quantity == "") {
+								if (content.order_country == "" || content.production_id == "" || content.order_id == "" || content.client_name == "" || quantity == "") {
 									main.alertshow(true, " 尚未填寫完整,請再次檢查清楚!!");
 									return;
 								}

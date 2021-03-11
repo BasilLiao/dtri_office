@@ -36,13 +36,13 @@ public class BomProductService {
 	@Autowired
 	private LoginService loginService;
 
-	/**查詢唯一值**/
+	/** 查詢唯一值 **/
 	public BomProductEntity searchById(Integer id) {
 		BomProductEntity re = new BomProductEntity();
 		re = productDao.queryProductbyId(id);
 		return re;
 	}
-	
+
 	/**
 	 * @param entitys 查詢物件
 	 * @param offset  分頁筆數(100筆為單位)
@@ -169,6 +169,9 @@ public class BomProductService {
 	/** 新增 **/
 	public Boolean added(BomProductEntity entity) {
 		Boolean check = false;
+		if (productDao.queryProduct_bom_number(entity) != null) {
+			entity.setBom_number(entity.getBom_number() + "_重複");
+		}
 		productDao.addedOne(entity);
 		for (BomGroupEntity one : entity.getGroupEntitis()) {
 			productDao.addedOneGroup(one);
@@ -223,7 +226,7 @@ public class BomProductService {
 	}
 
 	/** JSON to 清單 **/
-	public List<BomProductEntity> jsonToEntities(JSONObject content, String action) {
+	public List<BomProductEntity> jsonToEntitiesSearch(JSONObject content, String action) {
 		List<BomProductEntity> entitys = new ArrayList<BomProductEntity>();
 
 		// 查詢?
@@ -249,11 +252,17 @@ public class BomProductService {
 				// 項目?->BOM料號
 				if (!one.isNull("p_bom_number") && !one.get("p_bom_number").equals(""))
 					p_entity.setBom_number(one.getString("p_bom_number"));
-				
+
 				p_entity.setGroupEntity(g_entity);
 				entitys.add(p_entity);
 			}
 		}
+		return entitys;
+	}
+
+	/** JSON to 清單 **/
+	public List<BomProductEntity> jsonToEntities(JSONObject content, String action) {
+		List<BomProductEntity> entitys = new ArrayList<BomProductEntity>();
 		// 更新 新增 移除用
 		if (!content.isNull("product") && !content.get("product").equals("") && !content.isNull("group_item")
 				&& !content.get("group_item").equals("")) {
@@ -268,7 +277,7 @@ public class BomProductService {
 			p_entity.setSys_create_user(loginService.getSessionUserBean().getAccount());
 			p_entity.setSys_modify_date(new Date());
 			p_entity.setSys_modify_user(loginService.getSessionUserBean().getAccount());
-			p_entity.setBom_number(product.getString("bom_number"));
+			p_entity.setBom_number(product.getString("bom_number").trim());
 			p_entity.setProduct_model(product.getString("product_model"));
 			p_entity.setVersion_motherboard(product.getString("version_motherboard"));
 			p_entity.setUseful(product.getInt("useful"));
@@ -277,7 +286,8 @@ public class BomProductService {
 
 			// 取得ID
 			p_entity.setId(product.getInt("id"));
-			if (action == "C" || p_entity.getId() == 0) {
+			// 如果是新增或另存 (取下個ID)
+			if (action.equals("C") || p_entity.getId() == 0) {
 				int id = productDao.nextvalGroup();
 				p_entity.setId(id);
 			}
@@ -288,7 +298,9 @@ public class BomProductService {
 				g_entity.setSys_create_user(p_entity.getSys_create_user());
 				g_entity.setSys_modify_date(p_entity.getSys_modify_date());
 				g_entity.setSys_modify_user(p_entity.getSys_modify_user());
-				g_entity.setId(group_one.getInt(0));
+				if (!action.equals("C")) {// 新增不需要ID
+					g_entity.setId(group_one.getInt(0));
+				}
 				g_entity.setProduct_id(p_entity.getId());
 				g_entity.setType_item_id(group_one.getInt(2));
 				g_entity.setType_item_group_id(group_one.getInt(3));

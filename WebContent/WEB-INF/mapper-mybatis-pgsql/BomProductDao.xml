@@ -4,6 +4,12 @@
 <mapper namespace="dtri.com.db.pgsql.dao.BomProductDao">
 
 	<!-- 查詢 資料 BOM清單 -->
+	<select id="queryProduct_bom_number" resultType="BomProductEntity">
+		SELECT *
+		FROM bom_product
+		WHERE bom_number = #{bom_number} LIMIT 1
+	</select>
+	<!-- 查詢 資料 BOM料號重覆性 -->
 	<select id="queryProduct" resultType="BomProductEntity">
 		SELECT *
 		FROM bom_product
@@ -60,11 +66,11 @@
 		INSERT INTO
 		bom_group (
 		sys_create_date,sys_create_user,sys_modify_date,sys_modify_user,
-		id,product_id,type_item_id,type_item_group_id,number,
+		product_id,type_item_id,type_item_group_id,number,
 		useful)
 		VALUES
 		(#{sys_create_date},#{sys_create_user},#{sys_modify_date},#{sys_modify_user},
-		#{id},#{product_id},#{type_item_id},#{type_item_group_id},#{number},
+		#{product_id},#{type_item_id},#{type_item_group_id},#{number},
 		#{useful});
 	</insert>
 	<!-- 取得下個物件 -->

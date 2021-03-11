@@ -11,51 +11,50 @@
 			<div class="mb-3 border border-primary shadow">
 				<div class="row mb-2">
 					<div class="col-md-5">
-						<a class="btn btn-success" data-toggle="collapse" href="#collapseSearch" role="button" aria-expanded="true" aria-controls="collapseSearch"> 查詢功能 : </a>
+						<a class="btn btn-sm btn-success" data-toggle="collapse" href="#collapseSearch" role="button" aria-expanded="true" aria-controls="collapseSearch"> 查詢功能 : </a>
 					</div>
 				</div>
 				<div class="collapse show" id="collapseSearch">
 					<div class="col-md-12">
 						<div class="row">
 							<div class="col-md-6 border border-primary">
-								<div class="text-left mb-2 mt-2">
-									項目群組: <select class="md-12 a_row2" id="s_g_item" name="s_g_item">
+								<div class="text-left mb-2 mt-2 row m-0">
+									<div class="col-3 p-0">項目群組:</div>
+									<select class="col-3 a_row2" id="s_g_item" name="s_g_item">
 										<option value="">請選擇</option>
 									</select>
 								</div>
-								<div class="text-left mb-2 mt-2">
-									支項項目: <select class="md-12 a_row2" id="s_i_item" name="s_i_item">
+								<div class="text-left mb-2 mt-2 row m-0">
+									<div class="col-3 p-0">支項項目:</div>
+									<select class="col-3 a_row2" id="s_i_item" name="s_i_item">
 										<option value="">請選擇</option>
 									</select>
 								</div>
-								<div class="text-left mb-2 mt-2">
-									產品型號: <input class="col-md-7" type="text" id="s_model" name="s_model" placeholder="Ex:型號123456" required autofocus />
+								<div class="text-left mb-2 mt-2 row m-0">
+									<div class="col-3 p-0">產品型號:</div>
+									<input class="col-7" type="text" id="s_model" name="s_model" placeholder="Ex:型號123456" required autofocus />
 								</div>
-								<div class="text-left mb-2 mt-2">
-									BOM料號: <input class="col-md-7" type="text" id="s_bom_number" name="s_bom_number" placeholder="Ex:A513-8745940-123" required autofocus />
+								<div class="text-left mb-2 mt-2 row m-0">
+									<div class="col-3 p-0">BOM料號:</div>
+									<input class="col-7" type="text" id="s_bom_number" name="s_bom_number" placeholder="Ex:A513-8745940-123" required autofocus />
 								</div>
-								<div class="row mb-2 mt-2">
-									<div class="col-md-4"></div>
+								<div class="row mb-2 mt-2 m-0 p-1">
 									<div class="col-md-4">
-										<button id="s_l_submit" class="col-md-12 btn btn-primary btn-block mr-2" type="submit">條件選擇</button>
+										<button id="s_l_submit" class="col-md-12 btn btn-info btn-block m-1" type="submit">Step1.條件登記</button>
 									</div>
-									<div class="col-md-4"></div>
+									<div class="col-md-4">
+										<button id="s_submit" class="col-md-12 btn btn-primary btn-block m-1" type="submit">Step2.查詢條件</button>
+									</div>
+									<div class="col-md-4">
+										<button id="s_c_submit" class="col-md-12 btn btn-warning btn-block m-1" type="button">清除條件</button>
+									</div>
 								</div>
 							</div>
 							<div class="col-md-6 border border-primary">
 								<div class="" id="s_l_list">
 									<div class="text-left mb-2 mt-2">條件清單:</div>
 								</div>
-								<div class="mb-2 mt-2 row">
-									<div class="col-md-3"></div>
-									<div class="col-md-3">
-										<button id="s_submit" class="col-md-12 btn btn-primary btn-block mr-2" type="submit">條件查詢</button>
-									</div>
-									<div class="col-md-3">
-										<button id="s_c_submit" class="col-md-12 btn btn-warning btn-block" type="button">條件清除</button>
-									</div>
-									<div class="col-md-3"></div>
-								</div>
+
 							</div>
 						</div>
 					</div>
@@ -66,7 +65,7 @@
 				<div class="border">
 					<div class="row mb-2">
 						<div class="col-md-5">
-							<a class="btn btn-success" data-toggle="collapse" href="#collapseFinish" role="button" aria-expanded="true" aria-controls="collapseFinish"> 查詢結果 : </a>
+							<a class="btn btn-sm btn-success" data-toggle="collapse" href="#collapseFinish" role="button" aria-expanded="true" aria-controls="collapseFinish"> 查詢結果 : </a>
 						</div>
 					</div>
 					<div class="collapse show" id="collapseFinish">
@@ -81,7 +80,7 @@
 								<table style="min-height: 480px;" class="table table-sm table-hover table-striped table-bordered table-responsive">
 									<thead>
 										<tr id="search_thead" class="bg-primary">
-											<th scope="col" style="min-width: 90px;">功能</th>
+											<th scope="col" style="min-width: 135px;">功能</th>
 											<th scope="col" style="min-width: 40px;">筆</th>
 										</tr>
 									</thead>
@@ -112,7 +111,7 @@
 			<div class="border border-primary shadow">
 				<div class="row mb-2">
 					<div class="col-md-5">
-						<a class="btn btn-success" data-toggle="collapse" href="#collapseAdded" role="button" aria-expanded="true" aria-controls="collapseAdded"> 新增/修改/刪除 功能 : </a>
+						<a class="btn btn-sm btn-success" data-toggle="collapse" href="#collapseAdded" role="button" aria-expanded="true" aria-controls="collapseAdded"> 新增/另存/修改/刪除 功能 : </a>
 					</div>
 				</div>
 				<form onsubmit="return templateBody.send_added_or_update_save();">
@@ -200,7 +199,7 @@
 											<th scope="col" style="min-width: 60px;">項目ID</th>
 											<th scope="col" style="min-width: 300px;">項目名稱</th>
 											<th scope="col" style="min-width: 80px;">數量</th>
-											<th scope="col" style="min-width: 70px;">排序</th>
+											<th scope="col" style="min-width: 70px; width: 100%;">排序</th>
 										</tr>
 									</thead>
 									<tbody id="group_tbody">
@@ -303,7 +302,7 @@
             //查詢監聽
             $(document).on("click", "#s_submit", function (event) {
                 templateBody.change_page_init();
-                templateBody.send_search();
+                templateBody.send_search("R");
             });
             //清除修改(預設)
             $(document).on("click", "#a_c_submit", function (event) {
@@ -371,7 +370,11 @@
                     //功能
                     var s_list = this.search_list[i][4];
 
-                    var a_submit = '<div class="md-6">';
+                    var na_submit = '<div class="md-6">';
+                    na_submit += '<button user_id="' + s_list + '" class="btn btn-info btn-sm btn-block na_submit">';
+                    na_submit += "另</button></div>";
+                    
+                    var a_submit = '<div class="md-6 ml-1">';
                     a_submit += '<button user_id="' + s_list + '" class="btn btn-warning btn-sm btn-block a_submit">';
                     a_submit += "改</button></div>";
 
@@ -379,7 +382,7 @@
                     d_submit += '<button user_id="' + s_list + '" class="btn btn-danger btn-sm btn-block d_submit">';
                     d_submit += "刪</button></div>";
 
-                    $("#search_tbody").append('<tr class= "page_all t_row' + s_list + ' '+page_group+'" style="white-space: nowrap;"><th class="ml-0 col-md-12 row">' + a_submit + d_submit + '</th></tr>');
+                    $("#search_tbody").append('<tr class= "page_all t_row' + s_list + ' '+page_group+'" style="white-space: nowrap;"><th class="ml-0 col-md-12 row">'+na_submit + a_submit + d_submit + '</th></tr>');
                     //計數量
                     $("#search_tbody .t_row" + this.search_list[i][4]).append("<td >" + i + "</td>");
 
@@ -387,6 +390,14 @@
                         $("#search_tbody .t_row" + s_list).append("<td class=s_" + j + ">" + this.search_list[i][j] + "</td>");
                     }
                 }
+                //另存監聽
+                $(document).off("click", ".na_submit");
+                $(document).on("click", ".na_submit", function (event) {
+                    templateBody.choose_update("另存資料", event);
+                    setTimeout(function(){
+                   	 $("html,body").animate({ scrollTop: 1000 }, 'slow'); 
+                   }, 500);
+                });
                 //修改監聽
                 $(document).off("click", ".a_submit");
                 $(document).on("click", ".a_submit", function (event) {
@@ -595,7 +606,7 @@
                     }
                 }
             },
-            //選擇  修改
+            //選擇  修改(另存)
             choose_update: function (a_u_type, event) {
                 $("#group_id_0").text(this.item_nb_max);
                 $("#a_item").attr("name", this.item_nb_max);
@@ -605,11 +616,15 @@
                 if (check !== null) {
                     $("#group_tbody .re_choose").remove();
                 }
+                
                 var id = event.target.attributes.user_id.value;
                 $("#a_u_id").text($(".t_row" + id + " .s_4")[0].innerText);
                 $("#a_u_model").val($(".t_row" + id + " .s_5")[0].innerText);
                 $("#a_u_version_motherboard").val($(".t_row" + id + " .s_6")[0].innerText);
-                $("#a_u_bom_number").val($(".t_row" + id + " .s_7")[0].innerText);
+               	$("#a_u_bom_number").val($(".t_row" + id + " .s_7")[0].innerText);
+				if(a_u_type=="另存資料"){
+					$("#a_u_bom_number").val("");
+                }
                 $("#a_u_useful").val($(".t_row" + id + " .s_8")[0].innerText);
                 $("#a_u_note").val($(".t_row" + id + " .s_9")[0].innerText);
                 $("#a_u_kind").val($(".t_row" + id + " .s_10")[0].innerText).change();
@@ -698,6 +713,7 @@
             },
             //頁數-初始化(新增 or 修改 or 刪除 or 條件 要重製)
             change_page_init:function(){
+			
               //active 更換為第一格
               	var a = "active";
               	var d = "disabled";
@@ -713,7 +729,7 @@
 						$(".p"+re_page+" a").attr("id","p"+re_page);
 					}
 					if(re_page==1){
-						$(".p"+now_page).addClass(a);
+						$(".p"+re_page).addClass(a);
 					}					
            		}
             	//分頁功能
@@ -730,7 +746,7 @@
             	 //頁數-取得當前最大筆數 && 頁數
                 this.page_max = this.search_list.length;
                 $(".p_n").removeClass("disabled");
-                if(this.page_max<this.page_max_total){
+                if(this.page_max<=this.page_max_total){
                 	$(".p_n").addClass("disabled");
                 }
                 $(".p_p").removeClass("disabled");
@@ -786,44 +802,52 @@
 							}
 	            		}						
 	            		this.page_batch-=1;
-	            		this.send_search();
+	            		this.send_search("R_P");
 					}
             	}else if(event.id=="p_n"){//下10頁(必須滿100筆最大量 )
-            		if(this.page_max>=this.page_max_total){
-	            	//換下一批次 頁數
-						$(".page-item").removeClass(a);
-	            		for (var i = 1; i <= 10; i++) {
-							var now_page = i+(this.page_batch*10);
-							var next_page = i+((this.page_batch+1)*10);
-							$(".p"+now_page).addClass("p"+next_page);
-							$(".p"+next_page).removeClass("p"+now_page);
-							$(".p"+next_page+" a").text(next_page);
-							$(".p"+next_page+" a").attr("id","p"+next_page);
-							if(i==1){
-								$(".p"+next_page).addClass(a);
-							}
-						}
-	            		this.page_batch+=1;
-	            		this.send_search();
-            		}
+
+            		this.page_batch+=1;
+		         	this.send_search("R_N");            		
             	}
             	
             	return false;
             },
-            //傳送 新增 or 修改 or 刪除
+            change_page_next:function(){
+            	var d = "disabled";
+            	var d_n  = "d-none";
+            	var a = "active";
+            	var pg = "pg_";
+            	if(this.page_max>this.page_max_total){
+            	//換下一批次 頁數
+				$(".page-item").removeClass(a);
+	           		for (var i = 1; i <= 10; i++) {
+						var now_page = i+((this.page_batch-1)*10);
+						var next_page = i+((this.page_batch)*10);
+						$(".p"+now_page).addClass("p"+next_page);
+						$(".p"+next_page).removeClass("p"+now_page);
+						$(".p"+next_page+" a").text(next_page);
+						$(".p"+next_page+" a").attr("id","p"+next_page);
+						if(i==1){
+							$(".p"+next_page).addClass(a);
+						}
+	           		}
+	           		//this.page_batch+=1;
+            	}
+            },
+            //傳送 新增 or 修改 or 刪除 or 另存
             send_added_or_update_save: function () {
             	//移動
             	 setTimeout(function(){
                   	 $("html,body").animate({ scrollTop: 350 }, 'slow'); 
                   }, 500);
             	
-            	//頁數-重製分頁
-            	this.change_page_init();
-            	
                 var content = new Object();
                 var product = new Object(); //產品資料
                 var group_item = []; //group 內資料
                 var group_one = [];
+              	//頁數-重製分頁
+            	this.change_page_init();
+              	
                 //BOM 產品清單
                 product.id = $("#a_u_id").text();
                 product.product_model = $("#a_u_model").val();
@@ -861,7 +885,15 @@
                     action = "D";
                     url = "./delete_bom_product.do";
                 }
-
+				//查詢
+                var search_list = [];
+                for (var i = 1; i < $("#s_l_list div").length; i++) {
+                    search_list.push($("#s_l_list div")[i].innerText);
+                }
+                content.search_list = search_list;
+                content.page_nb = this.page_batch*this.page_batch_total;//批次(起始數)
+                content.page_total = this.page_batch_total;//(每次要的最大數量)
+                
                 var data = JSON.stringify({
                     data: {
                         datetime: "",
@@ -872,12 +904,13 @@
                         content: content,
                     },
                 });
+             
                 main.ajaxSend(url, data);
-               
+              	
                 return false; //防止真傳送
             },
             //傳送 查詢
-            send_search: function () {
+            send_search: function (action) {
                 var content = new Object();
                 var search_list = [];
 
@@ -894,7 +927,7 @@
                 var data = JSON.stringify({
                     data: {
                         datetime: "",
-                        action: "R",
+                        action: action,
                         whoami: main.loginData.account,
                         cellBackName: "bodyAfter",
                         cellBackOrder: order,
@@ -908,14 +941,24 @@
                 console.log("to index success");
                 switch (event.r_cellBackOrder) {
                     case "search_update":
-                        //刷新資料
+                     
                         if (event.r_content.templateInfo.body["list"] != null && event.r_content.templateInfo.body["list"] != "") {
+                       		 //刷新資料
                             this.group_list =  main.contentData.templateInfo.body["group_list"];
                             this.item_list =   main.contentData.templateInfo.body["item_list"];
                             this.search_list = main.contentData.templateInfo.body["list"];
+                           
+                            //如果是下一頁
+                            if(event.r_action=="R_N"){
+ 								this.change_page_next();
+                            }
                             this.search_update();
                             this.rm_added(false);
+                        }else{
+                        	//沒查到資料時
+                        	this.page_batch-=1;
                         }
+                        
                         break;
                     case "update_body_nav":
                         break;

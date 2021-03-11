@@ -59,24 +59,30 @@ public class BomProductController {
 			List<BomProductEntity> entity = new ArrayList<BomProductEntity>();
 			BomProductGroupBean bpg = new BomProductGroupBean();
 			if (frontData.get("content") != null && !frontData.get("content").equals("")) {
-				entity = productService.jsonToEntities(frontData.getJSONObject("content"),
+				entity = productService.jsonToEntitiesSearch(frontData.getJSONObject("content"),
 						frontData.getString("action"));
 				// 取得換頁碼 如果沒有 0
 				page_nb = productService.jsonToPageNb(frontData.getJSONObject("content"));
 				page_total = productService.jsonToPageTotal(frontData.getJSONObject("content"));
 			}
 			bpg = productService.search(entity, page_nb, page_total);
-			JSONObject p_Obj = productService.entitiesToJson(bpg);
+			
+			// 查詢過後 沒資料
+			if (bpg.getBomProductEntities().size() < 1) {
+				r_allData = productService.fail_ajaxRspJson(frontData, "無資料!!");
+			} else {
+				// Step4-2 .包裝資料
+				JSONObject p_Obj = productService.entitiesToJson(bpg);
+				r_allData = productService.ajaxRspJson(p_Obj, frontData, "訪問成功!!");
 
-			// Step4-2 .包裝資料
-			r_allData = productService.ajaxRspJson(p_Obj, frontData, "訪問成功!!");
+			}
 		} else {
 			// Step4-1 .登出 && 包裝 錯誤 資料
 			r_allData = productService.fail_ajaxRspJson(frontData, "你沒有權限!!");
 		}
 
 		// Step6.結果回傳
-		//System.out.println(r_allData);
+		// System.out.println(r_allData);
 		return r_allData.toString();
 	}
 
@@ -119,6 +125,8 @@ public class BomProductController {
 
 				// Step4-2 .DB 查詢 正確 資料
 				List<BomProductEntity> entitys = new ArrayList<BomProductEntity>();
+				entitys = productService.jsonToEntitiesSearch(frontData.getJSONObject("content"),
+						frontData.getString("action"));
 				BomProductGroupBean bpg = new BomProductGroupBean();
 				bpg = productService.search(entitys, page_nb, page_total);
 				JSONObject p_Obj = productService.entitiesToJson(bpg);
@@ -132,7 +140,7 @@ public class BomProductController {
 		}
 
 		// Step6.結果回傳
-		//System.out.println(r_allData);
+		// System.out.println(r_allData);
 		return r_allData.toString();
 	}
 
@@ -149,8 +157,8 @@ public class BomProductController {
 		// Step2.取出 session 訊息 & 檢查權限( 新增 更新 )
 		List<GroupEntity> group = loginService.getSessionGroupBean();
 		boolean checkPermission = loginService.checkPermission(group, SYS_F, "01000101");
-		UserEntity user= loginService.getSessionUserBean();
-		
+		UserEntity user = loginService.getSessionUserBean();
+
 		// Step1.解析內容-檢查 -> 取出內容物
 		JsonDataModel data = new JsonDataModel();
 		JSONObject frontData = (JSONObject) data.frontToBack(ajaxJSON).get("data");
@@ -159,24 +167,24 @@ public class BomProductController {
 		// Step3.建立回傳元素
 		JSONObject r_allData = new JSONObject();
 		int page_nb = 0, page_total = 100;
-		
+
 		// Step3-1 .DB 取出 正確 資料
 		List<BomProductEntity> entitys = new ArrayList<BomProductEntity>();
 		if (frontData.get("content") != null && !frontData.get("content").equals("")) {
-			
+
 			// Step3-2 .DB 修改類只有本人 建立 可改(如果:不是 全部權限 或 不是本人)=沒修改 權限
-			entitys = productService.jsonToEntities(frontData.getJSONObject("content"),	frontData.getString("action"));
+			entitys = productService.jsonToEntities(frontData.getJSONObject("content"), frontData.getString("action"));
 			BomProductEntity one = productService.searchById(entitys.get(0).getId());
 			System.out.println(entitys.get(0).getSys_modify_user());
-			if(loginService.checkPermission(group, SYS_F, "11111111") || 
-					user.getAccount().equals(one.getSys_create_user())) {
-			}else {
-				checkPermission = false;				
+			if (loginService.checkPermission(group, SYS_F, "11111111")
+					|| user.getAccount().equals(one.getSys_create_user())) {
+			} else {
+				checkPermission = false;
 			}
-		}else {
-			checkPermission = false;	
+		} else {
+			checkPermission = false;
 		}
-		
+
 		// Step4.檢查許可權 & 輸入物件
 		if (checkPermission) {
 			// 取得換頁碼 如果沒有 0
@@ -184,10 +192,12 @@ public class BomProductController {
 			page_total = productService.jsonToPageTotal(frontData.getJSONObject("content"));
 			// Step4-1 .DB 更新 正確 資料
 			productService.update(entitys.get(0));
-			
+
 			// Step4-2 .DB 查詢 正確 資料
 			entitys = new ArrayList<BomProductEntity>();
 			BomProductGroupBean bpg = new BomProductGroupBean();
+			entitys = productService.jsonToEntitiesSearch(frontData.getJSONObject("content"),
+					frontData.getString("action"));
 			bpg = productService.search(entitys, page_nb, page_total);
 			JSONObject p_Obj = productService.entitiesToJson(bpg);
 
@@ -200,7 +210,7 @@ public class BomProductController {
 		}
 
 		// Step5.結果回傳
-		//System.out.println(r_allData);
+		// System.out.println(r_allData);
 		return r_allData.toString();
 	}
 
@@ -217,8 +227,8 @@ public class BomProductController {
 		// Step2.取出 session 訊息 & 檢查權限( 新增 更新 )
 		List<GroupEntity> group = loginService.getSessionGroupBean();
 		boolean checkPermission = loginService.checkPermission(group, SYS_F, "01000011");
-		UserEntity user= loginService.getSessionUserBean();
-		
+		UserEntity user = loginService.getSessionUserBean();
+
 		// Step1.解析內容-檢查 -> 取出內容物
 		JsonDataModel data = new JsonDataModel();
 		JSONObject frontData = (JSONObject) data.frontToBack(ajaxJSON).get("data");
@@ -227,24 +237,24 @@ public class BomProductController {
 		// Step3.建立回傳元素
 		JSONObject r_allData = new JSONObject();
 		int page_nb = 0, page_total = 0;
-		
+
 		// Step3-1 .DB 取出 正確 資料
 		List<BomProductEntity> entitys = new ArrayList<BomProductEntity>();
 		if (frontData.get("content") != null && !frontData.get("content").equals("")) {
-			
+
 			// Step3-2 .DB 移除類只有本人 建立 可改(如果:不是 全部權限 或 不是本人)=沒移除 權限
-			entitys = productService.jsonToEntities(frontData.getJSONObject("content"),	frontData.getString("action"));
+			entitys = productService.jsonToEntities(frontData.getJSONObject("content"), frontData.getString("action"));
 			BomProductEntity one = productService.searchById(entitys.get(0).getId());
 			System.out.println(entitys.get(0).getSys_modify_user());
-			if(loginService.checkPermission(group, SYS_F, "11111111") || 
-					user.getAccount().equals(one.getSys_create_user())) {
-			}else {
-				checkPermission = false;				
+			if (loginService.checkPermission(group, SYS_F, "11111111")
+					|| user.getAccount().equals(one.getSys_create_user())) {
+			} else {
+				checkPermission = false;
 			}
-		}else {
-			checkPermission = false;	
+		} else {
+			checkPermission = false;
 		}
-		
+
 		// Step4.檢查許可權 & 輸入物件
 		if (checkPermission) {
 
@@ -253,9 +263,11 @@ public class BomProductController {
 			// 取得換頁碼 如果沒有 0
 			page_nb = productService.jsonToPageNb(frontData.getJSONObject("content"));
 			page_total = productService.jsonToPageTotal(frontData.getJSONObject("content"));
-			
+
 			// Step4-2 .DB 查詢 正確 資料
 			entitys = new ArrayList<BomProductEntity>();
+			entitys = productService.jsonToEntitiesSearch(frontData.getJSONObject("content"),
+					frontData.getString("action"));
 			BomProductGroupBean bpg = new BomProductGroupBean();
 			bpg = productService.search(entitys, page_nb, page_total);
 			JSONObject p_Obj = productService.entitiesToJson(bpg);
@@ -268,7 +280,7 @@ public class BomProductController {
 		}
 
 		// Step5.結果回傳
-		//System.out.println(r_allData);
+		// System.out.println(r_allData);
 		return r_allData.toString();
 	}
 }

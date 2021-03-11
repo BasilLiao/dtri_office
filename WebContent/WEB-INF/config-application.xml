@@ -55,8 +55,8 @@
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations" value="UTF-8" />
 		<property name="location">
-			<value>file:${catalina.home}/WebAppConfig/application.properties
-			</value>
+			<!-- 外部配置 --><value>file:${catalina.home}/WebAppConfig/application.properties</value>
+			<!-- 內部配置<value>classpath:/application.properties</value>  -->
 		</property>
 	</bean>
 
