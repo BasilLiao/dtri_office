@@ -143,14 +143,14 @@ public class BomProductService {
 				p_list = productDao.queryProduct(all_where_product, all_limit);
 			} else {
 				all_where_group += "type_item_id !=0";
-				for (BomProductEntity one : p_list) {
-					group_limit_in.add(one.getId());
-				}
-				// 取得傭有條件的 群組 項目+產品
 				// ID 條件
 				all_where_product += "product_model !=''";
 				// 產品-清單
 				p_list = productDao.queryProduct(all_where_product, all_limit);
+				for (BomProductEntity one : p_list) {
+					group_limit_in.add(one.getId());
+				}
+				// 取得傭有條件的 群組 項目+產品
 				g_list = productDao.queryGroup(all_where_group, group_limit_in);
 			}
 
