@@ -114,21 +114,25 @@
 							<div class="col-md-12">
 								<div class="row">
 									<div class="col-md-6 border border-primary">
-										<div class="text-left mb-2 mt-2">
-											項目群組: <select class="md-12 a_row2" id="s_g_item" name="s_g_item">
+										<div class="text-left mb-2 mt-2 row m-0">
+											<div class="col-3 p-0">項目群組:</div>
+											<select class="col-3 a_row2" id="s_g_item" name="s_g_item">
 												<option value="">請選擇</option>
 											</select>
 										</div>
-										<div class="text-left mb-2 mt-2">
-											支項項目: <select class="md-12 a_row2" id="s_i_item" name="s_i_item">
+										<div class="text-left mb-2 mt-2 row m-0">
+											<div class="col-3 p-0">支項項目:</div>
+											<select class="col-3 a_row2" id="s_i_item" name="s_i_item">
 												<option value="">請選擇</option>
 											</select>
 										</div>
-										<div class="text-left mb-2 mt-2">
-											產品型號: <input class="col-md-7" type="text" id="s_model" name="s_model" placeholder="Ex:型號123456" required autofocus />
+										<div class="text-left mb-2 mt-2 row m-0">
+											<div class="col-3 p-0">產品型號:</div>
+											<input class="col-7" type="text" id="s_model" name="s_model" placeholder="Ex:型號123456" required autofocus />
 										</div>
-										<div class="text-left mb-2 mt-2">
-											BOM料號: <input class="col-md-7" type="text" id="s_bom_number" name="s_bom_number" placeholder="Ex:A513-8745940-123" required autofocus />
+										<div class="text-left mb-2 mt-2 row m-0">
+											<div class="col-3 p-0">BOM料號:</div>
+											<input class="col-7" type="text" id="s_bom_number" name="s_bom_number" placeholder="Ex:A513-8745940-123" required autofocus />
 										</div>
 										<div class="row m-0 p-1 mb-2 mt-2">
 											<div class="col-md-4">
@@ -165,7 +169,7 @@
 								<div class="col-md-12">
 									<div id="search_choose" class="row mb-2">
 										<div class="text-left">
-											<b>顯示名稱->(紅字=試產 / 綠字=可量產 / 綠框=已使用過)</b>
+											<b>顯示名稱->(紅字=試產 / 綠字=可量產 / 白亮底色=已使用過)</b>
 										</div>
 									</div>
 									<!-- 顯示內容 -->
@@ -847,7 +851,7 @@
 					//可量產
 					var text_g = " text-success";
 
-					this.search_list[i][checked] != "" ? (success_color = "bg-light border border-success font-weight-bold") : (success_color = "");
+					this.search_list[i][checked] != "" ? (success_color = "bg-light font-weight-bold") : (success_color = "");
 					this.search_list[i][kind] == 0 ? (success_color += text_r) : (success_color += text_g);
 					$("#search_tbody").append('<tr class=" page_all  t_row' + s_list + " " + page_group + '" style="white-space: nowrap;"><th class="ml-0 col-md-12 row">' + a_submit + "</th></tr>");
 					//計數量
@@ -1087,6 +1091,10 @@
 				lk += "'p_bom_number':'" + $("#s_bom_number").val() + "'}";
 
 				$("#s_l_list").append('<div class="text-left mb-2 mt-2">' + lk + "</div>");
+				//清除選擇
+				$("#s_model").val("");
+				$("#s_bom_number").val("");
+				$("#s_g_item").val("").trigger("change");
 			},
 			//選擇  預覽
 			choose_show : function(a_u_type, event, production) {

@@ -536,6 +536,10 @@
                 lk += "'p_bom_number':'" + $("#s_bom_number").val() + "'}";
 
                 $("#s_l_list").append('<div class="text-left mb-2 mt-2">' + lk + "</div>");
+              //清除選擇
+				$("#s_model").val("");
+				$("#s_bom_number").val("");
+				$("#s_g_item").val("").trigger("change");
             },
 
             //新增子項目

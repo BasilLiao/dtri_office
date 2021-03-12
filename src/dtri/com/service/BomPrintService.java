@@ -37,9 +37,9 @@ public class BomPrintService {
 	private LoginService loginService;
 
 	/**
-	 * @param entitys      	查詢條件
-	 * @param offset 		幾頁
-	 * @param page_total   	數量
+	 * @param entitys    查詢條件
+	 * @param offset     幾頁
+	 * @param page_total 數量
 	 * @return 查詢後清單
 	 * 
 	 **/
@@ -52,18 +52,17 @@ public class BomPrintService {
 		String product_bom_nb = " ";// 對應的BOM
 		String all_where_product = " ";// SQL BOM 條件
 		String all_where_group = " ";// SQL 群組 條件
-		String all_limit = " OFFSET "+offset+" LIMIT "+page_total;
+		String all_limit = " OFFSET " + offset + " LIMIT " + page_total;
 		List<Integer> group_limit_in = new ArrayList<Integer>();
+
 		ArrayList<BomGroupEntity> g_list = new ArrayList<BomGroupEntity>();
 		List<BomProductEntity> p_list = new ArrayList<BomProductEntity>();
 		List<BomTypeItemEntity> i_list = new ArrayList<BomTypeItemEntity>();
 		int select_nb = 0;// 查詢條件
 		// ----------項目----------
-		if (entitys.size() > 0) {
-			// u條件
+		if (entitys.size() > 0 && (entitys.get(0).getBom_number() != null || entitys.get(0).getProduct_model() != null
+				|| entitys.get(0).getGroupEntity().getType_item_group_id() != null)) {
 			for (BomProductEntity entity : entitys) {
-				// 如果項目沒有值
-
 				// 組
 				if (entity.getGroupEntity().getType_item_group_id() != null
 						&& entity.getGroupEntity().getType_item_group_id() != 0) {
@@ -82,38 +81,6 @@ public class BomPrintService {
 					all_where_group += "type_item_id !=0 ) OR ";
 				}
 			}
-			// 防止空值
-			if (!all_where_group.equals(" ")) {
-				//除對多餘的 OR
-				all_where_group = all_where_group.substring(0, all_where_group.length()-3);
-			} else {
-				all_where_group += "type_item_id !=0";
-			}
-			// 取得傭有條件的 群組 項目
-			g_list = productDao.queryGroup(all_where_group,null);
-			// 過濾 重複 產品清單
-			Map<Integer, Integer> g_m_list = new HashMap<Integer, Integer>();
-			if (entitys.size() >= 0) {
-				for (BomGroupEntity bomG : g_list) {
-					if (g_m_list.containsKey(bomG.getProduct_id())) {
-						g_m_list.put(bomG.getProduct_id(), g_m_list.get(bomG.getProduct_id()) + 1);
-					} else {
-						g_m_list.put(bomG.getProduct_id(), 1);
-					}
-				}
-			}
-
-			// 取得產品條件後 再次取得資料 項目-群組
-			if (entitys.size() > 0) {
-				all_where_group = " product_id in(";
-				for (Entry<Integer, Integer> item : g_m_list.entrySet()) {
-					if (select_nb <= item.getValue()) {
-						all_where_group += item.getKey() + ",";
-					}
-				}
-				all_where_group += "0)";
-				g_list = productDao.queryGroup(all_where_group,null);
-			}
 			// ----------產品----------
 			for (BomProductEntity entity : entitys) {
 				// 查詢名稱 條件不能與 項目衝突
@@ -127,47 +94,91 @@ public class BomPrintService {
 				}
 
 			}
-			// ID 條件
-			all_where_product += "product_model !=''";
-			all_where_product += " AND id in(";
-			for (Entry<Integer, Integer> item : g_m_list.entrySet()) {
-				if (select_nb <= item.getValue()) {
-					all_where_product += item.getKey() + ",";
+		
+			// 如果(項目有值) / 如果只有(產品有值)
+			if (!all_where_group.equals(" ")) {
+				// 除對多餘的 OR
+				all_where_group = all_where_group.substring(0, all_where_group.length() - 3);
+				// 取得傭有條件的 群組 項目
+				g_list = productDao.queryGroup(all_where_group, null);
+				// 過濾 重複 產品清單
+				Map<Integer, Integer> g_m_list = new HashMap<Integer, Integer>();
+				if (entitys.size() >= 0) {
+					for (BomGroupEntity bomG : g_list) {
+						if (g_m_list.containsKey(bomG.getProduct_id())) {
+							g_m_list.put(bomG.getProduct_id(), g_m_list.get(bomG.getProduct_id()) + 1);
+						} else {
+							g_m_list.put(bomG.getProduct_id(), 1);
+						}
+					}
 				}
+				// 取得產品條件後 再次取得資料 項目-群組
+				if (entitys.size() > 0) {
+					all_where_group = " product_id in(";
+					for (Entry<Integer, Integer> item : g_m_list.entrySet()) {
+						if (select_nb <= item.getValue()) {
+							all_where_group += item.getKey() + ",";
+						}
+					}
+					all_where_group += "0)";
+					g_list = productDao.queryGroup(all_where_group, null);
+				}
+
+				// ID 條件
+				all_where_product += "product_model !=''";
+				all_where_product += " AND id in(";
+				for (Entry<Integer, Integer> item : g_m_list.entrySet()) {
+					if (select_nb <= item.getValue()) {
+						all_where_product += item.getKey() + ",";
+					}
+				}
+				all_where_product += "0)";
+				// 產品-清單
+				p_list = productDao.queryProduct(all_where_product, all_limit);
+			} else {
+				all_where_group += "type_item_id !=0";
+				for (BomProductEntity one : p_list) {
+					group_limit_in.add(one.getId());
+				}
+				// 取得傭有條件的 群組 項目+產品
+				// ID 條件
+				all_where_product += "product_model !=''";
+				// 產品-清單
+				p_list = productDao.queryProduct(all_where_product, all_limit);
+				g_list = productDao.queryGroup(all_where_group, group_limit_in);
 			}
-			all_where_product += "0)";
-			// 產品-清單
-			p_list = productDao.queryProduct(all_where_product,all_limit);
-			// 項目-清單
-			i_list = itemDao.queryAll("!= ' '");
+
 		} else {
 			// 無條件
-			// 項目-清單
-			i_list = itemDao.queryAll("!= ' '");
 			// 產品-清單
-			p_list = productDao.queryProduct("product_model !='' ",all_limit);
+			p_list = productDao.queryProduct("product_model !='' ", all_limit);
 			// 取得傭有條件的 群組 項目 (限制)
 			for (BomProductEntity one : p_list) {
 				group_limit_in.add(one.getId());
 			}
-			g_list = productDao.queryGroup("type_item_id !=0",group_limit_in);
+			g_list = productDao.queryGroup("type_item_id !=0", group_limit_in);
 		}
 
+		// 項目-清單
+		i_list = itemDao.queryAll("!= ' '");
 		bpg.setBomGroupEntities(g_list);
 		bpg.setBomProductEntities(p_list);
 		bpg.setBomTypeItemEntities(i_list);
 		return bpg;
 	}
-	/**檢查過 第一次列印**/
-	public void checked(int id,String name) {
+
+	/** 檢查過 第一次列印 **/
+	public void checked(int id, String name) {
 		productDao.checkedOne(id, name);
-		
+
 	}
-	/**修正 BOM 生產單類型**/
-	public void  productkind(int id,int kind) {
+
+	/** 修正 BOM 生產單類型 **/
+	public void productkind(int id, int kind) {
 		productDao.updateProductKind(id, kind);
-		
+
 	}
+
 	/** 檢查換頁碼 如果沒有固定為從0開始 **/
 	public int jsonToPageNb(JSONObject content) {
 		if (!content.isNull("page_nb") && !content.get("page_nb").equals("")) {
